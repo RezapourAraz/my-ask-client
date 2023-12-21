@@ -39,7 +39,7 @@ const MainHeader = () => {
 
   return (
     <TopHeaderContainer>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Grid container sx={{ py: 2, justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FaQuestion style={{ fontSize: 42, color: "white" }} />
