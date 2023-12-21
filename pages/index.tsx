@@ -1,3 +1,4 @@
+import MainBanner from "@/components/banners/Main.banners";
 import MainHeader from "@/components/headers/Main.headers";
 import TopHeader from "@/components/headers/Top.headers";
 import { Box } from "@mui/material";
@@ -16,6 +17,7 @@ export default function Home() {
       </Head>
       <TopHeader />
       <MainHeader />
+      <MainBanner />
     </>
   );
 }
