@@ -1,3 +1,4 @@
+import MainHeader from "@/components/headers/Main.headers";
 import TopHeader from "@/components/headers/Top.headers";
 import { Box } from "@mui/material";
 import { Inter } from "next/font/google";
@@ -14,6 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <TopHeader />
+      <MainHeader />
     </>
   );
 }
