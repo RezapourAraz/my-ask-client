@@ -7,6 +7,7 @@ import { Box, Container, Grid } from "@mui/material";
 import TopHeader from "../headers/Top.headers";
 import MainHeader from "../headers/Main.headers";
 import MainBanner from "../banners/Main.banners";
+import MainFooter from "../footers/Main.footers";
 
 // Types
 type IMainLayoutProps = {
@@ -30,6 +31,7 @@ const MainLayout: FC<IMainLayoutProps> = ({ children, sidebar }) => {
           </Grid>
         </Grid>
       </Container>
+      <MainFooter />
     </Grid>
   );
 };
