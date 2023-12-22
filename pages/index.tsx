@@ -1,6 +1,7 @@
 import MainBanner from "@/components/banners/Main.banners";
 import MainHeader from "@/components/headers/Main.headers";
 import TopHeader from "@/components/headers/Top.headers";
+import MainLayout from "@/components/layout/Main.layout";
 import { Box } from "@mui/material";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -15,9 +16,9 @@ export default function Home() {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <TopHeader />
-      <MainHeader />
-      <MainBanner />
+      <MainLayout sidebar={<Box>hello</Box>}>
+        <Box>hello</Box>
+      </MainLayout>
     </>
   );
 }
