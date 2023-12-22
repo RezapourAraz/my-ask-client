@@ -8,6 +8,7 @@ import MainTab from "@/components/tabs/Main.tabs";
 // Mui
 import { Box } from "@mui/material";
 import { Inter } from "next/font/google";
+import MainSidebar from "@/components/sidebars/Main.sidebars";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function Home() {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout sidebar={<Box>hello</Box>}>
+      <MainLayout sidebar={<MainSidebar />}>
         <MainTab setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
       </MainLayout>
     </>
