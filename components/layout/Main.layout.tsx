@@ -21,11 +21,11 @@ const MainLayout: FC<IMainLayoutProps> = ({ children, sidebar }) => {
       <MainHeader />
       <MainBanner />
       <Container maxWidth="xl">
-        <Grid container sx={{ px: 5 }}>
-          <Grid item md={9}>
+        <Grid container sx={{ px: 3 }}>
+          <Grid item md={9} sx={{ px: 2 }}>
             {children}
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={3} sx={{ px: 2 }}>
             {sidebar}
           </Grid>
         </Grid>

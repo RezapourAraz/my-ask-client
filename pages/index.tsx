@@ -1,14 +1,19 @@
-import MainBanner from "@/components/banners/Main.banners";
-import MainHeader from "@/components/headers/Main.headers";
-import TopHeader from "@/components/headers/Top.headers";
+import Head from "next/head";
+import { useState } from "react";
+
+// components
 import MainLayout from "@/components/layout/Main.layout";
+import MainTab from "@/components/tabs/Main.tabs";
+
+// Mui
 import { Box } from "@mui/material";
 import { Inter } from "next/font/google";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [selectedTab, setSelectedTab] = useState("recentQuestions");
+
   return (
     <>
       <Head>
@@ -17,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout sidebar={<Box>hello</Box>}>
-        <Box>hello</Box>
+        <MainTab setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
       </MainLayout>
     </>
   );
