@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Button, Grid } from "@mui/material";
 import StatsCard from "../cards/Stats.cards";
 import HighestPointsSection from "../sections/HighestPoints.sections";
+import TagsSection from "../sections/Tags.sections";
 
 const MainSidebar = () => {
   return (
@@ -19,6 +20,7 @@ const MainSidebar = () => {
       </Box>
       <StatsCard />
       <HighestPointsSection />
+      <TagsSection />
     </Grid>
   );
 };
