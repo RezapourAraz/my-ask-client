@@ -48,6 +48,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
       >
         {tabs.map((tab) => (
           <Box
+            key={tab.id}
             sx={{
               p: 1.5,
               bgcolor: tab.value === selectedTab ? "primary.main" : "initial",
@@ -67,7 +68,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
         ))}
       </Grid>
       {selectedTab === "recentQuestions" && <RecentQuestionsSection />}
-      <Grid container md={12} sx={{ justifyContent: "flex-end", my: 5 }}>
+      <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
         <Pagination
           count={2}
           variant="text"

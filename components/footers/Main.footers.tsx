@@ -49,7 +49,7 @@ const MainFooter = () => {
     <Grid sx={{ bgcolor: "secondary.main" }}>
       <Container maxWidth="xl">
         <Grid container sx={{ p: 3 }}>
-          <Grid md={3} p={2}>
+          <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
                 Where We Are
@@ -85,7 +85,7 @@ const MainFooter = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid md={3} p={2}>
+          <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
                 Quick Links
@@ -93,7 +93,10 @@ const MainFooter = () => {
             </Box>
             <Box>
               {quickLinks.map((link) => (
-                <Box sx={{ py: 1, borderBottom: 1, borderColor: "grey.600" }}>
+                <Box
+                  key={link.id}
+                  sx={{ py: 1, borderBottom: 1, borderColor: "grey.600" }}
+                >
                   <Link href={link.route} style={{ textDecoration: "none" }}>
                     <Typography variant="h5" color="grey.300">
                       - {link.name}
@@ -103,14 +106,14 @@ const MainFooter = () => {
               ))}
             </Box>
           </Grid>
-          <Grid md={3} p={2}>
+          <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
                 Popular Questions
               </Typography>
             </Box>
           </Grid>
-          <Grid md={3} p={2}>
+          <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
                 Subscribe
@@ -143,6 +146,7 @@ const MainFooter = () => {
             </Box>
           </Grid>
           <Grid
+            item
             md={12}
             px={2}
             pt={2}

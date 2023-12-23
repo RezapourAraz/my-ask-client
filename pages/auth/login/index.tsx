@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useAppDispatch } from "@/lib/redux.hooks";
 
 // Mui
 import {
@@ -11,13 +14,45 @@ import {
   Typography,
 } from "@mui/material";
 
+// redux
+import { setUser } from "@/redux/auth/auth.reducer";
+import { useLoginForm } from "@/lib/formik.hooks";
+import { useLoginMutation } from "@/redux/auth/auth.slice";
 // Icons
 import { FaUser } from "react-icons/fa";
-import Head from "next/head";
-import { useRouter } from "next/router";
+import { RiLockPasswordFill } from "react-icons/ri";
+
+// Cookie
+import { useCookies } from "react-cookie";
+import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 const Login = () => {
+  // hooks
   const router = useRouter();
+  const [login, { isSuccess, error }] = useLoginMutation();
+  const [cookie, setCookie] = useCookies(["user"]);
+
+  // handlers
+  const handleOnSubmit = async () => {
+    try {
+      const data = await login(values).unwrap();
+      if (data.code === 200) {
+        // dispatch(setUser(data?.data));
+        setCookie("user", JSON.stringify(data.data), {
+          path: "/",
+          maxAge: 3600, // Expires after 1hr
+          sameSite: true,
+        });
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // formik
+  const { handleChange, handleSubmit, errors, values } =
+    useLoginForm(handleOnSubmit);
 
   return (
     <>
@@ -36,6 +71,11 @@ const Login = () => {
         }}
       >
         <Grid
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
           sx={{
             width: 400,
             border: 1,
@@ -53,6 +93,7 @@ const Login = () => {
           </Grid>
           <Grid my={3}>
             <Input
+              name="email"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder="Email/Username"
@@ -61,19 +102,24 @@ const Login = () => {
                   <FaUser />
                 </InputAdornment>
               }
+              value={values.email}
+              onChange={handleChange}
             />
           </Grid>
           <Grid mt={3}>
             <Input
+              name="password"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder="Password"
               type="password"
               startAdornment={
                 <InputAdornment position="start">
-                  <FaUser />
+                  <RiLockPasswordFill />
                 </InputAdornment>
               }
+              value={values.password}
+              onChange={handleChange}
             />
           </Grid>
           <Grid
@@ -102,6 +148,7 @@ const Login = () => {
             <Button
               variant="contained"
               fullWidth
+              type="submit"
               sx={{ boxShadow: 0, color: "common.white" }}
             >
               Log in

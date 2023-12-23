@@ -4,17 +4,19 @@ import "@/styles/globals.css";
 // Mui
 import { theme } from "@/theme/theme";
 import { ThemeProvider } from "@mui/material";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
+
+// store
+import StoreProvider from "./storeProvider";
+import { CookiesProvider } from "react-cookie";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
+    <CookiesProvider>
+      <StoreProvider>
+        <ThemeProvider theme={theme}>
           <Component {...pageProps} />
-        </Provider>
-      </ThemeProvider>
-    </>
+        </ThemeProvider>
+      </StoreProvider>
+    </CookiesProvider>
   );
 }

@@ -18,7 +18,7 @@ const tags = [
     name: "Programmer",
   },
   {
-    id: 2,
+    id: 3,
     name: "Redux",
   },
 ];
@@ -94,6 +94,7 @@ const QuestionCard = () => {
           <Box display="flex" gap={1}>
             {tags.map((tab) => (
               <Box
+                key={tab.id}
                 bgcolor="secondary.main"
                 sx={{
                   p: 0.5,
