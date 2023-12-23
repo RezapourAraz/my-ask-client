@@ -103,7 +103,11 @@ const TopHeader = () => {
               <Box className="black" sx={{ color: "common.white" }}>
                 <GiTrophyCup />
               </Box>
-              <Typography className="black" variant="h6">
+              <Typography
+                className="black"
+                variant="h6"
+                onClick={() => router.push("/badges-and-points")}
+              >
                 Badges
               </Typography>
             </Box>
