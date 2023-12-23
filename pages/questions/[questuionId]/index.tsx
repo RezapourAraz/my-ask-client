@@ -11,6 +11,8 @@ import { Box, Grid, Typography } from "@mui/material";
 import QuestionCard from "@/components/cards/Question.cards";
 import AnswerCard from "@/components/cards/Answer.cards";
 import AnswersSection from "@/components/sections/Answers.sections";
+import LeaveAnswerCard from "@/components/cards/LeaveAnswer.cards";
+import RelatedQuestionsSection from "@/components/sections/RelatedQuestions.sections";
 
 const Question = () => {
   return (
@@ -24,6 +26,8 @@ const Question = () => {
         <Grid my={6}>
           <QuestionCard />
           <AnswersSection />
+          <LeaveAnswerCard />
+          <RelatedQuestionsSection />
         </Grid>
       </MainLayout>
     </>

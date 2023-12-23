@@ -17,6 +17,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/inputs/TextEditor.inputs.jsx",
+    "components/inputs/TextEditor.inputs.jsx"
+  ],
   "exclude": ["node_modules"]
 }
