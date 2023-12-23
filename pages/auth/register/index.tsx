@@ -16,8 +16,10 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -105,7 +107,8 @@ const Register = () => {
               <Typography
                 variant="h6"
                 component="span"
-                sx={{ color: "primary.main" }}
+                sx={{ color: "primary.main", cursor: "pointer" }}
+                onClick={() => router.push("/auth/login")}
               >
                 login
               </Typography>

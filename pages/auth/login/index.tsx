@@ -14,8 +14,11 @@ import {
 // Icons
 import { FaUser } from "react-icons/fa";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -79,13 +82,14 @@ const Login = () => {
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
             <Typography variant="h6">
-              Have an account?{" "}
+              You have not an account?{" "}
               <Typography
                 variant="h6"
                 component="span"
-                sx={{ color: "primary.main" }}
+                sx={{ color: "primary.main", cursor: "pointer" }}
+                onClick={() => router.push("/auth/register")}
               >
-                login
+                Register
               </Typography>
             </Typography>
             <Typography variant="h6">Forgot Password?</Typography>
