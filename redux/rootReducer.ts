@@ -1,8 +1,11 @@
 // import { RootState } from './store';
 import { combineReducers } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { authReducer } from "./auth/auth.reducer";
 
-const combinedReducer = combineReducers({});
+const combinedReducer = combineReducers({
+  [authReducer.name]: authReducer.reducer,
+});
 
 const rootReducer: (
   state: any,
@@ -14,7 +17,6 @@ const rootReducer: (
     };
     return nextState;
   } else {
-    // @ts-ignore
     return combinedReducer(state, action);
   }
 };
