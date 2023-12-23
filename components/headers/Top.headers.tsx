@@ -16,8 +16,12 @@ import { FaPencilAlt } from "react-icons/fa";
 import { GiTrophyCup } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const TopHeader = () => {
+  // hooks
+  const router = useRouter();
+
   return (
     <TopHeaderContainer>
       <Container maxWidth="xl">
@@ -45,7 +49,11 @@ const TopHeader = () => {
               >
                 <FaUser />
               </Box>
-              <Typography className="black" variant="h6">
+              <Typography
+                className="black"
+                variant="h6"
+                onClick={() => router.push("/auth/login")}
+              >
                 Login Area
               </Typography>
             </Box>
@@ -68,7 +76,11 @@ const TopHeader = () => {
               <Box className="black" sx={{ color: "common.white" }}>
                 <FaPencilAlt />
               </Box>
-              <Typography className="black" variant="h6">
+              <Typography
+                className="black"
+                variant="h6"
+                onClick={() => router.push("/add-post")}
+              >
                 Add Post
               </Typography>
             </Box>
