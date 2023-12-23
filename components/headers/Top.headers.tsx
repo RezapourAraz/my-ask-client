@@ -17,10 +17,13 @@ import { GiTrophyCup } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { useAppSelector } from "@/lib/redux.hooks";
 
 const TopHeader = () => {
   // hooks
   const router = useRouter();
+
+  // selector
 
   return (
     <TopHeaderContainer>
@@ -49,6 +52,7 @@ const TopHeader = () => {
               >
                 <FaUser />
               </Box>
+
               <Typography
                 className="black"
                 variant="h6"

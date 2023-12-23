@@ -6,6 +6,7 @@ import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 // Icons
 import { MdOutlineQuestionMark } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import Link from "next/link";
 
 // tags data
 const tags = [
@@ -40,11 +41,11 @@ const QuestionCard = () => {
       </Grid>
       <Grid container item md={11} sx={{ alignItems: "center" }}>
         <Grid item md={10}>
-          <Box>
+          <Link href="/questions/1" style={{ textDecoration: "none" }}>
             <Typography variant="h2" color="secondary.main">
               How much do web developers earn? What is their salary?
             </Typography>
-          </Box>
+          </Link>
         </Grid>
         <Grid container item md={2} sx={{ justifyContent: "space-between" }}>
           <Box

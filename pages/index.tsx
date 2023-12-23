@@ -14,6 +14,7 @@ import { parseCookies } from "@/helper/cookie";
 import { useAppDispatch } from "@/lib/redux.hooks";
 import { setUser } from "@/redux/auth/auth.reducer";
 import { useRouter } from "next/router";
+import MainBanner from "@/components/banners/Main.banners";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +25,12 @@ export default function Home({ data }: { data: any }) {
   // states
   const [selectedTab, setSelectedTab] = useState("recentQuestions");
 
-  if (data) {
-    const user = JSON?.parse(data?.user);
-    dispatch(setUser(user));
-  } else {
-    router.replace("/auth/login");
-  }
+  // if (data) {
+  //   const user = JSON?.parse(data?.user);
+  //   dispatch(setUser(user));
+  // } else {
+  //   router.replace("/auth/login");
+  // }
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function Home({ data }: { data: any }) {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout sidebar={<MainSidebar />}>
+      <MainLayout sidebar={<MainSidebar />} mainBanner={<MainBanner />}>
         <MainTab setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
       </MainLayout>
     </>
@@ -51,17 +52,17 @@ export default function Home({ data }: { data: any }) {
 //   return {};
 // }
 
-Home.getInitialProps = async ({ req, res }: { req: any; res: any }) => {
-  const data = parseCookies(req);
+// Home.getInitialProps = async ({ req, res }: { req: any; res: any }) => {
+//   const data = parseCookies(req);
 
-  if (res) {
-    if (Object.keys(data).length === 0 && data.constructor === Object) {
-      res.writeHead(301, { Location: "/" });
-      res.end();
-    }
-  }
+//   if (res) {
+//     if (Object.keys(data).length === 0 && data.constructor === Object) {
+//       res.writeHead(301, { Location: "/" });
+//       res.end();
+//     }
+//   }
 
-  return {
-    data: data && data,
-  };
-};
+//   return {
+//     data: data && data,
+//   };
+// };

@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Typography, styled } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -43,12 +44,12 @@ const MainHeader = () => {
         <Grid container sx={{ py: 2, justifyContent: "space-between", px: 5 }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FaQuestion style={{ fontSize: 42, color: "white" }} />
-            <Box>
+            <Link href="/" style={{ textDecoration: "none" }}>
               <Typography variant="h3">My Ask ?</Typography>
               <Typography variant="h6" sx={{ fontSize: 10 }}>
                 You Ask. We Answer
               </Typography>
-            </Box>
+            </Link>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             {routes.map((route) => (
@@ -64,7 +65,9 @@ const MainHeader = () => {
                 }}
                 key={route.id}
               >
-                <Typography variant="h4">{route.name}</Typography>
+                <Link href={route.route} style={{ textDecoration: "none" }}>
+                  <Typography variant="h4">{route.name}</Typography>
+                </Link>
               </Box>
             ))}
           </Box>
