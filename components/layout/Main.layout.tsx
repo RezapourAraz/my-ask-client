@@ -13,14 +13,20 @@ import MainFooter from "../footers/Main.footers";
 type IMainLayoutProps = {
   children: ReactNode;
   sidebar: ReactNode;
+  mainBanner?: ReactNode;
 };
 
-const MainLayout: FC<IMainLayoutProps> = ({ children, sidebar }) => {
+const MainLayout: FC<IMainLayoutProps> = ({
+  children,
+  sidebar,
+  mainBanner,
+}) => {
   return (
     <Grid sx={{ bgcolor: "grey.200" }}>
       <TopHeader />
       <MainHeader />
-      <MainBanner />
+      {mainBanner}
+
       <Container maxWidth="xl">
         <Grid container sx={{ px: 3 }}>
           <Grid item md={9} sx={{ px: 2 }}>

@@ -93,6 +93,7 @@ const BadgesAndPoints = () => {
             <Grid my={2} container justifyContent="space-between" rowGap={2}>
               {badgesData.map((badge) => (
                 <Grid
+                  key={badge.id}
                   item
                   md={5.9}
                   sx={{ color: "common.white", bgcolor: badge.color, p: 1.5 }}
@@ -112,6 +113,7 @@ const BadgesAndPoints = () => {
             <Grid my={2} container justifyContent="space-between" rowGap={2}>
               {pointsData.map((point) => (
                 <Grid
+                  key={point.id}
                   item
                   md={5.9}
                   sx={{ color: "common.black", bgcolor: "grey.300", p: 1.5 }}

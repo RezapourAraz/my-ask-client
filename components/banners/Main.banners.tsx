@@ -1,3 +1,7 @@
+import React from "react";
+import { useRouter } from "next/router";
+
+// Mui
 import {
   Box,
   Button,
@@ -7,9 +11,11 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 const MainBanner = () => {
+  // hooks
+  const router = useRouter();
+
   return (
     <Grid sx={{ bgcolor: "primary.main", height: 400 }}>
       <Container maxWidth="xl" sx={{ height: "100%" }}>
@@ -62,6 +68,7 @@ const MainBanner = () => {
                       boxShadow: 0,
                     },
                   }}
+                  onClick={() => router.push("/auth/login")}
                 >
                   Join Now
                 </Button>
