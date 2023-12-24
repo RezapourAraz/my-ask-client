@@ -1,13 +1,15 @@
 import { Box, Breadcrumbs, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { FC } from "react";
 
-const QuestionBanner = () => {
+// types
+type IQuestionBannerProps = {
+  title: string;
+};
+const QuestionBanner: FC<IQuestionBannerProps> = ({ title }) => {
   // hooks
   const router = useRouter();
-
-  console.log(router.asPath.split("/"));
 
   const routes = router.asPath.split("/");
 
@@ -15,9 +17,7 @@ const QuestionBanner = () => {
     <Grid sx={{ bgcolor: "primary.main" }}>
       <Container maxWidth="xl">
         <Grid sx={{ px: 5, py: 3 }}>
-          <Typography variant="h2">
-            How much do web developers earn? What is their salary?
-          </Typography>
+          <Typography variant="h2">{title}</Typography>
           <Breadcrumbs sx={{ mt: 1 }}>
             {routes.map((route, idx) => (
               <Link

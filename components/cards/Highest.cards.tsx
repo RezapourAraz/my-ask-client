@@ -14,7 +14,14 @@ const HighestCard = () => {
           <Typography color="primary.main" variant="h3">
             Araz Rezapour
           </Typography>
-          <Box sx={{ bgcolor: "success.main", display: "inline-flex", p: 0.5 }}>
+          <Box
+            sx={{
+              bgcolor: "success.main",
+              display: "inline-flex",
+              p: 0.5,
+              borderRadius: 1,
+            }}
+          >
             <Typography variant="h6">Developer</Typography>
           </Box>
           <Typography color="secondary.main" variant="h5">

@@ -22,7 +22,12 @@ const Question = () => {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout mainBanner={<QuestionBanner />} sidebar={<MainSidebar />}>
+      <MainLayout
+        mainBanner={
+          <QuestionBanner title="How much do web developers earn? What is their salary?" />
+        }
+        sidebar={<MainSidebar />}
+      >
         <Grid my={6}>
           <QuestionCard />
           <AnswersSection />

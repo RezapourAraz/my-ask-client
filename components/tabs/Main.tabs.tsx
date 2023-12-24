@@ -68,6 +68,10 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
         ))}
       </Grid>
       {selectedTab === "recentQuestions" && <RecentQuestionsSection />}
+      {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
+      {selectedTab === "answers" && <RecentQuestionsSection />}
+      {selectedTab === "noAnswers" && <RecentQuestionsSection />}
+      {selectedTab === "mostVisited" && <RecentQuestionsSection />}
       <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
         <Pagination
           count={2}

@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
+import NextNProgress from "nextjs-progressbar";
 
 // Mui
 import { theme } from "@/theme/theme";
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <CookiesProvider>
       <StoreProvider>
         <ThemeProvider theme={theme}>
+          <NextNProgress color="#f0f0f0" />
           <Component {...pageProps} />
         </ThemeProvider>
       </StoreProvider>

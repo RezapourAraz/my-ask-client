@@ -28,6 +28,11 @@ const routes = [
     route: "/user",
   },
   {
+    id: 6,
+    name: "Blogs",
+    route: "/blogs",
+  },
+  {
     id: 5,
     name: "Contact Us",
     route: "/contact-us",
