@@ -12,7 +12,7 @@ import MainFooter from "../footers/Main.footers";
 // Types
 type IMainLayoutProps = {
   children: ReactNode;
-  sidebar: ReactNode;
+  sidebar?: ReactNode;
   mainBanner?: ReactNode;
 };
 
@@ -29,12 +29,14 @@ const MainLayout: FC<IMainLayoutProps> = ({
 
       <Container maxWidth="xl">
         <Grid container sx={{ px: 3 }}>
-          <Grid item md={9} sx={{ px: 2 }}>
+          <Grid item md={sidebar ? 9 : 12} sx={{ px: 2 }}>
             {children}
           </Grid>
-          <Grid item md={3} sx={{ px: 2 }}>
-            {sidebar}
-          </Grid>
+          {sidebar && (
+            <Grid item md={3} sx={{ px: 2 }}>
+              {sidebar}
+            </Grid>
+          )}
         </Grid>
       </Container>
       <MainFooter />
