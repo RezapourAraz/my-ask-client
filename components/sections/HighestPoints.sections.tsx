@@ -3,8 +3,12 @@ import React from "react";
 // Mui
 import { Box, Grid, Typography } from "@mui/material";
 import HighestCard from "../cards/Highest.cards";
+import { useTranslation } from "next-i18next";
 
 const HighestPointsSection = () => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <Grid
       sx={{
@@ -17,7 +21,7 @@ const HighestPointsSection = () => {
     >
       <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
         <Typography variant="h4" color="primary.main">
-          Highest points
+          {t("highest_points")}
         </Typography>
       </Box>
       <HighestCard />

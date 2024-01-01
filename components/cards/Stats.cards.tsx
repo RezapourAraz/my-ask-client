@@ -59,7 +59,7 @@ const StatsCard = () => {
           }}
         >
           <RiShieldStarFill />
-          <Typography>Best Answers (23)</Typography>
+          <Typography>{t("best_answers")} (23)</Typography>
         </Box>
         <Box
           sx={{
@@ -72,7 +72,7 @@ const StatsCard = () => {
           }}
         >
           <BiSolidUserRectangle />
-          <Typography>Users (656)</Typography>
+          <Typography>{t("users")} (656)</Typography>
         </Box>
       </Box>
     </Grid>

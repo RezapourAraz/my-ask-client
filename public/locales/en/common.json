@@ -33,5 +33,12 @@
   "text_area": "Ask a question and you will be sure to find an answer",
   "ask_now": "Ask Now",
   "stats": "Stats",
-  "answers": "Answers"
+  "answers": "Answers",
+  "best_answers": "Best Answers",
+  "users": "Users",
+  "highest_points": "Highest Points",
+  "points": "Pointes",
+  "developers": "Developers",
+  "tags": "Tags",
+  "analytics": "Analytics"
 }

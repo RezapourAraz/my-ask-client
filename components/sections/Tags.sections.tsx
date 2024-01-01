@@ -2,8 +2,12 @@ import React from "react";
 
 // Mui
 import { Box, Button, Grid, Typography } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const TagsSection = () => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <Grid
       sx={{
@@ -16,7 +20,7 @@ const TagsSection = () => {
     >
       <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
         <Typography variant="h4" color="primary.main">
-          Tags
+          {t("tags")}
         </Typography>
       </Box>
       <Box my={3} gap={1}>
@@ -30,7 +34,7 @@ const TagsSection = () => {
             boxShadow: 0,
           }}
         >
-          analytics
+          {t("analytics")}
         </Button>
         <Button
           variant="contained"
@@ -42,7 +46,7 @@ const TagsSection = () => {
             boxShadow: 0,
           }}
         >
-          analytics
+          {t("analytics")}
         </Button>
         <Button
           variant="contained"
@@ -54,7 +58,7 @@ const TagsSection = () => {
             boxShadow: 0,
           }}
         >
-          analytics
+          {t("analytics")}
         </Button>
         <Button
           variant="contained"
@@ -66,7 +70,7 @@ const TagsSection = () => {
             boxShadow: 0,
           }}
         >
-          analytics
+          {t("analytics")}
         </Button>
         <Button
           variant="contained"
@@ -78,31 +82,7 @@ const TagsSection = () => {
             boxShadow: 0,
           }}
         >
-          analytics
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          analytics
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          analytics
+          {t("analytics")}
         </Button>
       </Box>
     </Grid>
