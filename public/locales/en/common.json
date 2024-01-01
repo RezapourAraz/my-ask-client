@@ -26,5 +26,10 @@
   "questions": "Questions",
   "user": "User",
   "blogs": "Blogs",
-  "contact_us": "Contact Us"
+  "contact_us": "Contact Us",
+  "welcome_ask_desc": "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque",
+  "about_us": "About Us",
+  "join_now": "Join Now",
+  "text_area": "Ask a question and you will be sure to find an answer",
+  "ask_now": "Ask Now"
 }

@@ -11,10 +11,12 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "next-i18next";
 
 const MainBanner = () => {
   // hooks
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <Grid sx={{ bgcolor: "primary.main", height: 400 }}>
@@ -33,12 +35,10 @@ const MainBanner = () => {
               }}
             >
               <Typography variant="h1" component="h6">
-                Welcome to My Ask
+                {t("welcome_ask")}
               </Typography>
               <Typography variant="h5" sx={{ my: 2 }}>
-                Duis dapibus aliquam mi, eget euismod sem scelerisque ut.
-                Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae
-                velit in neque dictum blandit. Proin in iaculis neque
+                {t("welcome_ask_desc")}
               </Typography>
               <Box display="flex" gap={1} my={2}>
                 <Button
@@ -54,7 +54,7 @@ const MainBanner = () => {
                     },
                   }}
                 >
-                  About Us
+                  {t("about_us")}
                 </Button>
                 <Button
                   variant="contained"
@@ -70,7 +70,7 @@ const MainBanner = () => {
                   }}
                   onClick={() => router.push("/auth/login")}
                 >
-                  Join Now
+                  {t("join_now")}
                 </Button>
               </Box>
             </Box>
@@ -97,7 +97,7 @@ const MainBanner = () => {
               }}
             >
               <TextareaAutosize
-                placeholder="Ask a question and you will be sure to find an answer"
+                placeholder={t("text_area")}
                 style={{
                   backgroundColor: "transparent",
                   width: "100%",
@@ -107,12 +107,19 @@ const MainBanner = () => {
                   outline: 0,
                 }}
               />
-              <Box position="absolute" sx={{ bottom: 10, right: 10 }}>
+              <Box
+                position="absolute"
+                sx={{
+                  bottom: 10,
+                  right: router.locale === "fa" ? 10 : 0,
+                  left: router.locale === "fa" ? 0 : 10,
+                }}
+              >
                 <Button
                   variant="contained"
                   sx={{ color: "common.white", boxShadow: 0 }}
                 >
-                  Ask Now
+                  {t("ask_now")}
                 </Button>
               </Box>
             </Box>
