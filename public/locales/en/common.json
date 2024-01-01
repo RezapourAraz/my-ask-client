@@ -1,5 +1,5 @@
 {
-  "title": "ُsoalito",
+  "title": "ُSoalito?",
   "login_title": "Login",
   "welcome": "Welcome back!",
   "email_username": "Email/Username",
@@ -15,5 +15,16 @@
   "username": "Username",
   "confirm_password": "Confirm Password",
   "have_an_account": "Already have an account?",
-  "signup": "Sign Up"
+  "signup": "Sign Up",
+  "login_area": "Login Area",
+  "add_post": "Add Post",
+  "badges": "Badges",
+  "search_here": "Search here...",
+  "you_ask_we_answer": "You Ask. We Answer.",
+  "home": "Home",
+  "ask_question": "Ask Question",
+  "questions": "Questions",
+  "user": "User",
+  "blogs": "Blogs",
+  "contact_us": "Contact Us"
 }

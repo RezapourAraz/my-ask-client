@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography, styled } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { useTranslation } from "next-i18next";
 
 // Icons
 import { FaQuestion } from "react-icons/fa";
@@ -9,38 +10,39 @@ import { FaQuestion } from "react-icons/fa";
 const routes = [
   {
     id: 1,
-    name: "Home",
+    name: "home",
     route: "/",
   },
   {
     id: 2,
-    name: "Ask Question",
+    name: "ask_question",
     route: "/ask-question",
   },
   {
     id: 3,
-    name: "Questions",
+    name: "questions",
     route: "/questions",
   },
   {
     id: 4,
-    name: "User",
+    name: "user",
     route: "/user",
   },
   {
     id: 6,
-    name: "Blogs",
+    name: "blogs",
     route: "/blogs",
   },
   {
     id: 5,
-    name: "Contact Us",
+    name: "contact_us",
     route: "/contact-us",
   },
 ];
 
 const MainHeader = () => {
-  //
+  // hooks
+  const { t } = useTranslation();
   const router = useRouter();
 
   return (
@@ -50,9 +52,9 @@ const MainHeader = () => {
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FaQuestion style={{ fontSize: 42, color: "white" }} />
             <Link href="/" style={{ textDecoration: "none" }}>
-              <Typography variant="h3">My Ask ?</Typography>
+              <Typography variant="h3">{t("title")}</Typography>
               <Typography variant="h6" sx={{ fontSize: 10 }}>
-                You Ask. We Answer
+                {t("you_ask_we_answer")}
               </Typography>
             </Link>
           </Box>
@@ -70,7 +72,7 @@ const MainHeader = () => {
                 key={route.id}
               >
                 <Link href={route.route} style={{ textDecoration: "none" }}>
-                  <Typography variant="h4">{route.name}</Typography>
+                  <Typography variant="h4">{t(`${route.name}`)}</Typography>
                 </Link>
               </Box>
             ))}

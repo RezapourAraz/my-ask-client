@@ -24,10 +24,18 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home({ data }: { data: any }) {
   // hooks
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const { locale } = useRouter();
   const { t } = useTranslation();
   // states
   const [selectedTab, setSelectedTab] = useState("recentQuestions");
+
+  useEffect(() => {
+    if (locale === "fa") {
+      document.dir = "rtl";
+    } else if (locale === "en") {
+      document.dir = "ltr";
+    }
+  });
 
   // if (data) {
   //   const user = JSON?.parse(data?.user);

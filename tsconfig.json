@@ -24,7 +24,8 @@
     "components/inputs/TextEditor.inputs.jsx",
     "components/inputs/TextEditor.inputs.jsx",
     "next-i18next.config.js",
-    "next-i18next.config.js"
+    "next-i18next.config.js",
+    "theme/theme.js"
   ],
   "exclude": ["node_modules"]
 }

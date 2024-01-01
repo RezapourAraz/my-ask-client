@@ -18,10 +18,12 @@ import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/lib/redux.hooks";
+import { useTranslation } from "next-i18next";
 
 const TopHeader = () => {
   // hooks
   const router = useRouter();
+  const { t } = useTranslation();
 
   // selector
 
@@ -58,7 +60,7 @@ const TopHeader = () => {
                 variant="h6"
                 onClick={() => router.push("/auth/login")}
               >
-                Login Area
+                {t("login_area")}
               </Typography>
             </Box>
             <Divider
@@ -85,7 +87,7 @@ const TopHeader = () => {
                 variant="h6"
                 onClick={() => router.push("/add-post")}
               >
-                Add Post
+                {t("add_post")}
               </Typography>
             </Box>
             <Divider
@@ -112,14 +114,14 @@ const TopHeader = () => {
                 variant="h6"
                 onClick={() => router.push("/badges-and-points")}
               >
-                Badges
+                {t("badges")}
               </Typography>
             </Box>
           </Grid>
           <Grid item md={2} container>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <FaSearch style={{ color: "white" }} />
-              <Input fullWidth placeholder="search here..." />
+              <Input fullWidth placeholder={t("search_here")} />
             </Box>
           </Grid>
         </Grid>

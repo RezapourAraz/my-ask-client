@@ -1,5 +1,5 @@
 {
-  "title": "سوالیتو",
+  "title": "؟سوالیتو",
   "login_title": "ورود",
   "welcome": "خوش آمدید!",
   "email_username": "ایمیل / نام کاربری",
@@ -15,5 +15,16 @@
   "username": "نام کاربری",
   "confirm_password": "تایید کلمه عبور",
   "have_an_account": "قبلا حساب کاربری داشتید؟",
-  "signup": "ثبت نام"
+  "signup": "ثبت نام",
+  "login_area": "ورود",
+  "add_post": "افزودن پست",
+  "badges": "نشان ها",
+  "search_here": "جستجو کنید...",
+  "you_ask_we_answer": "سوال از تو. جواب از ما",
+  "home": "خانه",
+  "ask_question": "پرسیدن سوال",
+  "questions": "سوالات",
+  "user": "کاربر",
+  "blogs": "بلاگ ها",
+  "contact_us": "تماس با ما"
 }
