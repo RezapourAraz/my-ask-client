@@ -8,13 +8,17 @@ import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { MdMarkChatRead } from "react-icons/md";
 import { RiShieldStarFill } from "react-icons/ri";
 import { BiSolidUserRectangle } from "react-icons/bi";
+import { useTranslation } from "next-i18next";
 
 const StatsCard = () => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <Grid sx={{ p: 2, bgcolor: "common.white", borderRadius: 1, boxShadow: 1 }}>
       <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
         <Typography variant="h4" color="primary.main">
-          Stats
+          {t("stats")}
         </Typography>
       </Box>
       <Box>
@@ -29,7 +33,7 @@ const StatsCard = () => {
           }}
         >
           <BsFillQuestionSquareFill />
-          <Typography>Questions (19)</Typography>
+          <Typography>{t("questions")} (19)</Typography>
         </Box>
         <Box
           sx={{
@@ -42,7 +46,7 @@ const StatsCard = () => {
           }}
         >
           <MdMarkChatRead />
-          <Typography>Answers (44)</Typography>
+          <Typography>{t("answers")} (44)</Typography>
         </Box>
         <Box
           sx={{
