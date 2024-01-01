@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "@/lib/redux.hooks";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Mui
 import {
@@ -25,11 +26,16 @@ import { RiLockPasswordFill } from "react-icons/ri";
 // Cookie
 import { useCookies } from "react-cookie";
 import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { useTranslation } from "next-i18next";
+import { GetStaticProps } from "next";
 
 const Login = () => {
   // hooks
   const router = useRouter();
+  const { t } = useTranslation();
   const [login, { isSuccess, error }] = useLoginMutation();
+
+  //
   const [cookie, setCookie] = useCookies(["user"]);
 
   // handlers
@@ -57,7 +63,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>{t("login_title")}</title>
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -86,17 +92,17 @@ const Login = () => {
           }}
         >
           <Box sx={{ textAlign: "center" }}>
-            <Typography variant="h2">Login</Typography>
+            <Typography variant="h2">{t("login_title")}</Typography>
           </Box>
           <Grid my={2} sx={{ textAlign: "center" }}>
-            <Typography variant="h5">welcome back!</Typography>
+            <Typography variant="h5">{t("welcome")}</Typography>
           </Grid>
           <Grid my={3}>
             <Input
               name="email"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Email/Username"
+              placeholder={t("email_username")}
               startAdornment={
                 <InputAdornment position="start">
                   <FaUser />
@@ -111,7 +117,7 @@ const Login = () => {
               name="password"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Password"
+              placeholder={t("password")}
               type="password"
               startAdornment={
                 <InputAdornment position="start">
@@ -128,21 +134,21 @@ const Login = () => {
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
             <Typography variant="h6">
-              You have not an account?{" "}
+              {t("don't_have_an_account")}{" "}
               <Typography
                 variant="h6"
                 component="span"
                 sx={{ color: "primary.main", cursor: "pointer" }}
                 onClick={() => router.push("/auth/register")}
               >
-                Register
+                {t("register")}
               </Typography>
             </Typography>
-            <Typography variant="h6">Forgot Password?</Typography>
+            <Typography variant="h6">{t("forgot_password")}</Typography>
           </Grid>
           <Grid container my={1} sx={{ alignItems: "center" }}>
             <Checkbox />
-            <Typography variant="h6">Remember me</Typography>
+            <Typography variant="h6">{t("remember_me")}</Typography>
           </Grid>
           <Grid>
             <Button
@@ -151,7 +157,7 @@ const Login = () => {
               type="submit"
               sx={{ boxShadow: 0, color: "common.white" }}
             >
-              Log in
+              {t("login")}
             </Button>
           </Grid>
         </Grid>
@@ -161,3 +167,11 @@ const Login = () => {
 };
 
 export default Login;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+};

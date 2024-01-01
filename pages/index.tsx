@@ -15,6 +15,9 @@ import { useAppDispatch } from "@/lib/redux.hooks";
 import { setUser } from "@/redux/auth/auth.reducer";
 import { useRouter } from "next/router";
 import MainBanner from "@/components/banners/Main.banners";
+import { useTranslation } from "next-i18next";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +25,7 @@ export default function Home({ data }: { data: any }) {
   // hooks
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
   // states
   const [selectedTab, setSelectedTab] = useState("recentQuestions");
 
@@ -35,7 +39,7 @@ export default function Home({ data }: { data: any }) {
   return (
     <>
       <Head>
-        <title>My Ask</title>
+        <title>{t("title")}</title>
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -66,3 +70,11 @@ export default function Home({ data }: { data: any }) {
 //     data: data && data,
 //   };
 // };
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+};

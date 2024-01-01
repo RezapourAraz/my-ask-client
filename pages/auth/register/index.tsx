@@ -17,13 +17,20 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { t } from "i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+import { useTranslation } from "next-i18next";
 
 const Register = () => {
+  // hooks
   const router = useRouter();
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Register</title>
+        <title>{t("register")}</title>
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -47,16 +54,16 @@ const Register = () => {
           }}
         >
           <Box sx={{ textAlign: "center" }}>
-            <Typography variant="h2">Create Account</Typography>
+            <Typography variant="h2">{t("create_account")}</Typography>
           </Box>
           <Grid my={2} sx={{ textAlign: "center" }}>
-            <Typography variant="h5">welcome to My Ask</Typography>
+            <Typography variant="h5">{t("welcome_ask")}</Typography>
           </Grid>
           <Grid my={3}>
             <Input
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Username*"
+              placeholder={t("username")}
               startAdornment={
                 <InputAdornment position="start">
                   <FaUser />
@@ -68,7 +75,7 @@ const Register = () => {
             <Input
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Email*"
+              placeholder={t("email")}
               startAdornment={
                 <InputAdornment position="start">
                   <MdEmail />
@@ -80,7 +87,7 @@ const Register = () => {
             <Input
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Password*"
+              placeholder={t("password")}
               startAdornment={
                 <InputAdornment position="start">
                   <RiLockPasswordFill />
@@ -92,7 +99,7 @@ const Register = () => {
             <Input
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
-              placeholder="Confirm Password*"
+              placeholder={t("confirm_password")}
               type="password"
               startAdornment={
                 <InputAdornment position="start">
@@ -103,14 +110,14 @@ const Register = () => {
           </Grid>
           <Grid my={2} container sx={{ alignItems: "center" }}>
             <Typography variant="h6">
-              Have an account?{" "}
+              {t("have_an_account")}{" "}
               <Typography
                 variant="h6"
                 component="span"
                 sx={{ color: "primary.main", cursor: "pointer" }}
                 onClick={() => router.push("/auth/login")}
               >
-                login
+                {t("login")}
               </Typography>
             </Typography>
           </Grid>
@@ -120,7 +127,7 @@ const Register = () => {
               fullWidth
               sx={{ boxShadow: 0, color: "common.white" }}
             >
-              Signup
+              {t("signup")}
             </Button>
           </Grid>
         </Grid>
@@ -130,3 +137,11 @@ const Register = () => {
 };
 
 export default Register;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+};

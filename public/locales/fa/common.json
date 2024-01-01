@@ -1,0 +1,19 @@
+{
+  "title": "سوالیتو",
+  "login_title": "ورود",
+  "welcome": "خوش آمدید!",
+  "email_username": "ایمیل / نام کاربری",
+  "password": "کلمه عبور",
+  "don't_have_an_account": "شما هنوز حساب کاربری ندارید؟",
+  "register": "ثبت نام",
+  "forgot_password": "کلمه عبور خود را فراموش کرده اید؟",
+  "remember_me": "مرا به خاطر بسپار",
+  "login": "ورود",
+  "create_account": "ایجاد حساب کاربری",
+  "welcome_ask": "خوش آمدید به سوالیتو",
+  "email": "ایمیل",
+  "username": "نام کاربری",
+  "confirm_password": "تایید کلمه عبور",
+  "have_an_account": "قبلا حساب کاربری داشتید؟",
+  "signup": "ثبت نام"
+}

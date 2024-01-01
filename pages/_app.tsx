@@ -9,8 +9,10 @@ import { ThemeProvider } from "@mui/material";
 // store
 import StoreProvider from "./storeProvider";
 import { CookiesProvider } from "react-cookie";
+import { appWithTranslation } from "next-i18next";
+// import nextI18NextConfig from "./../next-i18next.config";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <CookiesProvider>
       <StoreProvider>
@@ -21,4 +23,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </StoreProvider>
     </CookiesProvider>
   );
-}
+};
+
+export default appWithTranslation(App);
