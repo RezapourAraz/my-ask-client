@@ -40,5 +40,11 @@
   "points": "Pointes",
   "developers": "Developers",
   "tags": "Tags",
-  "analytics": "Analytics"
+  "analytics": "Analytics",
+  "recent_questions": "Recent Questions",
+  "most_answered": "Most Answered",
+  "no_answers": "No Answers",
+  "most_visited": "Most Visited",
+  "question": "Question?",
+  "report": "Report!"
 }

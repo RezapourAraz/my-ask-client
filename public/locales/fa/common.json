@@ -40,5 +40,11 @@
   "points": "امتیازات",
   "developer": "توسعه دهنده",
   "tags": "برچسب ها",
-  "analytics": "تجزیه و تحلیل"
+  "analytics": "تجزیه و تحلیل",
+  "recent_questions": "سوالات اخیر",
+  "most_answered": "بیشترین پاسخ ",
+  "no_answers": "بدون پاسخ ",
+  "most_visited": "بیشترین بازدید",
+  "question": "سوال؟",
+  "report": "گزارش!"
 }

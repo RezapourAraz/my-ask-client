@@ -3,32 +3,33 @@ import React, { Dispatch, FC, SetStateAction } from "react";
 // Mui
 import { Box, Grid, Pagination, Typography } from "@mui/material";
 import RecentQuestionsSection from "../sections/RecentQuestions.sections";
+import { useTranslation } from "next-i18next";
 
 // tabs data
 const tabs = [
   {
     id: 1,
-    name: "Recent Questions",
+    name: "recent_questions",
     value: "recentQuestions",
   },
   {
     id: 2,
-    name: "Most Answered",
+    name: "most_answered",
     value: "mostAnswered",
   },
   {
     id: 3,
-    name: "Answers",
+    name: "answers",
     value: "answers",
   },
   {
     id: 4,
-    name: "No Answers",
+    name: "no_answers",
     value: "noAnswers",
   },
   {
     id: 5,
-    name: "Most Visited",
+    name: "most_visited",
     value: "mostVisited",
   },
 ];
@@ -40,6 +41,9 @@ type IMainTabProps = {
 };
 
 const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <Box>
       <Grid
@@ -62,7 +66,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
                 tab.value === selectedTab ? "common.white" : "secondary.main"
               }
             >
-              {tab.name}
+              {t(`${tab.name}`)}
             </Typography>
           </Box>
         ))}

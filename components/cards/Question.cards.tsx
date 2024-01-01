@@ -7,6 +7,7 @@ import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import { MdOutlineQuestionMark } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 // tags data
 const tags = [
@@ -25,6 +26,9 @@ const tags = [
 ];
 
 const QuestionCard = () => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <Grid
       container
@@ -58,9 +62,9 @@ const QuestionCard = () => {
               width: "fit-content",
             }}
           >
-            <MdOutlineQuestionMark style={{ color: "white" }} />
+            {/* <MdOutlineQuestionMark style={{ color: "white" }} /> */}
             <Typography variant="h6" fontSize={12}>
-              Question
+              {t("question")}
             </Typography>
           </Box>
           <Button
@@ -72,7 +76,7 @@ const QuestionCard = () => {
               p: 0.1,
             }}
           >
-            Report
+            {t("report")}
           </Button>
         </Grid>
         <Grid
