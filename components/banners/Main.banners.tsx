@@ -111,8 +111,8 @@ const MainBanner = () => {
                 position="absolute"
                 sx={{
                   bottom: 10,
-                  right: router.locale === "fa" ? 10 : 0,
-                  left: router.locale === "fa" ? 0 : 10,
+                  right: router.locale === "en" ? 10 : "initial",
+                  left: router.locale === "fa" ? 10 : "initial",
                 }}
               >
                 <Button
