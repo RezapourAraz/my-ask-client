@@ -23,18 +23,36 @@ const UserCard = () => {
         my: 2,
       }}
     >
-      <Grid item md={12}>
+      <Grid
+        item
+        md={12}
+        sx={{
+          pb: 2,
+          borderBottom: 2,
+          borderColor: "grey.300",
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+        }}
+      >
         <Typography
           variant="h5"
           sx={{
             color: "primary.main",
-            pb: 2,
-            borderBottom: 2,
-            borderColor: "grey.300",
           }}
         >
           About Araz Rezapour
         </Typography>
+        <Box
+          sx={{
+            bgcolor: "success.main",
+            display: "inline-flex",
+            p: 0.5,
+            borderRadius: 1,
+          }}
+        >
+          <Typography variant="h6">Explainer</Typography>
+        </Box>
       </Grid>
       <Grid item md={1} sx={{ my: 3 }}>
         <Avatar sx={{ width: 50, height: 50 }} />
