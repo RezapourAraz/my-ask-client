@@ -8,6 +8,7 @@ import QuestionBanner from "@/components/banners/Question.banners";
 import MainLayout from "@/components/layout/Main.layout";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
 import UserCard from "@/components/cards/User.cards";
+import UserStatsSection from "@/components/sections/UserStats.sections";
 
 const User = () => {
   return (
@@ -23,6 +24,7 @@ const User = () => {
       >
         <Grid my={6}>
           <UserCard />
+          <UserStatsSection />
         </Grid>
       </MainLayout>
     </>
