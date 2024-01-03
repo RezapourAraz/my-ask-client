@@ -37,6 +37,8 @@ export default function Home({ data }: { data: any }) {
     }
   });
 
+  console.log(data);
+
   // if (data) {
   //   const user = JSON?.parse(data?.user);
   //   dispatch(setUser(user));
@@ -58,11 +60,26 @@ export default function Home({ data }: { data: any }) {
   );
 }
 
-// export async function getServerSideProps(ctx) {
-//   const {};
+export async function getServerSideProps(ctx: any) {
+  const { limit = 10, page = 1 } = ctx.query;
 
-//   return {};
-// }
+  // i'll add axios
+
+  const request = await fetch(
+    `http://localhost:5005/api/v1/questions?page=${page}&limit=${limit}`,
+    {
+      method: "GET",
+    }
+  );
+  const questions = await request.json();
+  console.log(questions);
+
+  return {
+    props: {
+      data: questions.data,
+    },
+  };
+}
 
 // Home.getInitialProps = async ({ req, res }: { req: any; res: any }) => {
 //   const data = parseCookies(req);
@@ -79,10 +96,10 @@ export default function Home({ data }: { data: any }) {
 //   };
 // };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale as string, ["common"])),
-    },
-  };
-};
+// export const getStaticProps: GetStaticProps = async ({ locale }) => {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale as string, ["common"])),
+//     },
+//   };
+// };
