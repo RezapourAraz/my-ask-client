@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie, hasCookie } from "cookies-next";
+import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 
 const BASE_URL = "http://localhost:5005/api/v1";
 
@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers["RefreshToken"] || null;
       const refreshResult = await refreshAccessToken(backendRefreshToken);
       if (!refreshResult) {
-        // TODO: Logout User
+        deleteCookie("user");
         return Promise.reject(error);
       }
       originalRequest._retry = true;

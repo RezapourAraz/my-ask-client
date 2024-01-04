@@ -45,6 +45,8 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   // hooks
   const { t } = useTranslation();
 
+  console.log(data);
+
   return (
     <Box>
       <Grid
@@ -73,34 +75,36 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
         ))}
       </Grid>
       {selectedTab === "recentQuestions" && (
-        <RecentQuestionsSection data={data} />
+        <RecentQuestionsSection data={data.data} />
       )}
       {/* {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
       {selectedTab === "answers" && <RecentQuestionsSection />}
       {selectedTab === "noAnswers" && <RecentQuestionsSection />}
       {selectedTab === "mostVisited" && <RecentQuestionsSection />} */}
-      <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
-        <Pagination
-          count={2}
-          variant="text"
-          shape="rounded"
-          color="primary"
-          sx={{
-            ".MuiPaginationItem-page": {
-              bgcolor: "grey.500",
-              color: "common.black",
-            },
-            ".Mui-selected": {
-              bgcolor: "primary.main",
-              color: "common.white",
-            },
-            ".MuiPaginationItem-previousNext": {
-              bgcolor: "grey.500",
-              color: "common.black",
-            },
-          }}
-        />
-      </Grid>
+      {data.count / data.pageSize > 1 && (
+        <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
+          <Pagination
+            count={data.count / data.pageSize}
+            variant="text"
+            shape="rounded"
+            color="primary"
+            sx={{
+              ".MuiPaginationItem-page": {
+                bgcolor: "grey.500",
+                color: "common.black",
+              },
+              ".Mui-selected": {
+                bgcolor: "primary.main",
+                color: "common.white",
+              },
+              ".MuiPaginationItem-previousNext": {
+                bgcolor: "grey.500",
+                color: "common.black",
+              },
+            }}
+          />
+        </Grid>
+      )}
     </Box>
   );
 };

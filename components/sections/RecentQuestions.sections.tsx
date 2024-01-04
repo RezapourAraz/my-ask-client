@@ -7,7 +7,6 @@ type IRecentQuestionsSectionProps = {
 };
 
 const RecentQuestionsSection: FC<IRecentQuestionsSectionProps> = ({ data }) => {
-  console.log(data);
 
   return (
     <>

@@ -95,12 +95,12 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         <Grid container item md={12} sx={{ mt: 2, gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <FaStar style={{ color: "yellow" }} />
-            <Typography>12</Typography>
+            <Typography>{question.rating}</Typography>
           </Box>
           <Box display="flex" gap={1}>
-            {tags.map((tab) => (
+            {question.tags.map((tag: any) => (
               <Box
-                key={tab.id}
+                key={tag.tagId}
                 bgcolor="secondary.main"
                 sx={{
                   p: 0.5,
@@ -109,7 +109,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6">{tab.name}</Typography>
+                <Typography variant="h6">{tag.tagTitle}</Typography>
               </Box>
             ))}
           </Box>

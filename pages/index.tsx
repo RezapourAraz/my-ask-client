@@ -79,7 +79,7 @@ export async function getServerSideProps({ query, req, res, ...ctx }: any) {
 
   return {
     props: {
-      data: response.data.data,
+      data: response.data,
     },
   };
 }
