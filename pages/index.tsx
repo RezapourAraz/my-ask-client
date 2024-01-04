@@ -20,6 +20,7 @@ import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import axios from "axios";
 import { axiosInstance } from "@/configs/AxiosConfig";
+import { getCookie, hasCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,14 +58,24 @@ export default function Home({ data }: { data: any }) {
   );
 }
 
-export async function getServerSideProps(ctx: any) {
-  const { limit = 10, page = 1 } = ctx.query;
+export async function getServerSideProps({ query, req, res, ...ctx }: any) {
+  const { limit = 10, page = 1 } = query;
+
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
 
   const response = await axiosInstance.get(
-    `/questions?page=${page}&limit=${limit}`
+    `/questions?page=${page}&limit=${limit}`,
+    user
+      ? {
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+            RefreshToken: user?.refreshToken,
+          },
+        }
+      : undefined
   );
-
-  console.log(response.data);
 
   return {
     props: {

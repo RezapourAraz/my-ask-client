@@ -28,6 +28,7 @@ import { useCookies } from "react-cookie";
 import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
+import { setCookie } from "cookies-next";
 
 const Login = () => {
   // hooks
@@ -36,7 +37,7 @@ const Login = () => {
   const [login, { isSuccess, error }] = useLoginMutation();
 
   //
-  const [cookie, setCookie] = useCookies(["user"]);
+  // const [cookie, setCookie] = useCookies(["user"]);
 
   // handlers
   const handleOnSubmit = async () => {
@@ -44,11 +45,8 @@ const Login = () => {
       const data = await login(values).unwrap();
       if (data.code === 200) {
         // dispatch(setUser(data?.data));
-        setCookie("user", JSON.stringify(data.data), {
-          path: "/",
-          maxAge: 3600, // Expires after 1hr
-          sameSite: true,
-        });
+
+        setCookie("user", data.data);
         router.push("/");
       }
     } catch (err) {
