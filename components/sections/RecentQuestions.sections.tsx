@@ -1,13 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
 import QuestionCard from "../cards/Question.cards";
 import { Pagination } from "@mui/material";
 
-const RecentQuestionsSection = () => {
+type IRecentQuestionsSectionProps = {
+  data: any;
+};
+
+const RecentQuestionsSection: FC<IRecentQuestionsSectionProps> = ({ data }) => {
+  console.log(data);
+
   return (
     <>
-      <QuestionCard />
-      <QuestionCard />
-      <QuestionCard />
+      {data.map((question: any) => (
+        <QuestionCard key={question.id} question={question} />
+      ))}
     </>
   );
 };

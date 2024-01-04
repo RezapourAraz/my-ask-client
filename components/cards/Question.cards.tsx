@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 // Mui
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
@@ -25,7 +25,11 @@ const tags = [
   },
 ];
 
-const QuestionCard = () => {
+type IQuestionCard = {
+  question: any;
+};
+
+const QuestionCard: FC<IQuestionCard> = ({ question }) => {
   // hooks
   const { t } = useTranslation();
 
@@ -47,7 +51,7 @@ const QuestionCard = () => {
         <Grid item md={10}>
           <Link href="/questions/1" style={{ textDecoration: "none" }}>
             <Typography variant="h2" color="secondary.main">
-              How much do web developers earn? What is their salary?
+              {question.title}
             </Typography>
           </Link>
         </Grid>
@@ -85,10 +89,7 @@ const QuestionCard = () => {
           sx={{ py: 4, borderBottom: 1, borderColor: "grey.300" }}
         >
           <Typography variant="caption" fontSize={16}>
-            I am thinking of pursuing web developing as a career & was just
-            wondering. I’ve heard that that location is a big factor when it
-            comes to salary of web developers. Kindly state: 1) Country 2)
-            Salary Monthly/Yearly 3) Years of experience. P.s) You can...
+            {question.content}
           </Typography>
         </Grid>
         <Grid container item md={12} sx={{ mt: 2, gap: 2 }}>

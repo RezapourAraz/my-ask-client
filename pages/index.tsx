@@ -18,6 +18,8 @@ import MainBanner from "@/components/banners/Main.banners";
 import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import axios from "axios";
+import { axiosInstance } from "@/configs/AxiosConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,15 +39,6 @@ export default function Home({ data }: { data: any }) {
     }
   });
 
-  console.log(data);
-
-  // if (data) {
-  //   const user = JSON?.parse(data?.user);
-  //   dispatch(setUser(user));
-  // } else {
-  //   router.replace("/auth/login");
-  // }
-
   return (
     <>
       <Head>
@@ -54,7 +47,11 @@ export default function Home({ data }: { data: any }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout sidebar={<MainSidebar />} mainBanner={<MainBanner />}>
-        <MainTab setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
+        <MainTab
+          data={data}
+          setSelectedTab={setSelectedTab}
+          selectedTab={selectedTab}
+        />
       </MainLayout>
     </>
   );
@@ -63,43 +60,15 @@ export default function Home({ data }: { data: any }) {
 export async function getServerSideProps(ctx: any) {
   const { limit = 10, page = 1 } = ctx.query;
 
-  // i'll add axios
-
-  const request = await fetch(
-    `http://localhost:5005/api/v1/questions?page=${page}&limit=${limit}`,
-    {
-      method: "GET",
-    }
+  const response = await axiosInstance.get(
+    `/questions?page=${page}&limit=${limit}`
   );
-  const questions = await request.json();
-  console.log(questions);
+
+  console.log(response.data);
 
   return {
     props: {
-      data: questions.data,
+      data: response.data.data,
     },
   };
 }
-
-// Home.getInitialProps = async ({ req, res }: { req: any; res: any }) => {
-//   const data = parseCookies(req);
-
-//   if (res) {
-//     if (Object.keys(data).length === 0 && data.constructor === Object) {
-//       res.writeHead(301, { Location: "/" });
-//       res.end();
-//     }
-//   }
-
-//   return {
-//     data: data && data,
-//   };
-// };
-
-// export const getStaticProps: GetStaticProps = async ({ locale }) => {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale as string, ["common"])),
-//     },
-//   };
-// };

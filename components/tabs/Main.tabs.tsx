@@ -38,9 +38,10 @@ const tabs = [
 type IMainTabProps = {
   selectedTab: string;
   setSelectedTab: Dispatch<SetStateAction<string>>;
+  data: any;
 };
 
-const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
+const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   // hooks
   const { t } = useTranslation();
 
@@ -71,11 +72,13 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab }) => {
           </Box>
         ))}
       </Grid>
-      {selectedTab === "recentQuestions" && <RecentQuestionsSection />}
-      {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
+      {selectedTab === "recentQuestions" && (
+        <RecentQuestionsSection data={data} />
+      )}
+      {/* {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
       {selectedTab === "answers" && <RecentQuestionsSection />}
       {selectedTab === "noAnswers" && <RecentQuestionsSection />}
-      {selectedTab === "mostVisited" && <RecentQuestionsSection />}
+      {selectedTab === "mostVisited" && <RecentQuestionsSection />} */}
       <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
         <Pagination
           count={2}
