@@ -7,7 +7,7 @@ import useTheme from "@/theme/theme";
 import { ThemeProvider } from "@mui/material";
 
 // store
-import StoreProvider from "./storeProvider";
+import StoreProvider from "../redux/storeProvider";
 import { CookiesProvider } from "react-cookie";
 import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -21,7 +21,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <CookiesProvider>
       <StoreProvider>
         <ThemeProvider theme={theme}>
-          <NextNProgress color="#f0f0f0" />
+          <NextNProgress color="#313338" />
           <Component {...pageProps} />
         </ThemeProvider>
       </StoreProvider>

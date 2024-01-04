@@ -6,19 +6,14 @@ import MainLayout from "@/components/layout/Main.layout";
 import MainTab from "@/components/tabs/Main.tabs";
 
 // Mui
-import { Box } from "@mui/material";
 import { Inter } from "next/font/google";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
-import { useCookies } from "react-cookie";
-import { parseCookies } from "@/helper/cookie";
 import { useAppDispatch } from "@/lib/redux.hooks";
-import { setUser } from "@/redux/auth/auth.reducer";
 import { useRouter } from "next/router";
 import MainBanner from "@/components/banners/Main.banners";
 import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import axios from "axios";
 import { axiosInstance } from "@/configs/AxiosConfig";
 import { getCookie, hasCookie } from "cookies-next";
 
@@ -28,7 +23,8 @@ export default function Home({ data }: { data: any }) {
   // hooks
   const dispatch = useAppDispatch();
   const { locale } = useRouter();
-  const { t } = useTranslation();
+
+  const { t } = useTranslation("common");
   // states
   const [selectedTab, setSelectedTab] = useState("recentQuestions");
 
@@ -58,7 +54,13 @@ export default function Home({ data }: { data: any }) {
   );
 }
 
-export async function getServerSideProps({ query, req, res, ...ctx }: any) {
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
   const { limit = 10, page = 1 } = query;
 
   const user: any = hasCookie("user", { req, res })
@@ -80,6 +82,7 @@ export async function getServerSideProps({ query, req, res, ...ctx }: any) {
   return {
     props: {
       data: response.data,
+      ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };
 }
