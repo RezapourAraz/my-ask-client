@@ -58,7 +58,7 @@ const AnswerCard = () => {
             </Box>
             <Box>
               <Typography variant="caption">
-                {new Date().toLocaleString()}
+                {new Date().toLocaleDateString("en-US")}
               </Typography>
             </Box>
           </Box>

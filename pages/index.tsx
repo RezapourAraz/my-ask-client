@@ -38,8 +38,6 @@ export default function Home({
     }
   });
 
-  console.log(questions);
-
   return (
     <>
       <Head>
@@ -76,6 +74,12 @@ export async function getServerSideProps({
 
   const questions = await getQuestions({ limit, page, user });
   const tags = await getTags({ user });
+
+  if (!questions) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

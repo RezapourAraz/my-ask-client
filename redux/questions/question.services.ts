@@ -27,3 +27,19 @@ export const getQuestions = async ({
     console.log(err);
   }
 };
+
+export const getQuestionById = async ({ user, id }: any) => {
+  const { data } = await axiosInstance.get(
+    `/questions/${id}`,
+    user
+      ? {
+          headers: {
+            Authorization: `Bearer ${user?.accessToken}`,
+            RefreshToken: user?.refreshToken,
+          },
+        }
+      : undefined
+  );
+
+  return data;
+};

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 // Mui
-import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Button, Grid, NoSsr, Typography } from "@mui/material";
 
 // Icons
 import { MdOutlineQuestionMark } from "react-icons/md";
@@ -95,7 +95,9 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         <Grid container item md={12} sx={{ mt: 2, gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <FaStar style={{ color: "yellow" }} />
-            <Typography>{question.rating}</Typography>
+            <Typography variant="h6" color="common.black">
+              {question.rating}
+            </Typography>
           </Box>
           <Box display="flex" gap={1}>
             {question.tags.map((tag: any) => (
