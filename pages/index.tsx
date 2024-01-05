@@ -15,8 +15,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // services
 import { getQuestions } from "@/redux/questions/question.services";
+import { getTags } from "@/redux/tags/tags.services";
 
-export default function Home({ data }: { data: any }) {
+export default function Home({
+  tags,
+  questions,
+}: {
+  questions: any;
+  tags: any;
+}) {
   // hooks
   const { locale } = useRouter();
   const { t } = useTranslation();
@@ -38,9 +45,12 @@ export default function Home({ data }: { data: any }) {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout sidebar={<MainSidebar />} mainBanner={<MainBanner />}>
+      <MainLayout
+        sidebar={<MainSidebar tags={tags} />}
+        mainBanner={<MainBanner />}
+      >
         <MainTab
-          data={data}
+          data={questions}
           setSelectedTab={setSelectedTab}
           selectedTab={selectedTab}
         />
@@ -63,10 +73,12 @@ export async function getServerSideProps({
     : null;
 
   const questions = await getQuestions({ limit, page, user });
+  const tags = await getTags({ user });
 
   return {
     props: {
-      data: questions,
+      questions,
+      tags,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

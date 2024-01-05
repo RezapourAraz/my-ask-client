@@ -4,7 +4,9 @@ import React from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
-const TagsSection = () => {
+const TagsSection = ({ tags }: any) => {
+  console.log(tags);
+
   // hooks
   const { t } = useTranslation();
 
@@ -24,66 +26,21 @@ const TagsSection = () => {
         </Typography>
       </Box>
       <Box my={3} gap={1}>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          {t("analytics")}
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          {t("analytics")}
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          {t("analytics")}
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          {t("analytics")}
-        </Button>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "secondary.main",
-            m: 0.5,
-            fontSize: 12,
-            color: "common.white",
-            boxShadow: 0,
-          }}
-        >
-          {t("analytics")}
-        </Button>
+        {tags?.data?.map((tag: any) => (
+          <Button
+            key={tag.id}
+            variant="contained"
+            sx={{
+              bgcolor: "secondary.main",
+              m: 0.5,
+              fontSize: 12,
+              color: "common.white",
+              boxShadow: 0,
+            }}
+          >
+            {t(`${tag.title}`)}
+          </Button>
+        ))}
       </Box>
     </Grid>
   );
