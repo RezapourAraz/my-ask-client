@@ -1,30 +1,25 @@
-import Head from "next/head";
 import { useEffect, useState } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { getCookie, hasCookie } from "cookies-next";
 
 // components
 import MainLayout from "@/components/layout/Main.layout";
 import MainTab from "@/components/tabs/Main.tabs";
-
-// Mui
-import { Inter } from "next/font/google";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
-import { useAppDispatch } from "@/lib/redux.hooks";
-import { useRouter } from "next/router";
 import MainBanner from "@/components/banners/Main.banners";
-import { useTranslation } from "next-i18next";
-import { GetStaticProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { axiosInstance } from "@/configs/AxiosConfig";
-import { getCookie, hasCookie } from "cookies-next";
 
-const inter = Inter({ subsets: ["latin"] });
+// i18next
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+// services
+import { getQuestions } from "@/redux/questions/question.services";
 
 export default function Home({ data }: { data: any }) {
   // hooks
-  const dispatch = useAppDispatch();
   const { locale } = useRouter();
-
-  const { t } = useTranslation("common");
+  const { t } = useTranslation();
   // states
   const [selectedTab, setSelectedTab] = useState("recentQuestions");
 
@@ -67,21 +62,11 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
-  const response = await axiosInstance.get(
-    `/questions?page=${page}&limit=${limit}`,
-    user
-      ? {
-          headers: {
-            Authorization: `Bearer ${user?.accessToken}`,
-            RefreshToken: user?.refreshToken,
-          },
-        }
-      : undefined
-  );
+  const questions = await getQuestions({ limit, page, user });
 
   return {
     props: {
-      data: response.data,
+      data: questions,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

@@ -7,7 +7,6 @@ type IRecentQuestionsSectionProps = {
 };
 
 const RecentQuestionsSection: FC<IRecentQuestionsSectionProps> = ({ data }) => {
-
   return (
     <>
       {data.map((question: any) => (
