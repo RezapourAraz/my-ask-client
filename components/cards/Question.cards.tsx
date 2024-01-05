@@ -33,6 +33,8 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
   // hooks
   const { t } = useTranslation();
 
+  const link = `/questions/${question.id} ${question.title}`.replace(/ /g, "-");
+
   return (
     <Grid
       container
@@ -49,7 +51,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
       </Grid>
       <Grid container item md={11} sx={{ alignItems: "center" }}>
         <Grid item md={10}>
-          <Link href="/questions/1" style={{ textDecoration: "none" }}>
+          <Link href={link} style={{ textDecoration: "none" }}>
             <Typography variant="h2" color="secondary.main">
               {question.title}
             </Typography>

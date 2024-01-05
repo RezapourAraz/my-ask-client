@@ -16,8 +16,9 @@ import RelatedQuestionsSection from "@/components/sections/RelatedQuestions.sect
 import { getQuestionById } from "@/redux/questions/question.services";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getCookie, hasCookie } from "cookies-next";
+import { getQuestionAnswers } from "@/redux/answers/answers.services";
 
-const Question = ({ question }: any) => {
+const Question = ({ question, answers }: any) => {
   return (
     <>
       <Head>
@@ -31,7 +32,8 @@ const Question = ({ question }: any) => {
       >
         <Grid my={6}>
           <QuestionCard question={question.data} />
-          <AnswersSection />
+          {answers.data.length > 0 && <AnswersSection answers={answers.data} />}
+
           <LeaveAnswerCard />
           <RelatedQuestionsSection />
         </Grid>
@@ -53,9 +55,13 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
-  const question = await getQuestionById({ id: params.questionId, user });
+  const { slug } = params;
+  const id = slug.split("-")[0];
 
-  if (!question) {
+  const question = await getQuestionById({ id, user });
+  const answers = await getQuestionAnswers({ id, user });
+
+  if (!question || !answers) {
     return {
       notFound: true,
     };
@@ -63,7 +69,8 @@ export async function getServerSideProps({
 
   return {
     props: {
-      question: question,
+      question,
+      answers,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

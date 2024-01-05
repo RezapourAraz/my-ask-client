@@ -16,7 +16,7 @@ import { IoFlag } from "react-icons/io5";
 import { TbArrowBackUp } from "react-icons/tb";
 import { FaCheck } from "react-icons/fa6";
 
-const AnswerCard = () => {
+const AnswerCard = ({ answer }: any) => {
   return (
     <Grid
       container
@@ -28,13 +28,13 @@ const AnswerCard = () => {
       }}
     >
       <Grid item md={1}>
-        <Avatar />
+        <Avatar src={answer.profile} />
       </Grid>
       <Grid container item md={11}>
         <Grid item md={9}>
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="h3" color="secondary.main">
-              Araz Rezapour
+              {answer.username}
             </Typography>
             <Typography
               variant="caption"
@@ -54,11 +54,11 @@ const AnswerCard = () => {
               <IconButton size="small">
                 <AiFillDislike style={{ color: "black", fontSize: 14 }} />
               </IconButton>
-              <Typography variant="caption">59</Typography>
+              <Typography variant="caption">{answer.rating}</Typography>
             </Box>
             <Box>
               <Typography variant="caption">
-                {new Date().toLocaleDateString("en-US")}
+                {new Date(answer.updated_at).toLocaleString("en-US")}
               </Typography>
             </Box>
           </Box>
@@ -72,16 +72,7 @@ const AnswerCard = () => {
           </Button>
         </Grid>
         <Grid item md={12} my={3}>
-          <Typography variant="body2">
-            Back-End Developers concentrate on what goes on behind the scenes of
-            a website. These are the people who build the databases that host
-            the site’s content and implement the technologies that runs its
-            search and e-commerce capabilities. Focused more on the website’s
-            responsiveness and speed than what its pages look like, they’re
-            skilled in languages such as Python and PHP, and frameworks like
-            Django and Ruby on Rails. Their pay ranges from $43,000 to $116,000,
-            PayScale says, with a median of $75,000.
-          </Typography>
+          <Typography variant="body2">{answer.content}</Typography>
         </Grid>
         <Grid item md={12}>
           <Typography
