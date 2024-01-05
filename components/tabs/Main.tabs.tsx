@@ -1,9 +1,11 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 
 // Mui
 import { Box, Grid, Pagination, Typography } from "@mui/material";
 import RecentQuestionsSection from "../sections/RecentQuestions.sections";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { usePathname, useSearchParams } from "next/navigation";
 
 // tabs data
 const tabs = [
@@ -44,8 +46,18 @@ type IMainTabProps = {
 const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   // hooks
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
+  const { replace, pathname } = useRouter();
 
-  console.log(data);
+  // handlers
+  const handleChangePagination = (value: number) => {
+    const params = new URLSearchParams(searchParams);
+
+    params.set("page", String(value));
+    params.set("limit", String(10));
+
+    replace(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <Box>
@@ -84,10 +96,11 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
       {data.count / data.pageSize > 1 && (
         <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
           <Pagination
-            count={data.count / data.pageSize}
+            count={Math.ceil(data.count / data.pageSize)}
             variant="text"
             shape="rounded"
             color="primary"
+            onChange={(event, value) => handleChangePagination(value)}
             sx={{
               ".MuiPaginationItem-page": {
                 bgcolor: "grey.500",

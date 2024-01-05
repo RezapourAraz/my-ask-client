@@ -5,8 +5,6 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
 const TagsSection = ({ tags }: any) => {
-  console.log(tags);
-
   // hooks
   const { t } = useTranslation();
 
