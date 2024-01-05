@@ -38,6 +38,8 @@ export default function Home({
     }
   });
 
+  console.log(questions);
+
   return (
     <>
       <Head>
@@ -46,7 +48,7 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
-        sidebar={<MainSidebar tags={tags} />}
+        sidebar={<MainSidebar tags={questions.relatedTags} />}
         mainBanner={<MainBanner />}
       >
         <MainTab

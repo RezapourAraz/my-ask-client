@@ -32,7 +32,11 @@ const TopHeader = () => {
       <Container maxWidth="xl">
         <Grid
           container
-          sx={{ alignItems: "center", justifyContent: "space-between", px: 5 }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "space-between",
+            px: 5,
+          }}
         >
           <Grid item md={3} container sx={{ gap: 2 }}>
             <Box
@@ -133,6 +137,7 @@ const TopHeader = () => {
 const TopHeaderContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   padding: 5,
+  display: "none",
 }));
 
 export default TopHeader;

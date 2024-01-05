@@ -19,13 +19,17 @@ const MainBanner = () => {
   const { t } = useTranslation();
 
   return (
-    <Grid sx={{ bgcolor: "primary.main", height: 400 }}>
+    <Grid sx={{ bgcolor: "primary.main", height: { xs: 550, md: 400 } }}>
       <Container maxWidth="xl" sx={{ height: "100%" }}>
         <Grid
           container
-          sx={{ px: 5, height: "100%", justifyContent: "space-between" }}
+          sx={{
+            px: { xs: 0, md: 5 },
+            height: "100%",
+            justifyContent: "space-between",
+          }}
         >
-          <Grid item md={3} sx={{ p: 2 }}>
+          <Grid item md={3} xs={12} sx={{ p: 2 }}>
             <Box
               sx={{
                 display: "flex",
@@ -75,7 +79,7 @@ const MainBanner = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item md={8} position="relative">
+          <Grid item md={8} xs={12} position="relative">
             <Box
               sx={{
                 backgroundImage: "url(chrome.png)",
@@ -90,10 +94,10 @@ const MainBanner = () => {
               sx={{
                 position: "absolute",
                 bgcolor: "primary.light",
-                top: 120,
+                top: { md: 120, xs: 30 },
                 left: 20,
                 right: 20,
-                bottom: 20,
+                bottom: { md: 20, xs: 10 },
               }}
             >
               <TextareaAutosize
@@ -105,6 +109,7 @@ const MainBanner = () => {
                   padding: 10,
                   border: 0,
                   outline: 0,
+                  fontSize: 12,
                 }}
               />
               <Box
