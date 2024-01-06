@@ -59,6 +59,19 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const handleChangeTab = (value: string) => {
+    setSelectedTab(value);
+
+    const params = new URLSearchParams(searchParams);
+    if (selectedTab === "recentQuestions") params.set("filter", "recent");
+    if (selectedTab === "mostAnswered") params.set("filter", "most");
+    if (selectedTab === "answers") params.set("filter", "answers");
+    if (selectedTab === "noAnswers") params.set("filter", "no-answers");
+    if (selectedTab === "mostVisited") params.set("filter", "visited");
+
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <Box>
       <Grid
@@ -73,7 +86,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
               bgcolor: tab.value === selectedTab ? "primary.main" : "initial",
               cursor: "pointer",
             }}
-            onClick={() => setSelectedTab(tab.value)}
+            onClick={() => handleChangeTab(tab.value)}
           >
             <Typography
               variant="h4"
@@ -86,9 +99,9 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
           </Box>
         ))}
       </Grid>
-      {selectedTab === "recentQuestions" && (
-        <RecentQuestionsSection data={data.data} />
-      )}
+
+      <RecentQuestionsSection data={data.data} />
+
       {/* {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
       {selectedTab === "answers" && <RecentQuestionsSection />}
       {selectedTab === "noAnswers" && <RecentQuestionsSection />}

@@ -77,13 +77,13 @@ export async function getServerSideProps({
   locale,
   ...ctx
 }: any) {
-  const { limit = 10, page = 1 } = query;
+  const { limit = 10, page = 1, filter = "recent" } = query;
 
   const user: any = hasCookie("user", { req, res })
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
-  const questions = await getQuestions({ limit, page, user });
+  const questions = await getQuestions({ limit, page, filter, user });
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
   const stats = await getStats({ user });

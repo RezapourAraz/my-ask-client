@@ -3,15 +3,17 @@ import { axiosInstance } from "@/configs/AxiosConfig";
 export const getQuestions = async ({
   limit,
   page,
+  filter,
   user,
 }: {
   limit: number;
   page: number;
+  filter: string;
   user: any;
 }) => {
   try {
     const { data } = await axiosInstance.get(
-      `/questions?page=${page}&limit=${limit}`,
+      `/questions?page=${page}&limit=${limit}&filter=${filter}`,
       user
         ? {
             headers: {
