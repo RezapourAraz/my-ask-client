@@ -102,9 +102,9 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
             </Typography>
           </Box>
           <Box display="flex" gap={1}>
-            {question.tags.map((tag: any) => (
+            {question?.tags?.map((tag: any) => (
               <Box
-                key={tag.tagId}
+                key={tag?.tagId}
                 bgcolor="secondary.main"
                 sx={{
                   p: 0.5,
@@ -113,7 +113,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6">{tag.tagTitle}</Typography>
+                <Typography variant="h6">{tag?.tagTitle}</Typography>
               </Box>
             ))}
           </Box>

@@ -12,12 +12,12 @@ const tabs = [
   {
     id: 1,
     name: "recent_questions",
-    value: "recentQuestions",
+    value: "recent",
   },
   {
     id: 2,
     name: "most_answered",
-    value: "mostAnswered",
+    value: "most",
   },
   {
     id: 3,
@@ -27,12 +27,12 @@ const tabs = [
   {
     id: 4,
     name: "no_answers",
-    value: "noAnswers",
+    value: "no-answers",
   },
   {
     id: 5,
     name: "most_visited",
-    value: "mostVisited",
+    value: "visited",
   },
 ];
 
@@ -60,16 +60,15 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   };
 
   const handleChangeTab = (value: string) => {
-    setSelectedTab(value);
-
     const params = new URLSearchParams(searchParams);
-    if (selectedTab === "recentQuestions") params.set("filter", "recent");
-    if (selectedTab === "mostAnswered") params.set("filter", "most");
-    if (selectedTab === "answers") params.set("filter", "answers");
-    if (selectedTab === "noAnswers") params.set("filter", "no-answers");
-    if (selectedTab === "mostVisited") params.set("filter", "visited");
+    if (value === "recent") params.set("filter", "recent");
+    if (value === "most") params.set("filter", "most");
+    if (value === "answers") params.set("filter", "answers");
+    if (value === "no-answers") params.set("filter", "no-answers");
+    if (value === "visited") params.set("filter", "visited");
 
     replace(`${pathname}?${params.toString()}`);
+    setSelectedTab(value);
   };
 
   return (

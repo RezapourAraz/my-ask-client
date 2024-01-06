@@ -26,7 +26,7 @@ const TagsSection = ({ tags }: any) => {
       <Box my={3} gap={1}>
         {tags?.map((tag: any) => (
           <Button
-            key={tag.tagId}
+            key={tag?.tagId}
             variant="contained"
             sx={{
               bgcolor: "secondary.main",
@@ -36,7 +36,7 @@ const TagsSection = ({ tags }: any) => {
               boxShadow: 0,
             }}
           >
-            {t(`${tag.tagTitle}`)}
+            {t(`${tag?.tagTitle}`)}
           </Button>
         ))}
       </Box>

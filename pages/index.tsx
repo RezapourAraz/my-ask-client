@@ -30,10 +30,15 @@ export default function Home({
   stats: any;
 }) {
   // hooks
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const { t } = useTranslation();
+
+  console.log(query);
+
   // states
-  const [selectedTab, setSelectedTab] = useState("recentQuestions");
+  const [selectedTab, setSelectedTab] = useState<string>(
+    query.filter ? String(query.filter) : "recent"
+  );
 
   useEffect(() => {
     if (locale === "fa") {
@@ -63,7 +68,7 @@ export default function Home({
         <MainTab
           data={questions}
           setSelectedTab={setSelectedTab}
-          selectedTab={selectedTab}
+          selectedTab={selectedTab as string}
         />
       </MainLayout>
     </>
@@ -87,6 +92,8 @@ export async function getServerSideProps({
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
   const stats = await getStats({ user });
+
+  // console.log(questions);
 
   if (!questions) {
     return {
