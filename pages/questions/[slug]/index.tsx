@@ -35,7 +35,7 @@ const Question = ({ question, answers }: any) => {
           {answers.data.length > 0 && <AnswersSection answers={answers.data} />}
 
           <LeaveAnswerCard />
-          <RelatedQuestionsSection />
+          <RelatedQuestionsSection related={question.relatedQuestions} />
         </Grid>
       </MainLayout>
     </>

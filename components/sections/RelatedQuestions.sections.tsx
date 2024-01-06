@@ -24,7 +24,9 @@ const relatedQuestions = [
   },
 ];
 
-const RelatedQuestionsSection = () => {
+const RelatedQuestionsSection = ({ related }: any) => {
+  console.log(related);
+
   return (
     <Grid
       sx={{
@@ -41,14 +43,14 @@ const RelatedQuestionsSection = () => {
         </Typography>
       </Box>
       <Grid>
-        {relatedQuestions.map((related) => (
+        {related.map((item: any) => (
           <Box
             sx={{ p: 1, display: "flex", alignItems: "center", gap: 1 }}
-            key={related.id}
+            key={item.id}
           >
             <MdKeyboardDoubleArrowRight />
             <Typography variant="h5" sx={{ color: "secondary.main" }}>
-              {related.title}
+              {item.title}
             </Typography>
           </Box>
         ))}
