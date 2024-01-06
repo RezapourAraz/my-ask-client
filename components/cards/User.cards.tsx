@@ -55,7 +55,14 @@ const UserCard = () => {
         </Box>
       </Grid>
       <Grid item md={1} sx={{ my: 3 }}>
-        <Avatar sx={{ width: 50, height: 50 }} />
+        <Avatar
+          sx={{
+            width: 50,
+            height: 50,
+            bgcolor: "primary.main",
+            color: "common.white",
+          }}
+        />
       </Grid>
       <Grid container item md={11} my={3}>
         <Grid item md={6}>

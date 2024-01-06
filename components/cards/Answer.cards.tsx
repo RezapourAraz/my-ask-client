@@ -28,7 +28,10 @@ const AnswerCard = ({ answer }: any) => {
       }}
     >
       <Grid item md={1}>
-        <Avatar src={answer.profile} />
+        <Avatar
+          src={answer.profile}
+          sx={{ bgcolor: "primary.main", color: "common.white" }}
+        />
       </Grid>
       <Grid container item md={11}>
         <Grid item md={9}>

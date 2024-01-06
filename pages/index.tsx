@@ -16,13 +16,16 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 // services
 import { getQuestions } from "@/redux/questions/question.services";
 import { getTags } from "@/redux/tags/tags.services";
+import { getHighestUserPoint } from "@/redux/users/users.services";
 
 export default function Home({
   tags,
   questions,
+  reputations,
 }: {
   questions: any;
   tags: any;
+  reputations: any;
 }) {
   // hooks
   const { locale } = useRouter();
@@ -46,7 +49,12 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
-        sidebar={<MainSidebar tags={questions.relatedTags} />}
+        sidebar={
+          <MainSidebar
+            tags={questions.relatedTags}
+            reputations={reputations.data}
+          />
+        }
         mainBanner={<MainBanner />}
       >
         <MainTab
@@ -74,6 +82,7 @@ export async function getServerSideProps({
 
   const questions = await getQuestions({ limit, page, user });
   const tags = await getTags({ user });
+  const reputations = await getHighestUserPoint({ user });
 
   if (!questions) {
     return {
@@ -85,6 +94,7 @@ export async function getServerSideProps({
     props: {
       questions,
       tags,
+      reputations,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

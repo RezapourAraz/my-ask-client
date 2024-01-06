@@ -47,7 +47,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
       }}
     >
       <Grid container item md={1} sx={{ alignItems: "center" }}>
-        <Avatar />
+        <Avatar sx={{ bgcolor: "primary.main", color: "common.white" }} />
       </Grid>
       <Grid container item md={11} sx={{ alignItems: "center" }}>
         <Grid item md={10}>

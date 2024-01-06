@@ -4,19 +4,22 @@ import React from "react";
 import { Avatar, Box, Grid, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
-const HighestCard = () => {
+const HighestCard = ({ reputation }: any) => {
   // hooks
   const { t } = useTranslation();
 
   return (
     <Grid container sx={{ alignContent: "center", gap: 1 }}>
       <Grid item md={2} container sx={{ alignContent: "center" }}>
-        <Avatar />
+        <Avatar
+          src={reputation.profile}
+          sx={{ bgcolor: "primary.main", color: "common.white" }}
+        />
       </Grid>
       <Grid item md={9}>
         <Box my={2}>
           <Typography color="primary.main" variant="h3">
-            Araz Rezapour
+            {reputation.username}
           </Typography>
           <Box
             sx={{
@@ -29,7 +32,7 @@ const HighestCard = () => {
             <Typography variant="h6">{t("developer")}</Typography>
           </Box>
           <Typography color="secondary.main" variant="h5">
-            429 {t("points")}
+            {reputation.reputation ? reputation.reputation : 0} {t("points")}
           </Typography>
         </Box>
       </Grid>

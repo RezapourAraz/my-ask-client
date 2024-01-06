@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import HighestCard from "../cards/Highest.cards";
 import { useTranslation } from "next-i18next";
 
-const HighestPointsSection = () => {
+const HighestPointsSection = ({ reputations }: any) => {
   // hooks
   const { t } = useTranslation();
 
@@ -24,9 +24,9 @@ const HighestPointsSection = () => {
           {t("highest_points")}
         </Typography>
       </Box>
-      <HighestCard />
-      <HighestCard />
-      <HighestCard />
+      {reputations.map((reputation: any) => (
+        <HighestCard reputation={reputation} />
+      ))}
     </Grid>
   );
 };
