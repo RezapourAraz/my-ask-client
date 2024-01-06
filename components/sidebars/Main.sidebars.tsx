@@ -7,7 +7,7 @@ import HighestPointsSection from "../sections/HighestPoints.sections";
 import TagsSection from "../sections/Tags.sections";
 import { useTranslation } from "next-i18next";
 
-const MainSidebar = ({ tags, reputations }: any) => {
+const MainSidebar = ({ tags, reputations, stats }: any) => {
   // hooks
   const { t } = useTranslation();
 
@@ -22,7 +22,7 @@ const MainSidebar = ({ tags, reputations }: any) => {
           {t("ask_now")}
         </Button>
       </Box>
-      <StatsCard />
+      <StatsCard stats={stats} />
       <HighestPointsSection reputations={reputations} />
       <TagsSection tags={tags} />
     </Grid>

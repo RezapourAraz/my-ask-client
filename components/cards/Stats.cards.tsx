@@ -10,7 +10,7 @@ import { RiShieldStarFill } from "react-icons/ri";
 import { BiSolidUserRectangle } from "react-icons/bi";
 import { useTranslation } from "next-i18next";
 
-const StatsCard = () => {
+const StatsCard = ({ stats }: any) => {
   // hooks
   const { t } = useTranslation();
 
@@ -33,7 +33,9 @@ const StatsCard = () => {
           }}
         >
           <BsFillQuestionSquareFill />
-          <Typography>{t("questions")} (19)</Typography>
+          <Typography>
+            {t("questions")} ({stats.questionsCount})
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -46,20 +48,9 @@ const StatsCard = () => {
           }}
         >
           <MdMarkChatRead />
-          <Typography>{t("answers")} (44)</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            p: 1,
-            bgcolor: "grey.300",
-            my: 1,
-          }}
-        >
-          <RiShieldStarFill />
-          <Typography>{t("best_answers")} (23)</Typography>
+          <Typography>
+            {t("answers")} ({stats.answersCount})
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -72,7 +63,9 @@ const StatsCard = () => {
           }}
         >
           <BiSolidUserRectangle />
-          <Typography>{t("users")} (656)</Typography>
+          <Typography>
+            {t("users")} ({stats.usersCount})
+          </Typography>
         </Box>
       </Box>
     </Grid>
