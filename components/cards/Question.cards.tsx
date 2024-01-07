@@ -6,6 +6,8 @@ import { Avatar, Box, Button, Grid, NoSsr, Typography } from "@mui/material";
 // Icons
 import { MdOutlineQuestionMark } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
@@ -47,7 +49,11 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
       }}
     >
       <Grid container item md={1} sx={{ alignItems: "center" }}>
-        <Avatar sx={{ bgcolor: "primary.main", color: "common.white" }} />
+        <Avatar
+          src={question.profile}
+          alt={question.username}
+          sx={{ bgcolor: "primary.main", color: "common.white" }}
+        />
       </Grid>
       <Grid container item md={11} sx={{ alignItems: "center" }}>
         <Grid item md={10}>
@@ -99,6 +105,12 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
             <FaStar style={{ color: "yellow" }} />
             <Typography variant="h6" color="common.black">
               {question.rating}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+            <FaEye />
+            <Typography variant="h6" color="common.black">
+              {question.views}
             </Typography>
           </Box>
           <Box display="flex" gap={1}>
