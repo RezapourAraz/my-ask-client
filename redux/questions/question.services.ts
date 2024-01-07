@@ -33,17 +33,41 @@ export const getQuestions = async ({
 };
 
 export const getQuestionById = async ({ user, id }: any) => {
-  const { data } = await axiosInstance.get(
-    `/questions/${id}`,
-    user
-      ? {
-          headers: {
-            Authorization: `Bearer ${user?.accessToken}`,
-            RefreshToken: user?.refreshToken,
-          },
-        }
-      : undefined
-  );
+  try {
+    const { data } = await axiosInstance.get(
+      `/questions/${id}`,
+      user
+        ? {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+              RefreshToken: user?.refreshToken,
+            },
+          }
+        : undefined
+    );
 
-  return data;
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateQuestionViews = async ({ user, id }: any) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/questions/view/${id}`,
+      user
+        ? {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+              RefreshToken: user?.refreshToken,
+            },
+          }
+        : undefined
+    );
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };

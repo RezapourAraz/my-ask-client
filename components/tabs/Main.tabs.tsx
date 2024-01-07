@@ -101,10 +101,6 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
 
       <RecentQuestionsSection data={data.data} />
 
-      {/* {selectedTab === "mostAnswered" && <RecentQuestionsSection />}
-      {selectedTab === "answers" && <RecentQuestionsSection />}
-      {selectedTab === "noAnswers" && <RecentQuestionsSection />}
-      {selectedTab === "mostVisited" && <RecentQuestionsSection />} */}
       {data.count / data.pageSize > 1 && (
         <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
           <Pagination

@@ -34,7 +34,7 @@ const StatsCard = ({ stats }: any) => {
         >
           <BsFillQuestionSquareFill />
           <Typography>
-            {t("questions")} ({stats.questionsCount})
+            {t("questions")} ({stats?.questionsCount})
           </Typography>
         </Box>
         <Box
@@ -49,7 +49,7 @@ const StatsCard = ({ stats }: any) => {
         >
           <MdMarkChatRead />
           <Typography>
-            {t("answers")} ({stats.answersCount})
+            {t("answers")} ({stats?.answersCount})
           </Typography>
         </Box>
         <Box
@@ -64,7 +64,7 @@ const StatsCard = ({ stats }: any) => {
         >
           <BiSolidUserRectangle />
           <Typography>
-            {t("users")} ({stats.usersCount})
+            {t("users")} ({stats?.usersCount})
           </Typography>
         </Box>
       </Box>

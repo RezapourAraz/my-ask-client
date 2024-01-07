@@ -28,7 +28,7 @@ const TopHeader = () => {
   // selector
 
   return (
-    <TopHeaderContainer>
+    <TopHeaderContainer sx={{ display: { xs: "none", md: "block" } }}>
       <Container maxWidth="xl">
         <Grid
           container
@@ -137,7 +137,6 @@ const TopHeader = () => {
 const TopHeaderContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   padding: 5,
-  display: "none",
 }));
 
 export default TopHeader;
