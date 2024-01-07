@@ -28,12 +28,12 @@ const MainLayout: FC<IMainLayoutProps> = ({
       {mainBanner}
 
       <Container maxWidth="xl">
-        <Grid container sx={{ px: 3 }}>
-          <Grid item md={sidebar ? 9 : 12} sx={{ px: 2 }}>
+        <Grid container sx={{ px: { xs: 0, md: 3 } }}>
+          <Grid item md={sidebar ? 9 : 12} sx={{ px: { xs: 0, md: 2 } }}>
             {children}
           </Grid>
           {sidebar && (
-            <Grid item md={3} sx={{ px: 2 }}>
+            <Grid item md={3} sx={{ px: { xs: 0, md: 2 } }}>
               {sidebar}
             </Grid>
           )}

@@ -33,7 +33,7 @@ const StatsCard = ({ stats }: any) => {
           }}
         >
           <BsFillQuestionSquareFill />
-          <Typography>
+          <Typography variant="h5" sx={{ color: "common.black" }}>
             {t("questions")} ({stats?.questionsCount})
           </Typography>
         </Box>
@@ -48,7 +48,7 @@ const StatsCard = ({ stats }: any) => {
           }}
         >
           <MdMarkChatRead />
-          <Typography>
+          <Typography variant="h5" sx={{ color: "common.black" }}>
             {t("answers")} ({stats?.answersCount})
           </Typography>
         </Box>
@@ -63,7 +63,7 @@ const StatsCard = ({ stats }: any) => {
           }}
         >
           <BiSolidUserRectangle />
-          <Typography>
+          <Typography variant="h5" sx={{ color: "common.black" }}>
             {t("users")} ({stats?.usersCount})
           </Typography>
         </Box>

@@ -81,7 +81,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
           <Box
             key={tab.id}
             sx={{
-              p: 1.5,
+              p: { xs: 0.5, md: 1.5 },
               bgcolor: tab.value === selectedTab ? "primary.main" : "initial",
               cursor: "pointer",
             }}
@@ -89,6 +89,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
           >
             <Typography
               variant="h4"
+              sx={{ fontSize: { xs: 14, md: 18 } }}
               color={
                 tab.value === selectedTab ? "common.white" : "secondary.main"
               }

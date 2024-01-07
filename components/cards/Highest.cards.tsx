@@ -10,13 +10,20 @@ const HighestCard = ({ reputation }: any) => {
 
   return (
     <Grid container sx={{ alignContent: "center", gap: 1 }}>
-      <Grid item md={2} container sx={{ alignContent: "center" }}>
+      <Grid
+        item
+        md={2}
+        xs={12}
+        container
+        sx={{ alignContent: "center", mt: { xs: 1, md: 0 } }}
+      >
         <Avatar
           src={reputation.profile}
+          alt={reputation.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
       </Grid>
-      <Grid item md={9}>
+      <Grid item md={9} xs={12}>
         <Box my={2}>
           <Typography color="primary.main" variant="h3">
             {reputation.username}

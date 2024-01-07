@@ -48,22 +48,32 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         my: 2,
       }}
     >
-      <Grid container item md={1} sx={{ alignItems: "center" }}>
+      <Grid container item md={1} xs={12} sx={{ alignItems: "center" }}>
         <Avatar
           src={question.profile}
           alt={question.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
       </Grid>
-      <Grid container item md={11} sx={{ alignItems: "center" }}>
-        <Grid item md={10}>
+      <Grid container item md={11} xs={12} sx={{ alignItems: "center" }}>
+        <Grid item md={10} xs={12} sx={{ my: { xs: 2, md: 0 } }}>
           <Link href={link} style={{ textDecoration: "none" }}>
-            <Typography variant="h2" color="secondary.main">
+            <Typography
+              variant="h2"
+              color="secondary.main"
+              sx={{ fontSize: { md: 28, xs: 16 } }}
+            >
               {question.title}
             </Typography>
           </Link>
         </Grid>
-        <Grid container item md={2} sx={{ justifyContent: "space-between" }}>
+        <Grid
+          container
+          item
+          md={2}
+          xs={12}
+          sx={{ justifyContent: "space-between" }}
+        >
           <Box
             sx={{
               display: "inline-flex",
@@ -75,7 +85,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
             }}
           >
             {/* <MdOutlineQuestionMark style={{ color: "white" }} /> */}
-            <Typography variant="h6" fontSize={12}>
+            <Typography variant="h6" sx={{ fontsize: { xs: 10, md: 14 } }}>
               {t("question")}
             </Typography>
           </Box>
@@ -86,6 +96,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
               color: "common.white",
               boxShadow: 0,
               p: 0.1,
+              fontSize: { xs: 12, md: 14 },
             }}
           >
             {t("report")}
@@ -94,13 +105,18 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         <Grid
           item
           md={12}
-          sx={{ py: 4, borderBottom: 1, borderColor: "grey.300" }}
+          xs={12}
+          sx={{
+            py: { xs: 2, md: 4 },
+            borderBottom: 1,
+            borderColor: "grey.300",
+          }}
         >
-          <Typography variant="caption" fontSize={16}>
+          <Typography variant="caption" sx={{ fontSize: { md: 16, xs: 12 } }}>
             {question.content}
           </Typography>
         </Grid>
-        <Grid container item md={12} sx={{ mt: 2, gap: 2 }}>
+        <Grid container item md={12} xs={12} sx={{ mt: 2, gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <FaStar style={{ color: "yellow" }} />
             <Typography variant="h6" color="common.black">
@@ -125,7 +141,9 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6">{tag?.tagTitle}</Typography>
+                <Typography variant="h6" sx={{ textWrap: "nowrap" }}>
+                  {tag?.tagTitle}
+                </Typography>
               </Box>
             ))}
           </Box>
