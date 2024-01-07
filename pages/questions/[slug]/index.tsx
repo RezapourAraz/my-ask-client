@@ -25,7 +25,10 @@ import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
 
 const Question = ({ question, answers, stats, reputations, tags }: any) => {
-  const user = getCookie("user");
+  // hooks
+  const userCookie: any = getCookie("user");
+
+  const user = userCookie && JSON.parse(userCookie);
 
   const updateViews = async () => {
     await updateQuestionViews({ user, id: question.data.id });

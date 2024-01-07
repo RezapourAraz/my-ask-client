@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Mui
 import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import TextEditorInput from "../inputs/TextEditor.inputs";
+import { useRouter } from "next/router";
+import { addQuestionAnswer } from "@/redux/answers/answers.services";
+import { getCookie, getCookies } from "cookies-next";
 
 const LeaveAnswerCard = () => {
+  // hooks
+  const { query } = useRouter();
+  const userCookie: any = getCookie("user");
+
+  const user = userCookie && JSON.parse(userCookie);
+
+  // states
+  // @ts-ignore
+  const questionId = query?.slug.split("-")[0];
+  const [content, setContent] = useState<string>("");
+
+  const handleChangeText = (e: any) => {
+    setContent(e);
+  };
+
+  const handleAnswer = async () => {
+    const body = {
+      content,
+      questionId: Number(questionId),
+      userId: user?.id,
+    };
+
+    const data = await addQuestionAnswer({ user, body });
+
+    console.log(data);
+  };
+
   return (
     <Grid
       sx={{
@@ -22,10 +52,18 @@ const LeaveAnswerCard = () => {
       </Box>
       <Grid container mt={2}>
         <Grid md={12}>
-          <TextEditorInput value={""} onChange={() => {}} />
+          <TextEditorInput
+            value={content}
+            onChange={(e: any) => handleChangeText(e)}
+          />
         </Grid>
         <Grid md={12} my={2}>
-          <Button variant="contained" fullWidth sx={{ color: "common.white" }}>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ color: "common.white" }}
+            onClick={handleAnswer}
+          >
             Post Your Answer
           </Button>
         </Grid>

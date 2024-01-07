@@ -18,3 +18,18 @@ export const getQuestionAnswers = async ({ id, user }: any) => {
     console.log(err);
   }
 };
+
+export const addQuestionAnswer = async ({ user, body }: any) => {
+  try {
+    const { data } = await axiosInstance.post("/answers", body, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+        RefreshToken: user.refreshToken,
+      },
+    });
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

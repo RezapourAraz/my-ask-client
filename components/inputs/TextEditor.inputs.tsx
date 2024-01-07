@@ -11,7 +11,7 @@ const TextEditorInput: FC<ITextEditorInput> = ({ value, onChange }) => {
 
   return (
     <Editor
-      apiKey="sabebc29w7v6rk8d18x2kay5mg9io0mslmpiv8lfa99fx06j"
+      apiKey="x7e5npbnun1h6db5gye2trbco63i0h45ah6278rnm5dcmxto"
       onInit={(evt, editor) => (editorRef.current = editor)}
       value={value}
       onEditorChange={onChange}
