@@ -49,7 +49,7 @@ const TextEditorInput: FC<ITextEditorInput> = ({ value, onChange }) => {
           var input = document.createElement("input");
           input.setAttribute("type", "file");
           input.setAttribute("accept", "image/*");
-          var url = `https://portalapi.ir/PortalApi/v1/Files`;
+          var url = `http://localhost:5005/api/v1/gallery`;
           var xhr = new XMLHttpRequest();
           var fd = new FormData();
           xhr.open("POST", url, true);
@@ -59,13 +59,15 @@ const TextEditorInput: FC<ITextEditorInput> = ({ value, onChange }) => {
             var file = this.files[0];
 
             var reader = new FileReader();
+
             xhr.onload = function () {
-              if (xhr.readyState === 4 && xhr.status === 200) {
+              if (xhr.readyState === 4 && xhr.status === 201) {
+                console.log("yes");
+
                 // File uploaded successfully
                 var response = JSON.parse(xhr.responseText);
 
-                var url = `http://portalapi.ir/uploadFiles/files/${response?.resultMessage}`;
-                console.log(response);
+                var url = `https://arazdev.storage.iran.liara.space//api/v1/gallery/${response?.src[0].image}`;
                 // Create a thumbnail of the uploaded image, with 150px width
                 cb(url, { title: file?.name });
               }
@@ -84,24 +86,7 @@ const TextEditorInput: FC<ITextEditorInput> = ({ value, onChange }) => {
 
               // call the callback and populate the Title field with the file name
 
-              // @ts-ignore
-              fd.append("Data.Id", 0);
-              // @ts-ignore
-              fd.append("Data.ObjectId", 0);
-              // @ts-ignore
-              fd.append("Data.ObjectTypeId", 0);
-              // @ts-ignore
-              fd.append("Data.PageId", 0);
-              // @ts-ignore
-              fd.append("Data.SiteId", 1);
-              // @ts-ignore
-              fd.append("Data.CategoryId", 0);
-              // @ts-ignore
-              fd.append("Data.EnableComments", true);
-              // @ts-ignore
-              fd.append("Data.IsActive", true);
-              // @ts-ignore
-              fd.append("Data.File", blobInfo.blob());
+              fd.append("file", blobInfo.blob());
 
               xhr.send(fd);
             };

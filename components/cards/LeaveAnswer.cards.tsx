@@ -30,7 +30,7 @@ const LeaveAnswerCard = () => {
       userId: user?.id,
     };
 
-    const data = await addQuestionAnswer({ user, body });
+    const { data } = await addQuestionAnswer({ user, body });
 
     console.log(data);
   };
