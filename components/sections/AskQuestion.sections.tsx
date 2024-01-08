@@ -10,7 +10,7 @@ const AskQuestionSection = ({ tags }: any) => {
   // states
   const [checkedState, setCheckedState] = useState();
 
-  console.log(tags);
+  console.log(checkedState);
 
   return (
     <Box sx={{ px: 2 }}>
