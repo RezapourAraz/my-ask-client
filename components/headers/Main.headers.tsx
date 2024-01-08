@@ -96,7 +96,7 @@ const MainHeader = () => {
                   key={route.id}
                 >
                   <Link href={route.route} style={{ textDecoration: "none" }}>
-                    <Typography variant="h4">{t(`${route.name}`)}</Typography>
+                    <Typography variant="h6">{t(`${route.name}`)}</Typography>
                   </Link>
                 </Box>
               ))}

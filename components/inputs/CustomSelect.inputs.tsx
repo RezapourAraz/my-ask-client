@@ -40,8 +40,6 @@ const CustomSelectInput = ({
   };
 
   const handleChange = (e: any, item: any) => {
-    console.log(e.target);
-
     if (e.target.checked) {
       if (!single) {
         setCheckedState(item);

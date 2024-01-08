@@ -15,11 +15,6 @@ const tabs = [
     value: "recent",
   },
   {
-    id: 2,
-    name: "most_answered",
-    value: "most",
-  },
-  {
     id: 3,
     name: "answers",
     value: "answers",
