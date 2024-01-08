@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Mui
 import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import TextEditorInput from "../inputs/TextEditor.inputs";
+import CustomSelectInput from "../inputs/CustomSelect.inputs";
+import MultiSelectInput from "../inputs/CustomSelect.inputs";
 
-const AskQuestionSection = () => {
+const AskQuestionSection = ({ tags }: any) => {
+  // states
+  const [checkedState, setCheckedState] = useState();
+
+  console.log(tags);
+
   return (
     <Box sx={{ px: 2 }}>
       <Grid sx={{ my: 6, p: 2, bgcolor: "common.white" }}>
@@ -55,9 +62,14 @@ const AskQuestionSection = () => {
             <Typography variant="subtitle2">Tags</Typography>
           </Grid>
           <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
+            <MultiSelectInput
+              width="100%"
+              inputItems={tags}
+              setCheckedState={setCheckedState}
+              checkedState={checkedState}
+            />
             <Typography variant="h6" color="secondary.main" mt={1}>
-              Please choose suitable Keywords Ex : post , video .
+              Please choose suitable Keywords Ex : Javascript , Node js
             </Typography>
           </Grid>
           <Grid md={12} my={3}>

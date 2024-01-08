@@ -5,6 +5,7 @@ import {
   Grid,
   Icon,
   IconButton,
+  NoSsr,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -75,8 +76,18 @@ const AnswerCard = ({ answer }: any) => {
           </Button>
         </Grid>
         <Grid item md={12} my={3}>
-          <Typography variant="body2">{answer.content}</Typography>
+          <NoSsr>
+            <Typography
+              my={2}
+              dangerouslySetInnerHTML={{
+                __html: answer.content,
+              }}
+            />
+          </NoSsr>
         </Grid>
+        {/* <Grid item md={12} my={3}>
+          <Typography variant="body2">{answer.content}</Typography>
+        </Grid> */}
         <Grid item md={12}>
           <Typography
             variant="h5"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "@/lib/redux.hooks";
@@ -22,6 +22,8 @@ import { useLoginMutation } from "@/redux/auth/auth.slice";
 // Icons
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { IoIosEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
 
 // Cookie
 import { useCookies } from "react-cookie";
@@ -36,8 +38,8 @@ const Login = () => {
   const { t } = useTranslation();
   const [login, { isSuccess, error }] = useLoginMutation();
 
-  //
-  // const [cookie, setCookie] = useCookies(["user"]);
+  // states
+  const [showPassword, setShowPassword] = useState(false);
 
   // handlers
   const handleOnSubmit = async () => {
@@ -116,10 +118,19 @@ const Login = () => {
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder={t("password")}
-              type="password"
+              type={showPassword ? "text" : "password"}
               startAdornment={
                 <InputAdornment position="start">
                   <RiLockPasswordFill />
+                </InputAdornment>
+              }
+              endAdornment={
+                <InputAdornment
+                  position="start"
+                  onClick={() => setShowPassword(!showPassword)}
+                  sx={{ cursor: "pointer" }}
+                >
+                  {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </InputAdornment>
               }
               value={values.password}

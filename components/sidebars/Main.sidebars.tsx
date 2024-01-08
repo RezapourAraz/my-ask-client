@@ -24,7 +24,7 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
       </Box>
       <StatsCard stats={stats} />
       <HighestPointsSection reputations={reputations} />
-      <TagsSection tags={tags} />
+      {tags && <TagsSection tags={tags} />}
     </Grid>
   );
 };
