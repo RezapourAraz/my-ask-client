@@ -12,7 +12,7 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
   const { t } = useTranslation();
 
   return (
-    <Grid sx={{ p: 1, position: "sticky", top: -30, mb: 0.1 }}>
+    <Grid sx={{ p: 1, position: "sticky", top: -30, mb: 1.5 }}>
       <Box>
         <Button
           variant="contained"
