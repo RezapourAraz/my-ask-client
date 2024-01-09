@@ -24,12 +24,14 @@ import { axiosInstance } from "@/configs/AxiosConfig";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
 
-const Question = ({ question, answers, stats, reputations, tags }: any) => {
-  // hooks
-  const userCookie: any = getCookie("user");
-
-  const user = userCookie && JSON.parse(userCookie);
-
+const Question = ({
+  question,
+  answers,
+  stats,
+  reputations,
+  tags,
+  user,
+}: any) => {
   const updateViews = async () => {
     await updateQuestionViews({ user, id: question.data.id });
   };
@@ -46,6 +48,7 @@ const Question = ({ question, answers, stats, reputations, tags }: any) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
+        user={user}
         mainBanner={<QuestionBanner title={question.data.title} />}
         sidebar={
           <MainSidebar
@@ -104,6 +107,7 @@ export async function getServerSideProps({
       stats,
       tags,
       reputations,
+      user,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

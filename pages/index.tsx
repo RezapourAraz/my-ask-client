@@ -23,11 +23,13 @@ export default function Home({
   questions,
   reputations,
   stats,
+  user,
 }: {
   questions: any;
   tags: any;
   reputations: any;
   stats: any;
+  user: any;
 }) {
   // hooks
   const { locale, query } = useRouter();
@@ -56,6 +58,7 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
+        user={user}
         sidebar={
           <MainSidebar
             tags={questions.relatedTags}
@@ -107,6 +110,7 @@ export async function getServerSideProps({
       tags,
       reputations,
       stats,
+      user,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

@@ -13,8 +13,10 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaShareSquare } from "react-icons/fa";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const ContactUs = () => {
+const ContactUs = ({ user }: any) => {
   return (
     <>
       <Head>
@@ -23,6 +25,7 @@ const ContactUs = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
+        user={user}
         mainBanner={
           <QuestionBanner title="How much do web developers earn? What is their salary?" />
         }
@@ -194,3 +197,22 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
+
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+}

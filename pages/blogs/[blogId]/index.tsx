@@ -6,10 +6,12 @@ import AnswersSection from "@/components/sections/Answers.sections";
 import RelatedQuestionsSection from "@/components/sections/RelatedQuestions.sections";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
 import { Grid } from "@mui/material";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const BlogDetail = () => {
+const BlogDetail = ({ user }: any) => {
   return (
     <>
       <Head>
@@ -18,6 +20,7 @@ const BlogDetail = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
+        user={user}
         sidebar={<MainSidebar />}
         mainBanner={<QuestionBanner title="Blogs" />}
       >
@@ -33,3 +36,22 @@ const BlogDetail = () => {
 };
 
 export default BlogDetail;
+
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
+
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+}

@@ -19,13 +19,14 @@ import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/lib/redux.hooks";
 import { useTranslation } from "next-i18next";
+import { getCookie } from "cookies-next";
 
-const TopHeader = () => {
+const TopHeader = ({ user }: any) => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
 
-  // selector
+  console.log(user);
 
   return (
     <TopHeaderContainer sx={{ display: { xs: "none", md: "block" } }}>
@@ -64,7 +65,7 @@ const TopHeader = () => {
                 variant="h6"
                 onClick={() => router.push("/auth/login")}
               >
-                {t("login_area")}
+                {user ? user.username : t("login_area")}
               </Typography>
             </Box>
             <Divider

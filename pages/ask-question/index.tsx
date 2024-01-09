@@ -7,7 +7,7 @@ import AddPostSection from "@/components/sections/AddPost.sections";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
 
 // Mui
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // i18next
 import { useTranslation } from "next-i18next";
@@ -17,20 +17,21 @@ import { getCookie, hasCookie } from "cookies-next";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import InfoForLoginCard from "@/components/cards/InfoForLogin.cards";
 
 const AddQuestion = ({
   tags,
   reputations,
   stats,
+  user,
 }: {
   tags: any;
   reputations: any;
   stats: any;
+  user: any;
 }) => {
   // hooks
   const { t } = useTranslation();
-
-  console.log(tags);
 
   return (
     <>
@@ -40,11 +41,12 @@ const AddQuestion = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
+        user={user}
         sidebar={
           <MainSidebar reputations={reputations.data} stats={stats.data} />
         }
       >
-        <AskQuestionSection tags={tags.data} />
+        {user ? <AskQuestionSection tags={tags.data} /> : <InfoForLoginCard />}
       </MainLayout>
     </>
   );
@@ -67,8 +69,6 @@ export async function getServerSideProps({
   const reputations = await getHighestUserPoint({ user });
   const stats = await getStats({ user });
 
-  // console.log(questions);
-
   if (!tags || !reputations || !stats) {
     return {
       notFound: true,
@@ -80,6 +80,7 @@ export async function getServerSideProps({
       tags,
       reputations,
       stats,
+      user,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

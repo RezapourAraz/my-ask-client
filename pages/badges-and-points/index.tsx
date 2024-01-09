@@ -7,6 +7,8 @@ import { Box, Grid, Typography } from "@mui/material";
 // components
 import MainLayout from "@/components/layout/Main.layout";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // data
 
@@ -74,7 +76,7 @@ const pointsData = [
   },
 ];
 
-const BadgesAndPoints = () => {
+const BadgesAndPoints = ({ user }: any) => {
   return (
     <>
       <Head>
@@ -82,7 +84,7 @@ const BadgesAndPoints = () => {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout sidebar={<MainSidebar />}>
+      <MainLayout user={user} sidebar={<MainSidebar />}>
         <Grid sx={{ px: 2 }}>
           <Grid sx={{ my: 6, p: 2, bgcolor: "common.white" }}>
             <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
@@ -130,3 +132,22 @@ const BadgesAndPoints = () => {
 };
 
 export default BadgesAndPoints;
+
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
+
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+}

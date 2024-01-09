@@ -3,10 +3,12 @@ import QuestionBanner from "@/components/banners/Question.banners";
 import MainLayout from "@/components/layout/Main.layout";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
 import { Box, Button, Grid, Typography } from "@mui/material";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const Page = () => {
+const Page = ({ user }: any) => {
   return (
     <>
       <Head>
@@ -14,7 +16,7 @@ const Page = () => {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout mainBanner={<QuestionBanner title="Error 404" />}>
+      <MainLayout user={user} mainBanner={<QuestionBanner title="Error 404" />}>
         <Box my={6}>
           <Box sx={{}} textAlign="center">
             <Typography sx={{ fontSize: 180, color: "grey.300" }}>
@@ -34,3 +36,22 @@ const Page = () => {
 };
 
 export default Page;
+
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
+
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+}

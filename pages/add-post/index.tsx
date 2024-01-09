@@ -8,8 +8,10 @@ import MainSidebar from "@/components/sidebars/Main.sidebars";
 import { Box, Button, Grid, Input } from "@mui/material";
 import AddPostSection from "@/components/sections/AddPost.sections";
 import Head from "next/head";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const AddPost = () => {
+const AddPost = ({ user }: any) => {
   return (
     <>
       <Head>
@@ -17,7 +19,7 @@ const AddPost = () => {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout sidebar={<MainSidebar />}>
+      <MainLayout user={user} sidebar={<MainSidebar />}>
         <AddPostSection />
       </MainLayout>
     </>
@@ -25,3 +27,22 @@ const AddPost = () => {
 };
 
 export default AddPost;
+
+export async function getServerSideProps({
+  query,
+  req,
+  res,
+  locale,
+  ...ctx
+}: any) {
+  const user: any = hasCookie("user", { req, res })
+    ? JSON.parse(getCookie("user", { req, res }) as string)
+    : null;
+
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(locale as string, ["common"])),
+    },
+  };
+}

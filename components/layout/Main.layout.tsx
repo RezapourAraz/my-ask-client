@@ -14,16 +14,18 @@ type IMainLayoutProps = {
   children: ReactNode;
   sidebar?: ReactNode;
   mainBanner?: ReactNode;
+  user: any;
 };
 
 const MainLayout: FC<IMainLayoutProps> = ({
   children,
   sidebar,
   mainBanner,
+  user,
 }) => {
   return (
     <Grid sx={{ bgcolor: "grey.200" }}>
-      <TopHeader />
+      <TopHeader user={user} />
       <MainHeader />
       {mainBanner}
 
