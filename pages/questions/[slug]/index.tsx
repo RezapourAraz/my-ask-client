@@ -23,6 +23,7 @@ import { getQuestionAnswers } from "@/redux/answers/answers.services";
 import { axiosInstance } from "@/configs/AxiosConfig";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
+import InfoForLoginCard from "@/components/cards/InfoForLogin.cards";
 
 const Question = ({
   question,
@@ -62,7 +63,7 @@ const Question = ({
           <QuestionCard question={question.data} />
           {answers.data.length > 0 && <AnswersSection answers={answers.data} />}
 
-          <LeaveAnswerCard />
+          {user ? <LeaveAnswerCard /> : <InfoForLoginCard />}
           <RelatedQuestionsSection related={question.relatedQuestions} />
         </Grid>
       </MainLayout>

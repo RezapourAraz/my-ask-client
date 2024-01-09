@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 // Mui
 import { Box, Grid, Typography } from "@mui/material";
@@ -6,25 +7,9 @@ import { Box, Grid, Typography } from "@mui/material";
 // icons
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
-const relatedQuestions = [
-  {
-    id: 1,
-    title:
-      "How do I tell my new employer that I can’t use the computer they gave me?",
-  },
-  {
-    id: 3,
-    title:
-      "How do I tell my new employer that I can’t use the computer they gave me?",
-  },
-  {
-    id: 2,
-    title:
-      "How do I tell my new employer that I can’t use the computer they gave me?",
-  },
-];
-
 const RelatedQuestionsSection = ({ related }: any) => {
+  const router = useRouter();
+
   console.log(related);
 
   return (
@@ -45,11 +30,25 @@ const RelatedQuestionsSection = ({ related }: any) => {
       <Grid>
         {related.map((item: any) => (
           <Box
-            sx={{ p: 1, display: "flex", alignItems: "center", gap: 1 }}
+            sx={{
+              p: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
             key={item.id}
           >
             <MdKeyboardDoubleArrowRight />
-            <Typography variant="h5" sx={{ color: "secondary.main" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: "secondary.main",
+                cursor: "pointer",
+                transition: "color .3s ease",
+                ":hover": { color: "primary.main" },
+              }}
+              onClick={() => router.push(`/questions/${item.id}-${item.title}`)}
+            >
               {item.title}
             </Typography>
           </Box>
