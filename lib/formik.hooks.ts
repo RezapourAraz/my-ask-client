@@ -22,3 +22,25 @@ export const useLoginForm = (submitHandler: any) => {
     onSubmit: submitHandler,
   });
 };
+
+export const useAskQuestionForm = (submitHandler: any) => {
+  const initialValues = {
+    title: "",
+    content: "",
+    user_id: null,
+    tags: [],
+  };
+
+  let schema = yup.object().shape({
+    title: yup.string().required("title is required"),
+    content: yup.string().required("body is required"),
+    tags: yup.array().required("tags is required"),
+  });
+
+  return useFormik({
+    initialValues,
+    validationSchema: schema,
+    validateOnChange: false,
+    onSubmit: submitHandler,
+  });
+};

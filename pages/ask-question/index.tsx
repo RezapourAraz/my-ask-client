@@ -37,7 +37,7 @@ const AddQuestion = ({
     <>
       <Head>
         <title>Ask Question</title>
-        <meta name="description" content="Travel App" />
+        <meta name="description" content="Ask Question" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout

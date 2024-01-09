@@ -112,9 +112,15 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
             borderColor: "grey.300",
           }}
         >
-          <Typography variant="caption" sx={{ fontSize: { md: 16, xs: 12 } }}>
-            {question.content}
-          </Typography>
+          <NoSsr>
+            <Typography
+              variant="caption"
+              sx={{ fontSize: { md: 16, xs: 12 } }}
+              dangerouslySetInnerHTML={{
+                __html: question.content,
+              }}
+            />
+          </NoSsr>
         </Grid>
         <Grid container item md={12} xs={12} sx={{ mt: 2, gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>

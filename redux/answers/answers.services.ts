@@ -21,8 +21,6 @@ export const getQuestionAnswers = async ({ id, user }: any) => {
 
 export const addQuestionAnswer = async ({ user, body }: any) => {
   try {
-    console.log(user);
-
     const { data } = await axiosInstance.post("/answers", body, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,

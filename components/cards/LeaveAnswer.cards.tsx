@@ -31,8 +31,6 @@ const LeaveAnswerCard = () => {
     };
 
     const data = await addQuestionAnswer({ user, body });
-
-    console.log(data);
   };
 
   return (
