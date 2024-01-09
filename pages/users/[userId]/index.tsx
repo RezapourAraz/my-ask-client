@@ -11,8 +11,10 @@ import UserCard from "@/components/cards/User.cards";
 import UserStatsSection from "@/components/sections/UserStats.sections";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { getTags } from "@/redux/tags/tags.services";
+import { getHighestUserPoint } from "@/redux/users/users.services";
 
-const User = ({ user }: any) => {
+const User = ({ user, reputations, tags }: any) => {
   return (
     <>
       <Head>
@@ -22,8 +24,8 @@ const User = ({ user }: any) => {
       </Head>
       <MainLayout
         user={user}
-        mainBanner={<QuestionBanner title={user.username} />}
-        sidebar={<MainSidebar />}
+        mainBanner={<QuestionBanner title={user?.username} />}
+        sidebar={<MainSidebar reputations={reputations} tags={tags} />}
       >
         <Grid my={6}>
           <UserCard />
@@ -47,9 +49,22 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
+  const tags = await getTags({ user });
+  const reputations = await getHighestUserPoint({ user });
+
+  console.log(reputations);
+
+  if (!user || !reputations || !tags) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       user,
+      reputations,
+      tags,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };
