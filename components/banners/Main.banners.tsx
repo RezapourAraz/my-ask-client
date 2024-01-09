@@ -29,7 +29,7 @@ const MainBanner = () => {
             justifyContent: "space-between",
           }}
         >
-          <Grid item md={3} xs={12} sx={{ p: 2 }}>
+          <Grid item md={12} xs={12} sx={{ p: 2 }}>
             <Box
               sx={{
                 display: "flex",
@@ -79,7 +79,7 @@ const MainBanner = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item md={8} xs={12} position="relative">
+          {/* <Grid item md={8} xs={12} position="relative">
             <Box
               sx={{
                 backgroundImage: "url(chrome.png)",
@@ -128,7 +128,7 @@ const MainBanner = () => {
                 </Button>
               </Box>
             </Box>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Grid>
