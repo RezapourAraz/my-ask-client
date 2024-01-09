@@ -42,13 +42,21 @@ const CustomSelectInput = ({
   const handleChange = (e: any, item: any) => {
     if (e.target.checked) {
       if (!single) {
-        setCheckedState(item);
+        const findInCheck = checkedState.find((el: any) => el.id === item.id);
+
+        if (!findInCheck) setCheckedState([...checkedState, item]);
+        else {
+          const filterCheck = checkedState.filter(
+            (el: any) => el.id !== item.id
+          );
+          setCheckedState(filterCheck);
+        }
       } else {
         setCheckedState(parseInt(e.target.value));
       }
       setOpen(false);
     } else {
-      if (checkedState === 0) {
+      if (!checkedState.length) {
         return;
       } else {
         setCheckedState();
@@ -99,7 +107,7 @@ const CustomSelectInput = ({
                 )
               : inputItems?.map(
                   (item: any) =>
-                    item?.id === checkedState?.id && (
+                    checkedState.find((el: any) => el.id === item.id) && (
                       <Typography
                         key={item?.id}
                         variant="h5"
@@ -117,7 +125,7 @@ const CustomSelectInput = ({
               color={error ? "red" : "primary.main"}
               noWrap
             >
-              {checkedState === 0 && "choose label"}
+              {!checkedState.length && "choose tag"}
             </Typography>
           </Box>
           {open ? <FiChevronUp /> : <FiChevronDown />}
@@ -130,7 +138,7 @@ const CustomSelectInput = ({
               flexWrap="nowrap"
               alignItems="center"
               justifyContent="space-between"
-              bgcolor={!checkedState ? "primary.light" : "common.white"}
+              bgcolor={!checkedState.length ? "primary.light" : "common.white"}
             >
               <FormControlLabel
                 sx={{
@@ -147,12 +155,12 @@ const CustomSelectInput = ({
                     noWrap
                     color="primary.main"
                   >
-                    choose
+                    choose tag
                   </Typography>
                 }
                 control={
                   <Checkbox
-                    checked={checkedState === 0 ? true : false}
+                    checked={checkedState.length ? true : false}
                     value={0}
                     onChange={handleChange}
                     sx={{ display: "none" }}
@@ -215,7 +223,7 @@ const CustomSelectInput = ({
                     alignItems="center"
                     justifyContent="space-between"
                     bgcolor={
-                      checkedState?.id === item?.id
+                      checkedState.find((el: any) => el.id === item.id)
                         ? "primary.light"
                         : "initial"
                     }

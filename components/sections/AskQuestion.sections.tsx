@@ -8,9 +8,7 @@ import MultiSelectInput from "../inputs/CustomSelect.inputs";
 
 const AskQuestionSection = ({ tags }: any) => {
   // states
-  const [checkedState, setCheckedState] = useState();
-
-  console.log(checkedState);
+  const [checkedState, setCheckedState] = useState([]);
 
   return (
     <Box sx={{ px: 2 }}>
