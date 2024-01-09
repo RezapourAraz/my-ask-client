@@ -35,8 +35,6 @@ export default function Home({
   const { locale, query } = useRouter();
   const { t } = useTranslation();
 
-  console.log(query);
-
   // states
   const [selectedTab, setSelectedTab] = useState<string>(
     query.filter ? String(query.filter) : "recent"

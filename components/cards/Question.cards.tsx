@@ -56,51 +56,65 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         />
       </Grid>
       <Grid container item md={11} xs={12} sx={{ alignItems: "center" }}>
-        <Grid item md={10} xs={12} sx={{ my: { xs: 2, md: 0 } }}>
-          <Link href={link} style={{ textDecoration: "none" }}>
-            <Typography
-              variant="h2"
-              color="secondary.main"
-              sx={{ fontSize: { md: 28, xs: 16 } }}
-            >
-              {question.title}
-            </Typography>
-          </Link>
-        </Grid>
-        <Grid
-          container
-          item
-          md={2}
-          xs={12}
-          sx={{ justifyContent: "space-between" }}
-        >
-          <Box
+        <Grid container display="inline-flex" wrap="nowrap" gap={2}>
+          <Grid
+            item
+            // md={10} xs={12}
+            sx={{ my: { xs: 2, md: 0 } }}
+          >
+            <Link href={link} style={{ textDecoration: "none" }}>
+              <Typography
+                variant="h2"
+                color="secondary.main"
+                sx={{ fontSize: { md: 28, xs: 16 } }}
+              >
+                {question.title}
+              </Typography>
+            </Link>
+          </Grid>
+          <Grid
+            container
+            item
+            // md={2}
+            // xs={12}
             sx={{
               display: "inline-flex",
-              bgcolor: "primary.main",
-              py: 0.1,
-              px: 1,
-              alignItems: "center",
-              width: "fit-content",
+              flexWrap: "nowrap",
+              columnGap: 1,
+              justifyContent: "space-between",
+              marginInlineStart: "auto",
+              width: { xs: 150 },
+              height: "fit-content",
             }}
           >
-            {/* <MdOutlineQuestionMark style={{ color: "white" }} /> */}
-            <Typography variant="h6" sx={{ fontsize: { xs: 10, md: 14 } }}>
-              {t("question")}
-            </Typography>
-          </Box>
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: "secondary.main",
-              color: "common.white",
-              boxShadow: 0,
-              p: 0.1,
-              fontSize: { xs: 12, md: 14 },
-            }}
-          >
-            {t("report")}
-          </Button>
+            <Box
+              sx={{
+                display: "inline-flex",
+                bgcolor: "primary.main",
+                py: 0.1,
+                px: 1,
+                alignItems: "center",
+                width: "fit-content",
+              }}
+            >
+              {/* <MdOutlineQuestionMark style={{ color: "white" }} /> */}
+              <Typography variant="h6" sx={{ fontsize: { xs: 10, md: 14 } }}>
+                {t("question")}
+              </Typography>
+            </Box>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: "secondary.main",
+                color: "common.white",
+                boxShadow: 0,
+                p: 0.1,
+                fontSize: { xs: 12, md: 14 },
+              }}
+            >
+              {t("report")}
+            </Button>
+          </Grid>
         </Grid>
         <Grid
           item

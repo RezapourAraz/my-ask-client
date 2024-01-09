@@ -46,5 +46,20 @@
   "no_answers": "بدون پاسخ ",
   "most_visited": "بیشترین بازدید",
   "question": "سوال؟",
-  "report": "گزارش!"
+  "report": "گزارش!",
+  "enter_username": "لطفا نام کاربری خود را وارد کنید .",
+  "enter_email": "لطفا ایمیل خود را وارد کنید .",
+  "post_title": "عنوان پست",
+  "enter_post_title": "لطفا عنوان پست خود را انتخاب کنید .",
+  "category": "دسته بندی",
+  "enter_category": "لطفا دسته بندی خود را انتخاب کنید .",
+  "enter_tags": "لطفا برچسب ها را وارد کنید .",
+  "publish_post": "انتشار پست",
+  "address": "آدرس",
+  "support": "پشتیبانی",
+  "quick_links": "لینک های سریع",
+  "profile": "پروفایل",
+  "popular_questions": "پربازدیدترین سوالات",
+  "subscribe": "اشتراک",
+  "subscribe_text": "اشتراک در خبرنامه ما"
 }

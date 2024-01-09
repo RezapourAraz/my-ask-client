@@ -75,7 +75,7 @@ const useTheme = (locale) => {
       imgInputBg: "#ffffff14",
     },
     typography: {
-      fontFamily: locale !== "fa-IR" ? "'PT Sans', sans-serif" : "Vazir",
+      fontFamily: locale !== "fa" ? "'PT Sans', sans-serif" : "Vazir",
       fontSize: 16,
       h1: {
         fontSize: 32,

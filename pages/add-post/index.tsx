@@ -10,16 +10,32 @@ import AddPostSection from "@/components/sections/AddPost.sections";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+import { getQuestions } from "@/redux/questions/question.services";
+import { getTags } from "@/redux/tags/tags.services";
+import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 
-const AddPost = ({ user }: any) => {
+const AddPost = ({ user, tags, reputations, stats }: any) => {
+  // hooks
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Add Post</title>
-        <meta name="description" content="Travel App" />
+        <title>{t("add_post")}</title>
+        <meta name="description" content={t("add_post")} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout user={user} sidebar={<MainSidebar />}>
+      <MainLayout
+        user={user}
+        sidebar={
+          <MainSidebar
+            tags={tags.data}
+            reputations={reputations.data}
+            stats={stats.data}
+          />
+        }
+      >
         <AddPostSection />
       </MainLayout>
     </>
@@ -39,9 +55,16 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
+  const tags = await getTags({ user });
+  const reputations = await getHighestUserPoint({ user });
+  const stats = await getStats({ user });
+
   return {
     props: {
       user,
+      tags,
+      reputations,
+      stats,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

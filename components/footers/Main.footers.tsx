@@ -14,37 +14,40 @@ import {
 
 // Icons
 import { MdEmail } from "react-icons/md";
+import { useTranslation } from "next-i18next";
 
 // quick links data
 const quickLinks = [
   {
     id: 1,
-    name: "Home",
+    name: "home",
     route: "/",
   },
   {
     id: 2,
-    name: "Ask Question",
+    name: "ask_question",
     route: "/ask-question",
   },
   {
     id: 3,
-    name: "Questions",
+    name: "questions",
     route: "/questions",
   },
   {
     id: 4,
-    name: "Profile",
+    name: "profile",
     route: "/profile",
   },
   {
     id: 5,
-    name: "Contact Us",
+    name: "contact_us",
     route: "/contact-us",
   },
 ];
 
 const MainFooter = () => {
+  const { t } = useTranslation();
+
   return (
     <Grid sx={{ bgcolor: "secondary.main" }}>
       <Container maxWidth="xl">
@@ -52,7 +55,7 @@ const MainFooter = () => {
           <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
-                Where We Are
+                {t("title")}
               </Typography>
             </Box>
             <Box my={3}>
@@ -63,7 +66,7 @@ const MainFooter = () => {
             </Box>
             <Box>
               <Typography variant="h5" sx={{ color: "primary.main" }}>
-                Address:
+                {t("address")}:
               </Typography>
             </Box>
             <Box my={3}>
@@ -73,7 +76,7 @@ const MainFooter = () => {
             </Box>
             <Box>
               <Typography variant="h5" sx={{ color: "primary.main" }}>
-                Support:
+                {t("support")}:
               </Typography>
             </Box>
             <Box my={3}>
@@ -88,7 +91,7 @@ const MainFooter = () => {
           <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
-                Quick Links
+                {t("quick_links")}
               </Typography>
             </Box>
             <Box>
@@ -99,7 +102,7 @@ const MainFooter = () => {
                 >
                   <Link href={link.route} style={{ textDecoration: "none" }}>
                     <Typography variant="h5" color="grey.300">
-                      - {link.name}
+                      - {t(`${link.name}`)}
                     </Typography>
                   </Link>
                 </Box>
@@ -109,19 +112,19 @@ const MainFooter = () => {
           <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
-                Popular Questions
+                {t("popular_questions")}
               </Typography>
             </Box>
           </Grid>
           <Grid item md={3} p={2}>
             <Box>
               <Typography variant="h4" sx={{ color: "primary.main" }}>
-                Subscribe
+                {t("subscribe")}
               </Typography>
             </Box>
             <Box my={3}>
               <Typography variant="caption" color="grey.300">
-                Subscribe to our email newsletter.
+                {t("subscribe_text")}
               </Typography>
             </Box>
             <Box my={2}>
@@ -131,7 +134,7 @@ const MainFooter = () => {
                     <MdEmail />
                   </InputAdornment>
                 }
-                placeholder="Email"
+                placeholder={t("email")}
                 fullWidth
               />
             </Box>
@@ -141,7 +144,7 @@ const MainFooter = () => {
                 variant="contained"
                 sx={{ boxShadow: 0, color: "common.white" }}
               >
-                Subscribe
+                {t("subscribe")}
               </Button>
             </Box>
           </Grid>
@@ -153,7 +156,7 @@ const MainFooter = () => {
             sx={{ borderTop: 1, borderColor: "grey.300" }}
           >
             <Typography variant="h6">
-              Copyright {new Date().getFullYear()} My Ask |{" "}
+              Copyright {new Date().getFullYear()} Soalito |{" "}
               <Typography component="span" variant="h5" color="primary.main">
                 Araz Rezapour
               </Typography>

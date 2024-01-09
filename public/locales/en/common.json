@@ -46,5 +46,20 @@
   "no_answers": "No Answers",
   "most_visited": "Most Visited",
   "question": "Question?",
-  "report": "Report!"
+  "report": "Report!",
+  "enter_username": "Please type your username .",
+  "enter_email": "Please type your email .",
+  "post_title": "Post Title",
+  "enter_post_title": "Please choose an appropriate title for the post .",
+  "category": "Category",
+  "enter_category": "Please choose the appropriate section so easily search for your post .",
+  "enter_tags": "Please enter some tags for your post .",
+  "publish_post": "Publish Your Post",
+  "address": "Address",
+  "support": "Support",
+  "quick_links": "Quick Links",
+  "profile": "Profile",
+  "popular_questions": "Popular Questions",
+  "subscribe": "Subscribe",
+  "subscribe_text": "Subscribe to our email newsletter."
 }
