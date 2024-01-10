@@ -87,8 +87,6 @@ export async function getServerSideProps({
   const { slug } = params;
   const id = slug.split("-")[0];
 
-  console.log(id);
-
   const question = await getQuestionById({ id, user });
   const answers = await getQuestionAnswers({ id, user });
   const stats = await getStats({ user });

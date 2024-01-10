@@ -11,8 +11,6 @@ export const getQuestions = async ({
   filter: string;
   user: any;
 }) => {
-  console.log(filter);
-
   try {
     const { data } = await axiosInstance.get(
       `/questions?page=${page}&limit=${limit}&filter=${filter}`,

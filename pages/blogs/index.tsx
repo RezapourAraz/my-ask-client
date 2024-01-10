@@ -14,8 +14,9 @@ import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
+import { getBlogs } from "@/redux/blogs/blogss.services";
 
-const Blogs = ({ user, reputations, tags, stats }: any) => {
+const Blogs = ({ user, reputations, tags, stats, blogs }: any) => {
   return (
     <>
       <Head>
@@ -34,9 +35,9 @@ const Blogs = ({ user, reputations, tags, stats }: any) => {
         }
         mainBanner={<QuestionBanner title="Blogs" />}
       >
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {blogs.data.map((blog: any) => (
+          <BlogCard blog={blog} />
+        ))}
       </MainLayout>
     </>
   );
@@ -51,6 +52,8 @@ export async function getServerSideProps({
   locale,
   ...ctx
 }: any) {
+  const { limit = 10, page = 1 } = query;
+
   const user: any = hasCookie("user", { req, res })
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
@@ -58,6 +61,7 @@ export async function getServerSideProps({
   const stats = await getStats({ user });
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
+  const blogs = await getBlogs({ user, page, limit });
 
   return {
     props: {
@@ -65,6 +69,7 @@ export async function getServerSideProps({
       reputations,
       tags,
       stats,
+      blogs,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };
