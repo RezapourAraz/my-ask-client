@@ -67,6 +67,21 @@ const StatsCard = ({ stats }: any) => {
             {t("users")} ({stats?.usersCount})
           </Typography>
         </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            p: 1,
+            bgcolor: "grey.300",
+            my: 1,
+          }}
+        >
+          <BiSolidUserRectangle />
+          <Typography variant="h5" sx={{ color: "common.black" }}>
+            {t("blogs")} ({stats?.blogsCount})
+          </Typography>
+        </Box>
       </Box>
     </Grid>
   );
