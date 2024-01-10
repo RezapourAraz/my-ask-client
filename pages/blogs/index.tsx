@@ -12,18 +12,26 @@ import QuestionBanner from "@/components/banners/Question.banners";
 import BlogCard from "@/components/cards/Blog.cards";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
+import { getTags } from "@/redux/tags/tags.services";
 
-const Blogs = ({ user }: any) => {
+const Blogs = ({ user, reputations, tags, stats }: any) => {
   return (
     <>
       <Head>
-        <title>My Ask</title>
-        <meta name="description" content="Travel App" />
+        <title>Blogs</title>
+        <meta name="description" content="Blogs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
         user={user}
-        sidebar={<MainSidebar />}
+        sidebar={
+          <MainSidebar
+            reputations={reputations.data}
+            tags={tags.data}
+            stats={stats.data}
+          />
+        }
         mainBanner={<QuestionBanner title="Blogs" />}
       >
         <BlogCard />
@@ -47,9 +55,16 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
+  const stats = await getStats({ user });
+  const tags = await getTags({ user });
+  const reputations = await getHighestUserPoint({ user });
+
   return {
     props: {
       user,
+      reputations,
+      tags,
+      stats,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };

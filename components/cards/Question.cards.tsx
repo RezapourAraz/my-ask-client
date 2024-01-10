@@ -48,7 +48,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         my: 2,
       }}
     >
-      <Grid container item md={1} xs={12} sx={{ alignItems: "center" }}>
+      <Grid container item md={1} xs={12}>
         <Avatar
           src={question.profile}
           alt={question.username}
@@ -66,7 +66,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
               <Typography
                 variant="h2"
                 color="secondary.main"
-                sx={{ fontSize: { md: 28, xs: 16 } }}
+                sx={{ fontSize: { md: 22, xs: 16 } }}
               >
                 {question.title}
               </Typography>
@@ -129,7 +129,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
           <NoSsr>
             <Typography
               variant="caption"
-              sx={{ fontSize: { md: 16, xs: 12 } }}
+              sx={{ fontSize: { md: 14, xs: 10 } }}
               dangerouslySetInnerHTML={{
                 __html: question.content,
               }}
