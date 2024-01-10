@@ -27,7 +27,7 @@
   "user": "User",
   "blogs": "Blogs",
   "contact_us": "Contact Us",
-  "welcome_ask_desc": "Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque",
+  "welcome_ask_desc": "We believe that Q&A can be a powerful tool for learning and growth. We hope that this site can help users achieve their goals and become a valuable resource for Q&A around the world.",
   "about_us": "About Us",
   "join_now": "Join Now",
   "text_area": "Ask a question and you will be sure to find an answer",
@@ -61,5 +61,14 @@
   "profile": "Profile",
   "popular_questions": "Popular Questions",
   "subscribe": "Subscribe",
-  "subscribe_text": "Subscribe to our email newsletter."
+  "subscribe_text": "Subscribe to our email newsletter.",
+  "y_name": "Your Name",
+  "y_email": "Your Email",
+  "subject": "Subject",
+  "message": "Message",
+  "send": "Send",
+  "phone_number": "Phone Number",
+  "social_links": "Social Links",
+  "about_us_text": "We are a team of experts in the field of Q&A, who launched this site with the aim of creating a comprehensive and useful platform to answer users' questions. We believe that everyone should have easy access to the information they need, and we have created this site as a valuable resource for answering users' questions on a variety of topics.We are committed to providing accurate, comprehensive, and up-to-date answers to help users learn and grow. We are also looking to create an active and vibrant community of users who can interact with each other and share information.",
+  "banner_text": "We believe that Q&A can be a powerful tool for learning and growth. We hope that this site can help users achieve their goals and become a valuable resource for Q&A around the world."
 }

@@ -15,20 +15,21 @@ import { MdEmail } from "react-icons/md";
 import { FaShareSquare } from "react-icons/fa";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const ContactUs = ({ user }: any) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Contact Us</title>
-        <meta name="description" content="Contact Us" />
+        <title>{t("contact_us")}</title>
+        <meta name="description" content={t("contact_us")} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
         user={user}
-        mainBanner={
-          <QuestionBanner title="How much do web developers earn? What is their salary?" />
-        }
+        mainBanner={<QuestionBanner title={t("contact_us")} />}
       >
         <Grid my={6}>
           <Grid container justifyContent="space-between">
@@ -45,15 +46,11 @@ const ContactUs = ({ user }: any) => {
             >
               <Grid sx={{ p: 2, borderBottom: 2, borderColor: "grey.300" }}>
                 <Typography variant="h4" sx={{ color: "primary.main" }}>
-                  Contact Us
+                  {t("contact_us")}
                 </Typography>
               </Grid>
               <Grid sx={{ my: 2 }}>
-                <Typography variant="caption">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                  adipiscing gravida odio, sit amet suscipit risus ultrices eu.
-                  Fusce viverra neque at purus laoreet consequat.
-                </Typography>
+                <Typography variant="caption">{t("about_us_text")}</Typography>
               </Grid>
               <Grid container alignItems="center" my={3}>
                 <Grid item md={2}>
@@ -62,7 +59,7 @@ const ContactUs = ({ user }: any) => {
                     color="common.black"
                     sx={{ width: 100 }}
                   >
-                    Your Name
+                    {t("y_name")}
                   </Typography>
                 </Grid>
                 <Grid item md={10} sx={{ width: "100%" }}>
@@ -76,7 +73,7 @@ const ContactUs = ({ user }: any) => {
                     color="common.black"
                     sx={{ width: 100 }}
                   >
-                    Your Email
+                    {t("y_email")}
                   </Typography>
                 </Grid>
                 <Grid item md={10} sx={{ width: "100%" }}>
@@ -90,7 +87,7 @@ const ContactUs = ({ user }: any) => {
                     color="common.black"
                     sx={{ width: 100 }}
                   >
-                    Subject
+                    {t("subject")}
                   </Typography>
                 </Grid>
                 <Grid item md={10} sx={{ width: "100%" }}>
@@ -104,7 +101,7 @@ const ContactUs = ({ user }: any) => {
                     color="common.black"
                     sx={{ width: 100 }}
                   >
-                    Message
+                    {t("message")}
                   </Typography>
                 </Grid>
 
@@ -118,7 +115,7 @@ const ContactUs = ({ user }: any) => {
                   variant="contained"
                   sx={{ color: "common.white", boxShadow: 0 }}
                 >
-                  Send
+                  {t("send")}
                 </Button>
               </Grid>
             </Grid>
@@ -135,27 +132,16 @@ const ContactUs = ({ user }: any) => {
             >
               <Grid sx={{ p: 2, borderBottom: 2, borderColor: "grey.300" }}>
                 <Typography variant="h4" sx={{ color: "primary.main" }}>
-                  About Us
+                  {t("about_us")}
                 </Typography>
               </Grid>
               <Grid mt={2}>
-                <Typography variant="caption">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                  adipiscing gravida odio, sit amet suscipit risus ultrices eu.
-                  Fusce viverra neque at purus laoreet consequat. Vivamus
-                  vulputate posuere nisl quis consequat. Donec congue commodo
-                  mi, sed commodo velit fringilla ac. Fusce placerat venenatis
-                  mi. Pellentesque habitant morbi tristique senectus et netus et
-                  malesuada fames ac turpis egestas. Cras ornare, dolor a
-                  aliquet rutrum, dolor turpis condimentum leo, a semper lacus
-                  purus in felis. Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit.
-                </Typography>
+                <Typography variant="caption">{t("about_us_text")}</Typography>
               </Grid>
               <Grid container alignItems="center" mt={2} gap={1}>
                 <IoLocationSharp style={{ color: "#FE7361" }} />
                 <Typography variant="h6" sx={{ color: "common.black" }}>
-                  Address:
+                  {t("address")}:
                 </Typography>
                 <Typography variant="h6" sx={{ color: "common.black" }}>
                   Tabriz Iran
@@ -164,7 +150,7 @@ const ContactUs = ({ user }: any) => {
               <Grid container alignItems="center" mt={2} gap={1}>
                 <FaPhone style={{ color: "#FE7361" }} />
                 <Typography variant="h6" sx={{ color: "common.black" }}>
-                  Phone number:
+                  {t("phone_number")}:
                 </Typography>
                 <Typography variant="h6" sx={{ color: "common.black" }}>
                   041 414 1414
@@ -173,7 +159,7 @@ const ContactUs = ({ user }: any) => {
               <Grid container alignItems="center" mt={2} gap={1}>
                 <MdEmail style={{ color: "#FE7361" }} />
                 <Typography variant="h6" sx={{ color: "common.black" }}>
-                  E-mail:
+                  {t("email")}:
                 </Typography>
                 <Typography variant="h6" sx={{ color: "common.black" }}>
                   rezapouraraz@gmail.com
@@ -182,7 +168,7 @@ const ContactUs = ({ user }: any) => {
               <Grid container alignItems="center" mt={2} gap={1}>
                 <FaShareSquare style={{ color: "#FE7361" }} />
                 <Typography variant="h6" sx={{ color: "common.black" }}>
-                  Social links:
+                  {t("social_links")}:
                 </Typography>
                 <Typography variant="h6" sx={{ color: "common.black" }}>
                   instagram
