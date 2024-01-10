@@ -26,3 +26,18 @@ export const getBlogs = async ({
     console.log(err);
   }
 };
+
+export const addBlog = async ({ user, body }: any) => {
+  try {
+    const { data } = await axiosInstance.post("/blogs", body, {
+      headers: {
+        Authorization: `Bearer ${user?.accessToken}`,
+        RefreshToken: user?.refreshToken,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

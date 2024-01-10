@@ -3,10 +3,54 @@ import React from "react";
 // Mui
 import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import TextEditorInput from "../inputs/TextEditor.inputs";
+import { useBlogForm } from "@/lib/formik.hooks";
+import { addBlog } from "@/redux/blogs/blogss.services";
+import { useRouter } from "next/router";
 
-const AddPostSection = () => {
+const AddPostSection = ({ user }: { user: any }) => {
   // hooks
   const { t } = useTranslation();
+  const router = useRouter();
+
+  // states
+  const [attachment, setAttachment] = React.useState<any>(null);
+
+  // handler
+  const submitHandler = async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append("title", values.title);
+      formData.append("content", values.content);
+      formData.append("userId", user.id);
+
+      if (attachment) {
+        formData.append("thumbnail", attachment);
+      }
+
+      const data = await addBlog({ user, body: formData });
+
+      if (data.code === 201) {
+        setFieldValue("title", "");
+        setFieldValue("content", "");
+        setAttachment(null);
+
+        router.push("/blogs");
+      }
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleFileChange = (e: any) => {
+    setAttachment(e.target.files[0]);
+  };
+
+  const { errors, values, handleChange, handleSubmit, setFieldValue } =
+    useBlogForm(submitHandler);
 
   return (
     <Box sx={{ px: 2 }}>
@@ -16,43 +60,15 @@ const AddPostSection = () => {
             {t("add_post")}
           </Typography>
         </Box>
-        <Grid container my={2}>
-          <Grid my={1} item md={2} container alignItems="center">
-            <Typography variant="subtitle2">
-              {t("username")}{" "}
-              <Typography
-                color="primary.main"
-                variant="subtitle2"
-                component="span"
-              >
-                *
-              </Typography>
-            </Typography>
-          </Grid>
-          <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
-            <Typography variant="h6" color="secondary.main">
-              {t("enter_username")}
-            </Typography>
-          </Grid>
-          <Grid item md={2} container alignItems="center">
-            <Typography variant="subtitle2">
-              {t("email")}{" "}
-              <Typography
-                color="primary.main"
-                variant="subtitle2"
-                component="span"
-              >
-                *
-              </Typography>
-            </Typography>
-          </Grid>
-          <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
-            <Typography variant="h6" color="secondary.main">
-              {t("enter_email")}
-            </Typography>
-          </Grid>
+        <Grid
+          container
+          my={2}
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
               {t("post_title")}{" "}
@@ -66,10 +82,16 @@ const AddPostSection = () => {
             </Typography>
           </Grid>
           <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
-            <Typography variant="h6" color="secondary.main">
+            <Input
+              name="title"
+              sx={{ bgcolor: "grey.300", color: "grey.900", px: 1 }}
+              fullWidth
+              value={values.title}
+              onChange={handleChange}
+            />
+            {/* <Typography variant="h6" color="secondary.main">
               {t("enter_post_title")}
-            </Typography>
+            </Typography> */}
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
@@ -84,27 +106,40 @@ const AddPostSection = () => {
             </Typography>
           </Grid>
           <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
-            <Typography variant="h6" color="secondary.main">
-              {t("enter_category")}
-            </Typography>
+            <Input
+              type="file"
+              sx={{ bgcolor: "grey.300" }}
+              fullWidth
+              name="thumbnail"
+              onChange={handleFileChange}
+            />
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
-            <Typography variant="subtitle2">Tags</Typography>
+            <Typography variant="subtitle2">
+              {t("content")}{" "}
+              <Typography
+                color="primary.main"
+                variant="subtitle2"
+                component="span"
+              >
+                *
+              </Typography>
+            </Typography>
           </Grid>
           <Grid my={1} item md={10}>
-            <Input sx={{ bgcolor: "grey.300" }} fullWidth />
-            <Typography variant="h6" color="secondary.main">
-              {t("enter_tags")}
-            </Typography>
+            <TextEditorInput
+              value={values.content}
+              onChange={(value: string) => setFieldValue("content", value)}
+            />
           </Grid>
           <Grid md={12} my={3}>
             <Button
               fullWidth
               variant="contained"
+              type="submit"
               sx={{ color: "common.white" }}
             >
-              Publish Your Post
+              {t("publish_blog")}
             </Button>
           </Grid>
         </Grid>

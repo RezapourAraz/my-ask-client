@@ -44,3 +44,22 @@ export const useAskQuestionForm = (submitHandler: any) => {
     onSubmit: submitHandler,
   });
 };
+
+export const useBlogForm = (submitHandler: any) => {
+  const initialValues = {
+    title: "",
+    content: "",
+  };
+
+  const schema = yup.object().shape({
+    title: yup.string().required("title is required"),
+    content: yup.string().required("body is required"),
+  });
+
+  return useFormik({
+    initialValues,
+    onSubmit: submitHandler,
+    validationSchema: schema,
+    validateOnChange: false,
+  });
+};

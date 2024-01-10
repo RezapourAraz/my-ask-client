@@ -36,7 +36,7 @@ const AddPost = ({ user, tags, reputations, stats }: any) => {
           />
         }
       >
-        <AddPostSection />
+        <AddPostSection user={user} />
       </MainLayout>
     </>
   );
