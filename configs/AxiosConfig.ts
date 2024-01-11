@@ -1,5 +1,5 @@
 import axios from "axios";
-import { deleteCookie, getCookie, hasCookie } from "cookies-next";
+import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
 
 const BASE_URL = "http://localhost:5005/api/v1";
 
@@ -37,12 +37,26 @@ axiosInstance.interceptors.response.use(
       const backendRefreshToken =
         originalRequest.headers["RefreshToken"] || null;
       const refreshResult = await refreshAccessToken(backendRefreshToken);
+
+      // @ts-ignore
+      const { RefreshToken, accessToken, ...rest } = JSON.stringify(
+        getCookie("user")
+      );
+
       if (!refreshResult) {
         deleteCookie("user");
         return Promise.reject(error);
       }
       originalRequest._retry = true;
+
       // TODO: Set New accessToken To User Cookie
+      const user = {
+        ...rest,
+        accessToken: refreshResult.data.accessToken,
+        refreshToken: refreshResult.data.refreshToken,
+      };
+
+      setCookie("user", user);
       return axiosInstance(originalRequest);
     }
     return Promise.reject(error);
@@ -72,6 +86,6 @@ async function refreshAccessToken(backendRefreshToken: string | null) {
     headers,
   });
 
-  if (result.status === 201) return await result.json();
+  if (result.status === 200) return await result.json();
   return null;
 }
