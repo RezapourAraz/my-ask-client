@@ -36,18 +36,13 @@ const data = [
     icon: <FaStarOfLife />,
   },
   {
-    id: 5,
-    name: "asked_questions",
-    icon: <BsFillQuestionSquareFill />,
-  },
-  {
     id: 6,
     name: "points",
     icon: <FaHeart />,
   },
   {
     id: 7,
-    name: "posts",
+    name: "blogs",
     icon: <IoIosDocument />,
   },
   {
@@ -104,7 +99,19 @@ const UserStatsSection = ({ user }: any) => {
               }}
             >
               {item.icon}
-              <Typography>{t(`${item.name}`)}</Typography>
+              <Typography>
+                {t(`${item.name}`)}(
+                {`${
+                  user[item.name + "Count"]
+                    ? user[item.name + "Count"]
+                    : item.name === "points"
+                    ? user.reputation
+                      ? user.reputation
+                      : 0
+                    : 0
+                }`}
+                )
+              </Typography>
             </Box>
           </Grid>
         ))}

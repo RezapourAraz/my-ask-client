@@ -14,31 +14,30 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getTags } from "@/redux/tags/tags.services";
 import { getHighestUserPoint, userProfile } from "@/redux/users/users.services";
 
-const User = ({ userData, reputations, tags }: any) => {
+const Profile = ({ userData, reputations, tags }: any) => {
+  const user = userData.data;
+
   return (
     <>
       <Head>
-        <title>{`${userData.username}`}</title>
+        <title>{`${user.username}`}</title>
         <meta name="description" content="Soalitoo App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
-        user={userData}
-        mainBanner={<QuestionBanner title={userData?.username} />}
-        sidebar={
-          <MainSidebar reputations={reputations.data} tags={tags.data} />
-        }
+        user={user}
+        mainBanner={<QuestionBanner title={user?.username} />}
       >
         <Grid my={6}>
-          <UserCard user={userData} />
-          <UserStatsSection user={userData} />
+          <UserCard user={user} />
+          <UserStatsSection user={user} />
         </Grid>
       </MainLayout>
     </>
   );
 };
 
-export default User;
+export default Profile;
 
 export async function getServerSideProps({
   query,
@@ -47,8 +46,6 @@ export async function getServerSideProps({
   locale,
   ...ctx
 }: any) {
-  const { userId } = query;
-
   const user: any = hasCookie("user", { req, res })
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
@@ -58,11 +55,16 @@ export async function getServerSideProps({
 
   const userData = await userProfile({ user, userId: user.id });
 
-  if (!user || !reputations || !tags || userData) {
-    return {
-      notFound: true,
-    };
-  }
+  //   console.log(user);
+  //   console.log(tags);
+  //   console.log(reputations);
+  console.log(userData);
+
+  //   if (!user || !reputations || !tags || userData) {
+  //     return {
+  //       notFound: true,
+  //     };
+  //   }
 
   return {
     props: {

@@ -73,5 +73,8 @@
   "banner_text": "We believe that Q&A can be a powerful tool for learning and growth. We hope that this site can help users achieve their goals and become a valuable resource for Q&A around the world.",
   "publish_blog": "Publish Your Blog",
   "content": "Content",
-  "thumbnail": "Thumbnail"
+  "thumbnail": "Thumbnail",
+  "comments": "Comments",
+  "polls": "Polls",
+  "followers": "Followers"
 }

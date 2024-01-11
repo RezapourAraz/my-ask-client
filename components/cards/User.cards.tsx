@@ -10,8 +10,11 @@ import { IoIosHeart } from "react-icons/io";
 import { GiWorld } from "react-icons/gi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
+import { pointMaker } from "@/helper/pointMaker";
 
 const UserCard = ({ user }: any) => {
+  const userPoints = pointMaker(user.reputation ? user.reputation : 0);
+
   return (
     <Grid
       container
@@ -43,15 +46,20 @@ const UserCard = ({ user }: any) => {
         >
           About {user.username}
         </Typography>
+
         <Box
           sx={{
-            bgcolor: "success.main",
+            bgcolor: userPoints?.color,
             display: "inline-flex",
-            p: 0.5,
+            p: 0.3,
+            px: 1,
             borderRadius: 1,
+            alignItems: "center",
           }}
         >
-          <Typography variant="h6">Explainer</Typography>
+          <Typography variant="caption" color="common.white">
+            {userPoints?.name}
+          </Typography>
         </Box>
       </Grid>
       <Grid item md={1} sx={{ my: 3 }}>
@@ -77,7 +85,7 @@ const UserCard = ({ user }: any) => {
               Registered:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              {new Date(user.updatedAt).toDateString()}
+              {new Date(user.updated_at).toDateString()}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -91,7 +99,7 @@ const UserCard = ({ user }: any) => {
               Country:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              Iran
+              {user.country}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -105,7 +113,7 @@ const UserCard = ({ user }: any) => {
               Age:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              23
+              {user.birth}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -135,7 +143,7 @@ const UserCard = ({ user }: any) => {
               Phone:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              +98 914 436 3473
+              {user.phone}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -149,7 +157,7 @@ const UserCard = ({ user }: any) => {
               City:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              Tabriz
+              {user.city}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -163,7 +171,7 @@ const UserCard = ({ user }: any) => {
               Gender:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              Male
+              {user.gender === 0 ? "Male" : "Female"}
             </Typography>
           </Box>
         </Grid>
