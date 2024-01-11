@@ -11,8 +11,13 @@ import { GiWorld } from "react-icons/gi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { pointMaker } from "@/helper/pointMaker";
+import { useTranslation } from "next-i18next";
 
 const UserCard = ({ user }: any) => {
+  // hooks
+  const { t } = useTranslation();
+
+  // state
   const userPoints = pointMaker(user.reputation ? user.reputation : 0);
 
   return (
@@ -44,7 +49,7 @@ const UserCard = ({ user }: any) => {
             color: "primary.main",
           }}
         >
-          About {user.username}
+          {t("about")} {user.username}
         </Typography>
 
         <Box
@@ -58,12 +63,14 @@ const UserCard = ({ user }: any) => {
           }}
         >
           <Typography variant="caption" color="common.white">
-            {userPoints?.name}
+            {t(`${userPoints?.name}`)}
           </Typography>
         </Box>
       </Grid>
       <Grid item md={1} sx={{ my: 3 }}>
         <Avatar
+          src={user.profile}
+          alt={user.username}
           sx={{
             width: 50,
             height: 50,
@@ -82,7 +89,7 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              Registered:
+              {t("registered")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
               {new Date(user.updated_at).toDateString()}
@@ -96,7 +103,7 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              Country:
+              {t("country")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
               {user.country}
@@ -110,7 +117,7 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              Age:
+              {t("age")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
               {user.birth}
@@ -140,7 +147,7 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              Phone:
+              {t("phone")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
               {user.phone}
@@ -154,7 +161,7 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              City:
+              {t("city")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
               {user.city}
@@ -168,10 +175,10 @@ const UserCard = ({ user }: any) => {
               fontWeight="bold"
               sx={{ fontSize: 13 }}
             >
-              Gender:
+              {t("gender")}:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              {user.gender === 0 ? "Male" : "Female"}
+              {user.gender === 0 ? t("male") : t("female")}
             </Typography>
           </Box>
         </Grid>
@@ -184,7 +191,7 @@ const UserCard = ({ user }: any) => {
           variant="contained"
           sx={{ color: "common.white", boxShadow: 0 }}
         >
-          Ask {user.username}
+          {t("ask")} {user.username}
         </Button>
       </Grid>
     </Grid>

@@ -76,5 +76,21 @@
   "thumbnail": "Thumbnail",
   "comments": "Comments",
   "polls": "Polls",
-  "followers": "Followers"
+  "followers": "Followers",
+  "about": "About",
+  "registered": "Registered",
+  "country": "Country",
+  "city": "City",
+  "phone": "Phone",
+  "age": "Age",
+  "gender": "Gender",
+  "ask": "Ask",
+  "male": "Male",
+  "female": "Female",
+  "beginner": "Beginner",
+  "teacher": "Teacher",
+  "pundit": "Pundit",
+  "explainer": "Explainer",
+  "professional": "Professional",
+  "enlightened": "Enlightened"
 }

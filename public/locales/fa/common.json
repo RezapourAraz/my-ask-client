@@ -76,5 +76,21 @@
   "thumbnail": "تصویر",
   "comments": "نظرات",
   "polls": "نظرسنجی ها",
-  "followers": "دنبال کننده ها"
+  "followers": "دنبال کننده ها",
+  "about": "درباره",
+  "registered": "تایید شده",
+  "country": "کشور",
+  "city": "شهر",
+  "phone": "تلفن",
+  "age": "سن",
+  "gender": "جنسیت",
+  "ask": "پرسیدن از",
+  "male": "مرد",
+  "female": "زن",
+  "beginner": "مبتدی",
+  "teacher": "معلم",
+  "pundit": "کارشناس",
+  "explainer": "توضیح دهنده ",
+  "professional": "حرفه ای",
+  "enlightened": "مشاور"
 }

@@ -63,9 +63,7 @@ const TopHeader = ({ user }: any) => {
               <Typography
                 className="black"
                 variant="h6"
-                onClick={() =>
-                  router.push(user ? `/users/${user.id}` : "/auth/login")
-                }
+                onClick={() => router.push(user ? `/profile` : "/auth/login")}
               >
                 {user ? user.username : t("login_area")}
               </Typography>
