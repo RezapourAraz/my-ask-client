@@ -11,6 +11,8 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
   // hooks
   const { t } = useTranslation();
 
+  console.log(tags);
+
   return (
     <Grid sx={{ p: 1, position: "sticky", top: -30, mb: 1.5 }}>
       <Box>

@@ -11,7 +11,7 @@ import { GiWorld } from "react-icons/gi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
-const UserCard = () => {
+const UserCard = ({ user }: any) => {
   return (
     <Grid
       container
@@ -41,7 +41,7 @@ const UserCard = () => {
             color: "primary.main",
           }}
         >
-          About Araz Rezapour
+          About {user.username}
         </Typography>
         <Box
           sx={{
@@ -77,7 +77,7 @@ const UserCard = () => {
               Registered:
             </Typography>
             <Typography variant="h6" color="grey.900" sx={{ fontSize: 13 }}>
-              2023/08/23
+              {new Date(user.updatedAt).toDateString()}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
@@ -169,20 +169,14 @@ const UserCard = () => {
         </Grid>
       </Grid>
       <Grid item md={12}>
-        <Typography variant="caption">
-          Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at
-          elit quis urna adipiscing iaculis. Curabitur vitae velit in neque
-          dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Curabitur vitae velit in neque dictum blandit.
-        </Typography>
+        <Typography variant="caption">{user.about}</Typography>
       </Grid>
       <Grid item md={12} mt={3}>
         <Button
           variant="contained"
           sx={{ color: "common.white", boxShadow: 0 }}
         >
-          Ask Araz Rezapour
+          Ask {user.username}
         </Button>
       </Grid>
     </Grid>

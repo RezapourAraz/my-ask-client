@@ -62,7 +62,7 @@ const data = [
   },
 ];
 
-const UserStatsSection = () => {
+const UserStatsSection = ({ user }: any) => {
   // hooks
   const { t } = useTranslation();
 

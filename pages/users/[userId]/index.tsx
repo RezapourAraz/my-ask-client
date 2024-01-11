@@ -18,18 +18,20 @@ const User = ({ user, reputations, tags }: any) => {
   return (
     <>
       <Head>
-        <title>{user.username}</title>
-        <meta name="description" content="Soalito App" />
+        <title>{`${user.username}`}</title>
+        <meta name="description" content="Soalitoo App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
         user={user}
         mainBanner={<QuestionBanner title={user?.username} />}
-        sidebar={<MainSidebar reputations={reputations} tags={tags} />}
+        sidebar={
+          <MainSidebar reputations={reputations.data} tags={tags.data} />
+        }
       >
         <Grid my={6}>
-          <UserCard />
-          <UserStatsSection />
+          <UserCard user={user} />
+          <UserStatsSection user={user} />
         </Grid>
       </MainLayout>
     </>
@@ -51,8 +53,6 @@ export async function getServerSideProps({
 
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
-
-  console.log(reputations);
 
   if (!user || !reputations || !tags) {
     return {
