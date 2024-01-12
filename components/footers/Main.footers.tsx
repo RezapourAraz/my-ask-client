@@ -60,8 +60,7 @@ const MainFooter = () => {
             </Box>
             <Box my={3}>
               <Typography variant="caption" color="grey.300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                adipiscing gravida odio, sit amet suscipit risus ultrices eu.
+                {t("banner_text")}
               </Typography>
             </Box>
             <Box>
@@ -71,10 +70,10 @@ const MainFooter = () => {
             </Box>
             <Box my={3}>
               <Typography variant="caption" color="grey.300">
-                Ask Me Network, 33 Street, syada Zeinab, Cairo, Egypt.
+                Iran , Tabriz
               </Typography>
             </Box>
-            <Box>
+            {/* <Box>
               <Typography variant="h5" sx={{ color: "primary.main" }}>
                 {t("support")}:
               </Typography>
@@ -86,7 +85,7 @@ const MainFooter = () => {
               <Typography variant="caption" color="grey.300">
                 Ask Me Network, 33 Street, syada Zeinab, Cairo, Egypt.
               </Typography>
-            </Box>
+            </Box> */}
           </Grid>
           <Grid item md={3} p={2}>
             <Box>
