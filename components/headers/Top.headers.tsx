@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 // Mui
 import {
@@ -10,23 +11,47 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import { ClickAwayListener } from "@mui/base";
 
 // Icons
 import { FaPencilAlt } from "react-icons/fa";
 import { GiTrophyCup } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import { useRouter } from "next/router";
-import { useAppSelector } from "@/lib/redux.hooks";
+
+// I18next
 import { useTranslation } from "next-i18next";
-import { getCookie } from "cookies-next";
+import { searchServices } from "@/redux/search/search.services";
+
+// components
 
 const TopHeader = ({ user }: any) => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
 
-  console.log(user);
+  // states
+  const [openSearchBox, setOpenSearchBox] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
+  const [result, setResult] = useState<[] | null>();
+
+  console.log(result);
+
+  // handlers
+  const onChangeHandler = (e: any) => {
+    setSearchText(e.target.value);
+  };
+
+  const fetchSearch = async () => {
+    const data = await searchServices({ user, q: searchText });
+
+    setResult(data.data);
+    setOpenSearchBox(true);
+  };
+
+  useEffect(() => {
+    fetchSearch();
+  }, [searchText]);
 
   return (
     <TopHeaderContainer sx={{ display: { xs: "none", md: "block" } }}>
@@ -123,10 +148,69 @@ const TopHeader = ({ user }: any) => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item md={2} container>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <FaSearch style={{ color: "white" }} />
-              <Input fullWidth placeholder={t("search_here")} />
+          <Grid item md={3} container sx={{ position: "relative" }}>
+            <Box sx={{ width: "100%" }}>
+              <ClickAwayListener onClickAway={() => setOpenSearchBox(false)}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    width: "100%",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <FaSearch style={{ color: "white" }} />
+                  <Input
+                    fullWidth
+                    placeholder={t("search_here")}
+                    sx={{
+                      width: 200,
+                      transition: "width .2s ease",
+                      ":focus-within": { width: "100%" },
+                    }}
+                    onChange={onChangeHandler}
+                    value={searchText}
+                  />
+
+                  {openSearchBox && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        py: 1.5,
+                        px: 1,
+                        width: 350,
+                        top: 50,
+                        left: 0,
+                        bgcolor: "common.white",
+                        borderRadius: 1,
+                        maxHeight: 200,
+                        overflowY: "auto",
+                      }}
+                    >
+                      {result && result.length > 0
+                        ? result?.map((item: any) => (
+                            <Box
+                              sx={{
+                                px: 1,
+                                py: 0.5,
+                                cursor: "pointer",
+                                ":hover": { bgcolor: "primary.light" },
+                              }}
+                            >
+                              <Typography
+                                variant="subtitle2"
+                                color="primary.main"
+                              >
+                                {item?.title}
+                              </Typography>
+                            </Box>
+                          ))
+                        : t("search_not_found")}
+                    </Box>
+                  )}
+                </Box>
+              </ClickAwayListener>
             </Box>
           </Grid>
         </Grid>
