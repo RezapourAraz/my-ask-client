@@ -93,5 +93,19 @@
   "explainer": "توضیح دهنده ",
   "professional": "حرفه ای",
   "enlightened": "مشاور",
-  "search_not_found": "نتیجه ای یافت نشد."
+  "search_not_found": "نتیجه ای یافت نشد.",
+  "beginner_20_point": "مبتدی (20) امتیاز",
+  "teacher_100_point": "معلم (100) امتیاز",
+  "pundit_150_point": "کارشناس (150) امتیاز",
+  "explainer_250_point": "توضیح دهنده (250) امتیاز",
+  "professional_500_point": "حرفه ای (500) امتیاز",
+  "enlightened_1000_point": "مشاور (1000) امتیاز",
+  "for_signup": "برای ثبت نام ( 20 ) امتیاز",
+  "when_answer_best": "هنگامی که پاسخ شما به عنوان بهترین پاسخ انتخاب میشود ( 5 )",
+  "add_answer": "برای اضافه کردن پاسخ ( 2 ) امتیاز",
+  "your_question_got_vote": "پرسش شما رای گرفت ( 1 ) امتیاز",
+  "when_polls": "برای انتخاب نظرسنجی در سوال. ( 1 ) امتیاز",
+  "your_answer_got_vote": "پاسخ شما رای گرفت ( 1 ) امتیاز",
+  "follow_user": "هروقت که یک کاربر دنبال می کند ( 1 ) امتیاز",
+  "badges_and_points": "بازنشانی ها و امتیاز ها"
 }

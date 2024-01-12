@@ -93,5 +93,19 @@
   "explainer": "Explainer",
   "professional": "Professional",
   "enlightened": "Enlightened",
-  "search_not_found": "No Result Found."
+  "search_not_found": "No Result Found.",
+  "beginner_20_point": "Beginner (20) Points",
+  "teacher_100_point": "Teacher (100) Points",
+  "pundit_150_point": "Pundit (150) Points",
+  "explainer_250_point": "Explainer (250) Points",
+  "professional_500_point": "Professional (500) Points",
+  "enlightened_1000_point": "Enlightened (1000) Points",
+  "for_signup": "For Signing up ( 20 )",
+  "when_answer_best": "When your answer has been chosen as the best answer ( 5 )",
+  "add_answer": "For adding an answer ( 2 )",
+  "your_question_got_vote": "Your question gets a vote ( 1 )",
+  "when_polls": "For choosing a poll on the question. ( 1 )",
+  "your_answer_got_vote": "Your answer gets a vote ( 1 )",
+  "follow_user": "Each time when a user follows you ( 1 )",
+  "badges_and_points": "Badges and Points"
 }

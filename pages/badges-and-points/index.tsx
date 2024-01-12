@@ -11,38 +11,39 @@ import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
+import { useTranslation } from "next-i18next";
 
 // data
 
 const badgesData = [
   {
     id: 1,
-    title: "Beginner ( 20 ) Points",
+    title: "beginner_20_point",
     color: "#2F3239",
   },
   {
     id: 2,
-    title: "Teacher ( 100 ) Points",
+    title: "teacher_100_point",
     color: "#DD3333",
   },
   {
     id: 3,
-    title: "Pundit ( 150 ) Points",
+    title: "pundit_150_point",
     color: "#DD9933",
   },
   {
     id: 4,
-    title: "Explainer ( 250 ) Points",
+    title: "explainer_250_point",
     color: "#81D742",
   },
   {
     id: 5,
-    title: "Professional ( 500 ) Points",
+    title: "professional_500_point",
     color: "#1E73BE",
   },
   {
     id: 6,
-    title: "Enlightened ( 1000 ) Points",
+    title: "enlightened_1000_point",
     color: "#8224E3",
   },
 ];
@@ -50,40 +51,42 @@ const badgesData = [
 const pointsData = [
   {
     id: 1,
-    title: "For Signing up ( 20 )",
+    title: "for_signup",
   },
   {
     id: 2,
-    title: "When your answer has been chosen as the best answer ( 5 )",
+    title: "when_answer_best",
   },
   {
     id: 3,
-    title: "For adding an answer ( 2 )",
+    title: "add_answer",
   },
   {
     id: 4,
-    title: "Your question gets a vote ( 1 )",
+    title: "your_question_got_vote",
   },
   {
     id: 5,
-    title: "For choosing a poll on the question. ( 1 )",
+    title: "when_polls",
   },
   {
     id: 6,
-    title: "Your answer gets a vote ( 1 )",
+    title: "your_answer_got_vote",
   },
   {
     id: 7,
-    title: "Each time when a user follows you ( 1 )",
+    title: "follow_user",
   },
 ];
 
 const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Add Post</title>
-        <meta name="description" content="Travel App" />
+        <title>{t("badges_and_points")}</title>
+        <meta name="description" content={t("badges_and_points")} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
@@ -100,7 +103,7 @@ const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
           <Grid sx={{ my: 6, p: 2, bgcolor: "common.white" }}>
             <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
               <Typography variant="h3" color="primary.main">
-                Badges
+                {t("badges")}
               </Typography>
             </Box>
             <Grid my={2} container justifyContent="space-between" rowGap={2}>
@@ -111,7 +114,7 @@ const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
                   md={5.9}
                   sx={{ color: "common.white", bgcolor: badge.color, p: 1.5 }}
                 >
-                  {badge.title}
+                  {t(`${badge.title}`)}
                 </Grid>
               ))}
             </Grid>
@@ -120,7 +123,7 @@ const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
           <Grid sx={{ my: 6, p: 2, bgcolor: "common.white" }}>
             <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
               <Typography variant="h3" color="primary.main">
-                Badges
+                {t("points")}
               </Typography>
             </Box>
             <Grid my={2} container justifyContent="space-between" rowGap={2}>
@@ -131,7 +134,7 @@ const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
                   md={5.9}
                   sx={{ color: "common.black", bgcolor: "grey.300", p: 1.5 }}
                 >
-                  {point.title}
+                  {t(point.title)}
                 </Grid>
               ))}
             </Grid>
