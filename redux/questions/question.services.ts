@@ -84,3 +84,24 @@ export const askQuestion = async ({ user, body }: any) => {
     console.log(err);
   }
 };
+
+export const voteQuestion = async ({ user, body }: any) => {
+  try {
+    const { questionId } = body;
+
+    const { data } = await axiosInstance.patch(
+      `/questions/vote/${questionId}`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${user?.accessToken}`,
+          RefreshToken: user?.refreshToken,
+        },
+      }
+    );
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -19,6 +19,7 @@ import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import VoteCard from "./Vote.cards";
+import { getCookie, getCookies } from "cookies-next";
 
 // tags data
 const tags = [
@@ -43,6 +44,9 @@ type IQuestionCard = {
 const QuestionCard: FC<IQuestionCard> = ({ question }) => {
   // hooks
   const { t } = useTranslation();
+
+  const userData = getCookie("user");
+  const user = userData ? JSON.parse(userData) : null;
 
   const link = `/questions/${question.id} ${question.title}`.replace(/ /g, "-");
 
@@ -72,7 +76,11 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
           alt={question.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
-        <VoteCard rating={question.rating} />
+        <VoteCard
+          rating={question.rating}
+          questionId={question.id}
+          user={user}
+        />
       </Grid>
       <Grid container item md={11} xs={12} sx={{ alignItems: "center" }}>
         <Grid container display="inline-flex" wrap="nowrap" gap={2}>
