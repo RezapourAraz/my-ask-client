@@ -1,12 +1,13 @@
 import React from "react";
 
 // Mui
-import { Box, Button, Grid, Input, Typography } from "@mui/material";
+import { Box, Button, Grid, Input, Typography, styled } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import TextEditorInput from "../inputs/TextEditor.inputs";
 import { useBlogForm } from "@/lib/formik.hooks";
 import { addBlog } from "@/redux/blogs/blogss.services";
 import { useRouter } from "next/router";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const AddPostSection = ({ user }: { user: any }) => {
   // hooks
@@ -95,7 +96,7 @@ const AddPostSection = ({ user }: { user: any }) => {
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
-              {t("category")}{" "}
+              {t("thumbnail")}{" "}
               <Typography
                 color="primary.main"
                 variant="subtitle2"
@@ -106,13 +107,23 @@ const AddPostSection = ({ user }: { user: any }) => {
             </Typography>
           </Grid>
           <Grid my={1} item md={10}>
-            <Input
-              type="file"
-              sx={{ bgcolor: "grey.300" }}
-              fullWidth
-              name="thumbnail"
-              onChange={handleFileChange}
-            />
+            <Button
+              component="label"
+              variant="contained"
+              sx={{
+                width: "100%",
+                p: 2.2,
+                bgcolor: "grey.300",
+                boxShadow: 0,
+                ":hover": { bgcolor: "grey.300", boxShadow: 0 },
+              }}
+            >
+              <VisuallyHiddenInput
+                type="file"
+                name="thumbnail"
+                onChange={handleFileChange}
+              />
+            </Button>
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
@@ -147,5 +158,17 @@ const AddPostSection = ({ user }: { user: any }) => {
     </Box>
   );
 };
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 export default AddPostSection;

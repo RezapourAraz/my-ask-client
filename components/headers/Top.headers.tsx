@@ -45,7 +45,7 @@ const TopHeader = ({ user }: any) => {
   const fetchSearch = async () => {
     const data = await searchServices({ user, q: searchText });
 
-    setResult(data.data);
+    setResult(data?.data);
     setOpenSearchBox(true);
   };
 
