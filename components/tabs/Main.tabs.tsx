@@ -44,6 +44,8 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   const searchParams = useSearchParams();
   const { replace, pathname } = useRouter();
 
+  console.log(data);
+
   // handlers
   const handleChangePagination = (value: number) => {
     const params = new URLSearchParams(searchParams);
@@ -61,6 +63,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
     if (value === "answers") params.set("filter", "answers");
     if (value === "no-answers") params.set("filter", "no-answers");
     if (value === "visited") params.set("filter", "visited");
+    params.set("page", String(1));
 
     replace(`${pathname}?${params.toString()}`);
     setSelectedTab(value);

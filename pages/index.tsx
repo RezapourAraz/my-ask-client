@@ -94,9 +94,7 @@ export async function getServerSideProps({
   const reputations = await getHighestUserPoint({ user });
   const stats = await getStats({ user });
 
-  // console.log(questions);
-
-  if (!questions) {
+  if (!questions || !tags || !reputations || !stats) {
     return {
       notFound: true,
     };
