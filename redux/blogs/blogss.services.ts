@@ -41,3 +41,23 @@ export const addBlog = async ({ user, body }: any) => {
     console.log(err);
   }
 };
+
+export const getBlogById = async ({ id, user }: any) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/blogs/${id}`,
+      user
+        ? {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+              RefreshToken: user?.refreshToken,
+            },
+          }
+        : undefined
+    );
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

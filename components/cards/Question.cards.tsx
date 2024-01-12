@@ -1,7 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 // Mui
-import { Avatar, Box, Button, Grid, NoSsr, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  Input,
+  NoSsr,
+  Typography,
+} from "@mui/material";
 
 // Icons
 import { MdOutlineQuestionMark } from "react-icons/md";
@@ -10,6 +18,7 @@ import { FaEye } from "react-icons/fa";
 
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import VoteCard from "./Vote.cards";
 
 // tags data
 const tags = [
@@ -37,6 +46,9 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
 
   const link = `/questions/${question.id} ${question.title}`.replace(/ /g, "-");
 
+  // states
+  const [openReport, setOpenReport] = useState(false);
+
   return (
     <Grid
       container
@@ -48,12 +60,19 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         my: 2,
       }}
     >
-      <Grid container item md={1} xs={12}>
+      <Grid
+        container
+        item
+        md={1}
+        xs={12}
+        sx={{ alignItems: "center", justifyContent: "center" }}
+      >
         <Avatar
           src={question.profile}
           alt={question.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
+        <VoteCard rating={question.rating} />
       </Grid>
       <Grid container item md={11} xs={12} sx={{ alignItems: "center" }}>
         <Grid container display="inline-flex" wrap="nowrap" gap={2}>
@@ -111,6 +130,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
                 p: 0.1,
                 fontSize: { xs: 12, md: 14 },
               }}
+              onClick={() => setOpenReport(true)}
             >
               {t("report")}
             </Button>
@@ -136,6 +156,31 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
             />
           </NoSsr>
         </Grid>
+        {openReport && (
+          <Box sx={{ my: 1, width: "100%" }}>
+            <Box>
+              <Typography variant="caption">{t("report_question")}</Typography>
+            </Box>
+            <Box my={1}>
+              <Input
+                fullWidth
+                sx={{ bgcolor: "grey.300", px: 1, color: "grey.800" }}
+              />
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Button
+                variant="contained"
+                sx={{ color: "common.white", boxShadow: 0 }}
+                onClick={() => setOpenReport(false)}
+              >
+                {t("report")}
+              </Button>
+              <Button onClick={() => setOpenReport(false)}>
+                {t("cancel")}
+              </Button>
+            </Box>
+          </Box>
+        )}
         <Grid container item md={12} xs={12} sx={{ mt: 2, gap: 2 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <FaStar style={{ color: "yellow" }} />

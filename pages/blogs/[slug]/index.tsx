@@ -5,29 +5,38 @@ import MainLayout from "@/components/layout/Main.layout";
 import AnswersSection from "@/components/sections/Answers.sections";
 import RelatedQuestionsSection from "@/components/sections/RelatedQuestions.sections";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
+import { getBlogById } from "@/redux/blogs/blogss.services";
+import { getTags } from "@/redux/tags/tags.services";
+import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { Grid } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const BlogDetail = ({ user }: any) => {
+const BlogDetail = ({ user, blog, reputations, tags, stats }: any) => {
   return (
     <>
       <Head>
-        <title>My Ask</title>
+        <title>{blog.title}</title>
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
         user={user}
-        sidebar={<MainSidebar />}
+        sidebar={
+          <MainSidebar
+            reputations={reputations.data}
+            tags={tags.data}
+            stats={stats.data}
+          />
+        }
         mainBanner={<QuestionBanner title="Blogs" />}
       >
         <Grid my={6}>
-          <BlogCard />
-          <RelatedQuestionsSection />
-          <AnswersSection />
+          <BlogCard blog={blog} />
+          {/* <RelatedQuestionsSection /> */}
+          {/* <AnswersSection /> */}
           <LeaveAnswerCard />
         </Grid>
       </MainLayout>
@@ -42,15 +51,34 @@ export async function getServerSideProps({
   req,
   res,
   locale,
+  params,
   ...ctx
 }: any) {
   const user: any = hasCookie("user", { req, res })
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
+  const { slug } = params;
+  const id = slug.split("-")[0];
+
+  const blog = await getBlogById({ user, id });
+  const stats = await getStats({ user });
+  const tags = await getTags({ user });
+  const reputations = await getHighestUserPoint({ user });
+
+  if (!blog) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       user,
+      blog: blog.data,
+      reputations,
+      tags,
+      stats,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };
