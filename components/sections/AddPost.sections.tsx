@@ -16,10 +16,12 @@ const AddPostSection = ({ user }: { user: any }) => {
 
   // states
   const [attachment, setAttachment] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(false);
 
   // handler
   const submitHandler = async () => {
     try {
+      setLoading(true);
       const formData = new FormData();
 
       formData.append("title", values.title);
@@ -33,14 +35,13 @@ const AddPostSection = ({ user }: { user: any }) => {
       const data = await addBlog({ user, body: formData });
 
       if (data.code === 201) {
+        setLoading(false);
         setFieldValue("title", "");
         setFieldValue("content", "");
         setAttachment(null);
 
         router.push("/blogs");
       }
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -144,14 +145,18 @@ const AddPostSection = ({ user }: { user: any }) => {
             />
           </Grid>
           <Grid md={12} my={3}>
-            <Button
+            <LoadingButton
               fullWidth
+              loading={loading}
               variant="contained"
               type="submit"
-              sx={{ color: "common.white" }}
+              sx={{
+                color: "common.white",
+                ".MuiLoadingButton-loadingIndicator": { color: "primary.main" },
+              }}
             >
               {t("publish_blog")}
-            </Button>
+            </LoadingButton>
           </Grid>
         </Grid>
       </Grid>
