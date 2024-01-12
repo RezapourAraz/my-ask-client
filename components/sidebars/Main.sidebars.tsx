@@ -6,12 +6,12 @@ import StatsCard from "../cards/Stats.cards";
 import HighestPointsSection from "../sections/HighestPoints.sections";
 import TagsSection from "../sections/Tags.sections";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const MainSidebar = ({ tags, reputations, stats }: any) => {
   // hooks
   const { t } = useTranslation();
-
-  console.log(tags);
+  const router = useRouter();
 
   return (
     <Grid sx={{ p: 1, position: "sticky", top: -30, mb: 1.5 }}>
@@ -20,6 +20,7 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
           variant="contained"
           fullWidth
           sx={{ color: "common.white", my: 5, boxShadow: 0 }}
+          onClick={() => router.push("/ask-question")}
         >
           {t("ask_now")}
         </Button>

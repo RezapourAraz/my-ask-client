@@ -57,6 +57,7 @@ const MainBanner = () => {
                       boxShadow: 0,
                     },
                   }}
+                  onClick={() => router.push("/contact-us")}
                 >
                   {t("about_us")}
                 </Button>

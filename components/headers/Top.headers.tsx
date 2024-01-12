@@ -40,13 +40,12 @@ const TopHeader = ({ user }: any) => {
   // handlers
   const onChangeHandler = (e: any) => {
     setSearchText(e.target.value);
+    setOpenSearchBox(true);
   };
 
   const fetchSearch = async () => {
     const data = await searchServices({ user, q: searchText });
-
     setResult(data?.data);
-    setOpenSearchBox(true);
   };
 
   useEffect(() => {
