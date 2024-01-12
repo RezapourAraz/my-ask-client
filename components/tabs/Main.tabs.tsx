@@ -42,9 +42,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
   // hooks
   const { t } = useTranslation();
   const searchParams = useSearchParams();
-  const { replace, pathname } = useRouter();
-
-  console.log(data);
+  const { replace, pathname, locale } = useRouter();
 
   // handlers
   const handleChangePagination = (value: number) => {
@@ -101,7 +99,13 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
       <RecentQuestionsSection data={data.data} />
 
       {data.count / data.pageSize > 1 && (
-        <Grid container sx={{ justifyContent: "flex-end", my: 5 }}>
+        <Grid
+          container
+          sx={{
+            justifyContent: "flex-end",
+            my: 5,
+          }}
+        >
           <Pagination
             count={Math.ceil(data.count / data.pageSize)}
             variant="text"
@@ -120,6 +124,7 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
               ".MuiPaginationItem-previousNext": {
                 bgcolor: "grey.500",
                 color: "common.black",
+                rotate: locale === "fa" ? "180deg" : "initial",
               },
             }}
           />
