@@ -1,3 +1,4 @@
+import { IUser } from "@/components/cards/Profile.cards";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -88,6 +89,44 @@ export const useRegisterFrom = (submitHandler: any) => {
   return useFormik({
     initialValues,
     validationSchema: schema,
+    onSubmit: submitHandler,
+    validateOnChange: false,
+  });
+};
+
+export const useProfileForm = (submitHandler: any, user: IUser) => {
+  const initialValues = user
+    ? {
+        about: user.about,
+        birth: user.birth,
+        city: user.city,
+        country: user.country,
+        email: user.email,
+        first_name: user.first_name,
+        gender: user.gender,
+        id: user.id,
+        last_name: user.last_name,
+        phone: user.phone,
+        profile: user.profile,
+        username: user.username,
+      }
+    : {
+        about: "",
+        birth: "",
+        city: "",
+        country: "",
+        email: "",
+        first_name: "",
+        gender: "",
+        id: "",
+        last_name: "",
+        phone: "",
+        profile: "",
+        username: "",
+      };
+
+  return useFormik({
+    initialValues,
     onSubmit: submitHandler,
     validateOnChange: false,
   });

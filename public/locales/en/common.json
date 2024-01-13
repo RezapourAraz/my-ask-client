@@ -109,5 +109,9 @@
   "follow_user": "Each time when a user follows you ( 1 )",
   "badges_and_points": "Badges and Points",
   "report_question": "Please briefly explain why you feel this question should be reported",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "birth": "Birthday",
+  "submit": "Submit"
 }

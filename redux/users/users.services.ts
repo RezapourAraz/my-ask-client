@@ -59,3 +59,32 @@ export const userProfile = async ({ user, userId }: any) => {
     console.log(err);
   }
 };
+
+export const userProfileUpdate = async ({
+  user,
+  body,
+  userId,
+}: {
+  user: any;
+  body: any;
+  userId: any;
+}) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/users/profile/${userId}`,
+      body,
+      user
+        ? {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+              RefreshToken: user?.refreshToken,
+            },
+          }
+        : undefined
+    );
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

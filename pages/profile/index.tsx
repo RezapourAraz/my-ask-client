@@ -13,6 +13,7 @@ import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getTags } from "@/redux/tags/tags.services";
 import { getHighestUserPoint, userProfile } from "@/redux/users/users.services";
+import ProfileCard from "@/components/cards/Profile.cards";
 
 const Profile = ({ userData, reputations, tags }: any) => {
   const user = userData.data;
@@ -21,7 +22,7 @@ const Profile = ({ userData, reputations, tags }: any) => {
     <>
       <Head>
         <title>{`${user.username}`}</title>
-        <meta name="description" content="Soalitoo App" />
+        <meta name="description" content="Soalitoo App user profile" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
@@ -29,7 +30,7 @@ const Profile = ({ userData, reputations, tags }: any) => {
         mainBanner={<QuestionBanner title={user?.username} />}
       >
         <Grid my={6}>
-          <UserCard user={user} />
+          <ProfileCard user={user} />
           <UserStatsSection user={user} />
         </Grid>
       </MainLayout>
