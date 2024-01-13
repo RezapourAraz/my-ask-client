@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Components
 import MainLayout from "@/components/layout/Main.layout";
@@ -33,41 +33,50 @@ const Question = ({
   tags,
   user,
 }: any) => {
+  // state
+  const [hydrated, setHydrated] = useState(false);
+
+  // handler
   const updateViews = async () => {
     await updateQuestionViews({ user, id: question.data.id });
   };
 
   useEffect(() => {
+    setHydrated(true);
     updateViews();
   }, []);
 
   return (
-    <>
-      <Head>
-        <title>{question.data.title}</title>
-        <meta name="description" content={question.data.content} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <MainLayout
-        user={user}
-        mainBanner={<QuestionBanner title={question.data.title} />}
-        sidebar={
-          <MainSidebar
-            stats={stats.data}
-            tags={tags.relatedTags}
-            reputations={reputations.data}
-          />
-        }
-      >
-        <Grid my={6}>
-          <QuestionCard question={question.data} />
-          {answers.data.length > 0 && <AnswersSection answers={answers.data} />}
+    hydrated && (
+      <>
+        <Head>
+          <title>{question.data.title}</title>
+          <meta name="description" content={question.data.content} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <MainLayout
+          user={user}
+          mainBanner={<QuestionBanner title={question.data.title} />}
+          sidebar={
+            <MainSidebar
+              stats={stats.data}
+              tags={tags.relatedTags}
+              reputations={reputations.data}
+            />
+          }
+        >
+          <Grid my={6}>
+            <QuestionCard question={question.data} />
+            {answers.data.length > 0 && (
+              <AnswersSection answers={answers.data} />
+            )}
 
-          {user ? <LeaveAnswerCard /> : <InfoForLoginCard />}
-          <RelatedQuestionsSection related={question.relatedQuestions} />
-        </Grid>
-      </MainLayout>
-    </>
+            {user ? <LeaveAnswerCard /> : <InfoForLoginCard />}
+            <RelatedQuestionsSection related={question.relatedQuestions} />
+          </Grid>
+        </MainLayout>
+      </>
+    )
   );
 };
 
@@ -93,7 +102,7 @@ export async function getServerSideProps({
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
 
-  if (!question || !answers) {
+  if (!question || !answers || !reputations || !tags || !stats) {
     return {
       notFound: true,
     };

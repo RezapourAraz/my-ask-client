@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 // Mui
 import {
@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import VoteCard from "./Vote.cards";
 import { getCookie, getCookies } from "cookies-next";
+import { useRouter } from "next/router";
 
 // tags data
 const tags = [
@@ -44,11 +45,15 @@ type IQuestionCard = {
 const QuestionCard: FC<IQuestionCard> = ({ question }) => {
   // hooks
   const { t } = useTranslation();
+  const { query } = useRouter();
 
   const userData = getCookie("user");
   const user = userData ? JSON.parse(userData) : null;
 
   const link = `/questions/${question.id} ${question.title}`.replace(/ /g, "-");
+  const { slug } = query;
+  // @ts-ignore
+  const id = slug ? slug.split("-")[0] : undefined;
 
   // states
   const [openReport, setOpenReport] = useState(false);
@@ -76,11 +81,13 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
           alt={question.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
-        <VoteCard
-          rating={question.rating}
-          questionId={question.id}
-          user={user}
-        />
+        {id && (
+          <VoteCard
+            rating={question.rating}
+            questionId={question.id}
+            user={user}
+          />
+        )}
       </Grid>
       <Grid container item md={11} xs={12} sx={{ alignItems: "center" }}>
         <Grid container display="inline-flex" wrap="nowrap" gap={2}>

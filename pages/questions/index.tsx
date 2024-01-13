@@ -51,21 +51,18 @@ export async function getServerSideProps({
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
-  //   const answers = await getQuestionAnswers({ id, user });
   const stats = await getStats({ user });
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
 
-  //   if (!question || !answers) {
-  //     return {
-  //       notFound: true,
-  //     };
-  //   }
+  if (!reputations || !tags || !stats) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      //   question,
-      //   answers,
       stats,
       tags,
       reputations,

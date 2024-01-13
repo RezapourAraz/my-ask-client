@@ -13,6 +13,10 @@ import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 // import nextI18NextConfig from "./../next-i18next.config";
 
+import { Bounce, ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 const App = ({ Component, pageProps }: AppProps) => {
   const { locale } = useRouter();
   const theme = useTheme(locale);
@@ -22,6 +26,18 @@ const App = ({ Component, pageProps }: AppProps) => {
       <StoreProvider>
         <ThemeProvider theme={theme}>
           <NextNProgress color="#313338" />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <Component {...pageProps} />
         </ThemeProvider>
       </StoreProvider>
