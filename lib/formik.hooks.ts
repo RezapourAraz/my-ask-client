@@ -63,3 +63,32 @@ export const useBlogForm = (submitHandler: any) => {
     validateOnChange: false,
   });
 };
+
+export const useRegisterFrom = (submitHandler: any) => {
+  const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  const schema = yup.object().shape({
+    username: yup.string().required("username is required"),
+    email: yup.string().email().required("email is required"),
+    password: yup
+      .string()
+      .min(8, "password must be min 8 character")
+      .required("password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")])
+      .required("Password confirmation is dose not match"),
+  });
+
+  return useFormik({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: submitHandler,
+    validateOnChange: false,
+  });
+};

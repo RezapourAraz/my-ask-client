@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Mui
 import {
@@ -14,6 +14,8 @@ import {
 // Icons
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { IoIosEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -21,11 +23,34 @@ import { t } from "i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 import { useTranslation } from "next-i18next";
+import { useRegisterFrom } from "@/lib/formik.hooks";
+import { IRegisterBody, registerUser } from "@/redux/auth/auth.services";
+import { toast } from "react-toastify";
 
 const Register = () => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
+
+  // states
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const submitHandler = async (values: IRegisterBody) => {
+    const data = await registerUser(values);
+
+    if (data.code === 201) {
+      toast.success("you registered successfully");
+      router.push("/auth/login");
+    } else {
+      toast.error("something went wrong!");
+    }
+  };
+
+  const { errors, values, handleChange, handleSubmit } =
+    useRegisterFrom(submitHandler);
+
+  console.log(errors);
 
   return (
     <>
@@ -41,6 +66,11 @@ const Register = () => {
           bgcolor: "secondary.main",
           alignItems: "center",
           justifyContent: "center",
+        }}
+        component="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
         }}
       >
         <Grid
@@ -61,9 +91,12 @@ const Register = () => {
           </Grid>
           <Grid my={3}>
             <Input
+              name="username"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder={t("username")}
+              value={values.username}
+              onChange={handleChange}
               startAdornment={
                 <InputAdornment position="start">
                   <FaUser />
@@ -73,9 +106,12 @@ const Register = () => {
           </Grid>
           <Grid my={3}>
             <Input
+              name="email"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder={t("email")}
+              value={values.email}
+              onChange={handleChange}
               startAdornment={
                 <InputAdornment position="start">
                   <MdEmail />
@@ -85,25 +121,50 @@ const Register = () => {
           </Grid>
           <Grid my={3}>
             <Input
+              name="password"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder={t("password")}
+              type={showPassword ? "text" : "password"}
+              value={values.password}
+              onChange={handleChange}
               startAdornment={
                 <InputAdornment position="start">
                   <RiLockPasswordFill />
+                </InputAdornment>
+              }
+              endAdornment={
+                <InputAdornment
+                  position="start"
+                  onClick={() => setShowPassword(!showPassword)}
+                  sx={{ cursor: "pointer" }}
+                >
+                  {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </InputAdornment>
               }
             />
           </Grid>
           <Grid mt={3}>
             <Input
+              name="confirmPassword"
               sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
               fullWidth
               placeholder={t("confirm_password")}
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
+              value={values.confirmPassword}
+              onChange={handleChange}
               startAdornment={
                 <InputAdornment position="start">
                   <RiLockPasswordFill />
+                </InputAdornment>
+              }
+              endAdornment={
+                <InputAdornment
+                  position="start"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  sx={{ cursor: "pointer" }}
+                >
+                  {showConfirmPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </InputAdornment>
               }
             />
@@ -125,6 +186,7 @@ const Register = () => {
             <Button
               variant="contained"
               fullWidth
+              type="submit"
               sx={{ boxShadow: 0, color: "common.white" }}
             >
               {t("signup")}
