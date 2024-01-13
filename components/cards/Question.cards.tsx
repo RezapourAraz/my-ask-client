@@ -83,7 +83,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         />
         {id && (
           <VoteCard
-            rating={question.rating}
+            rating={question.vote}
             questionId={question.id}
             user={user}
           />
