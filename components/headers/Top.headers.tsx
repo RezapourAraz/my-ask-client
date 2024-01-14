@@ -23,6 +23,9 @@ import { FaSearch } from "react-icons/fa";
 import { useTranslation } from "next-i18next";
 import { searchServices } from "@/redux/search/search.services";
 
+// loader
+import BeatLoader from "react-spinners/BeatLoader";
+
 // components
 
 const TopHeader = ({ user }: any) => {
@@ -34,18 +37,19 @@ const TopHeader = ({ user }: any) => {
   const [openSearchBox, setOpenSearchBox] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [result, setResult] = useState<[] | null>();
-
-  console.log(result);
+  const [loading, setLoading] = useState(true);
 
   // handlers
   const onChangeHandler = (e: any) => {
     setSearchText(e.target.value);
     setOpenSearchBox(true);
+    setLoading(true);
   };
 
   const fetchSearch = async () => {
     const data = await searchServices({ user, q: searchText });
     setResult(data?.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -187,25 +191,36 @@ const TopHeader = ({ user }: any) => {
                         overflowY: "auto",
                       }}
                     >
-                      {result && result.length > 0
-                        ? result?.map((item: any) => (
-                            <Box
-                              sx={{
-                                px: 1,
-                                py: 0.5,
-                                cursor: "pointer",
-                                ":hover": { bgcolor: "primary.light" },
-                              }}
+                      {loading ? (
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <BeatLoader size={15} color="#FE7361" />
+                        </Box>
+                      ) : result && result.length > 0 ? (
+                        result?.map((item: any) => (
+                          <Box
+                            sx={{
+                              px: 1,
+                              py: 0.5,
+                              cursor: "pointer",
+                              ":hover": { bgcolor: "primary.light" },
+                            }}
+                          >
+                            <Typography
+                              variant="subtitle2"
+                              color="primary.main"
                             >
-                              <Typography
-                                variant="subtitle2"
-                                color="primary.main"
-                              >
-                                {item?.title}
-                              </Typography>
-                            </Box>
-                          ))
-                        : t("search_not_found")}
+                              {item?.title}
+                            </Typography>
+                          </Box>
+                        ))
+                      ) : (
+                        t("search_not_found")
+                      )}
                     </Box>
                   )}
                 </Box>
