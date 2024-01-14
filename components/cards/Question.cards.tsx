@@ -106,8 +106,9 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         {id && (
           <VoteCard
             rating={question.vote}
-            questionId={question.id}
+            relId={question.id}
             user={user}
+            relName="question"
           />
         )}
       </Grid>

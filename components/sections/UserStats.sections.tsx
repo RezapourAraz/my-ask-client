@@ -82,7 +82,7 @@ const UserStatsSection = ({ user }: any) => {
             borderColor: "grey.300",
           }}
         >
-          User Stats
+          {t("user_stats")}
         </Typography>
       </Grid>
       <Grid item container md={12} sx={{ justifyContent: "space-between" }}>

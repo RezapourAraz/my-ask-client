@@ -11,12 +11,14 @@ import { toast } from "react-toastify";
 
 const VoteCard = ({
   rating,
-  questionId,
+  relId,
   user,
+  relName,
 }: {
   rating: any;
-  questionId: any;
+  relId: any;
   user: any;
+  relName: any;
 }) => {
   // states
   const [newRating, setNewRating] = useState(rating);
@@ -28,10 +30,10 @@ const VoteCard = ({
         user,
         body: {
           voteType: arg === "plus" ? 1 : 0,
-          relName: "question",
+          relName,
           userId: user?.id,
         },
-        relId: questionId,
+        relId,
       });
 
       if (data?.code === 201) {
@@ -43,7 +45,7 @@ const VoteCard = ({
         }
         toast.success(data.message);
       } else {
-        toast.error("You vote this question");
+        toast.error(`You vote this ${relName}`);
       }
     } else {
       toast.error("You must be login");

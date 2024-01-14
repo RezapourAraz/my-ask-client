@@ -6,11 +6,12 @@ import { Box, Grid, Typography } from "@mui/material";
 
 // icons
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const RelatedQuestionsSection = ({ related }: any) => {
+  // hooks
   const router = useRouter();
-
-  console.log(related);
+  const { t } = useTranslation();
 
   return (
     <Grid
@@ -24,7 +25,7 @@ const RelatedQuestionsSection = ({ related }: any) => {
     >
       <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
         <Typography variant="h3" color="primary.main">
-          Related questions
+          {t("related_questions")}
         </Typography>
       </Box>
       <Grid>

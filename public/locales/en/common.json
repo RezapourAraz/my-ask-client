@@ -116,5 +116,7 @@
   "submit": "Submit",
   "question_title": "Question Title",
   "publish_question": "Publish your question",
-  "thanks_report": "Thank you for reporting"
+  "thanks_report": "Thank you for reporting",
+  "related_questions": "Related Questions",
+  "user_stats": "User Stats"
 }

@@ -116,5 +116,7 @@
   "submit": "اعمال",
   "question_title": "عنوان سؤال",
   "publish_question": "انتشار سؤال",
-  "thanks_report": "متشکریم از گزارشتان"
+  "thanks_report": "متشکریم از گزارشتان",
+  "related_questions": "سوالات مرتبط",
+  "user_stats": "آمار کاربر"
 }

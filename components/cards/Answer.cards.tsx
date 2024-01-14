@@ -16,22 +16,39 @@ import { AiFillDislike } from "react-icons/ai";
 import { IoFlag } from "react-icons/io5";
 import { TbArrowBackUp } from "react-icons/tb";
 import { FaCheck } from "react-icons/fa6";
+import { pointMaker } from "@/helper/pointMaker";
+import VoteCard from "./Vote.cards";
+import { getCookie } from "cookies-next";
 
 const AnswerCard = ({ answer }: any) => {
+  // hooks
+  const userData = getCookie("user");
+  const user = userData ? JSON.parse(userData) : null;
+  // state
+  const userPoints = pointMaker(answer.reputation ? answer.reputation : 0);
+
+  console.log(answer);
+
   return (
     <Grid
       container
       sx={{
-        p: 2,
+        mt: 2,
         bgcolor: "common.white",
         borderBottom: 1,
         borderColor: "grey.300",
       }}
     >
-      <Grid item md={1}>
+      <Grid item md={1} container sx={{ justifyContent: "center" }}>
         <Avatar
           src={answer.profile}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
+        />
+        <VoteCard
+          user={user}
+          relId={answer.id}
+          relName="answer"
+          rating={answer.rating}
         />
       </Grid>
       <Grid container item md={11}>
@@ -43,11 +60,11 @@ const AnswerCard = ({ answer }: any) => {
             <Typography
               variant="caption"
               component="span"
-              bgcolor="success.main"
+              bgcolor={userPoints?.color}
               color="common.white"
               sx={{ px: 0.5, borderRadius: 1 }}
             >
-              Explainer
+              {userPoints?.name}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -88,7 +105,7 @@ const AnswerCard = ({ answer }: any) => {
         {/* <Grid item md={12} my={3}>
           <Typography variant="body2">{answer.content}</Typography>
         </Grid> */}
-        <Grid item md={12}>
+        <Grid item md={12} sx={{ mb: 2 }}>
           <Typography
             variant="h5"
             color="success.main"

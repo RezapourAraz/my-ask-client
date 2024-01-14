@@ -14,7 +14,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const BlogDetail = ({ user, blog, reputations, tags, stats }: any) => {
+const BlogDetail = ({ user, blog, reputations, stats }: any) => {
   return (
     <>
       <Head>
@@ -25,11 +25,7 @@ const BlogDetail = ({ user, blog, reputations, tags, stats }: any) => {
       <MainLayout
         user={user}
         sidebar={
-          <MainSidebar
-            reputations={reputations.data}
-            tags={tags.data}
-            stats={stats.data}
-          />
+          <MainSidebar reputations={reputations.data} stats={stats.data} />
         }
         mainBanner={<QuestionBanner title="Blogs" />}
       >
@@ -63,7 +59,6 @@ export async function getServerSideProps({
 
   const blog = await getBlogById({ user, id });
   const stats = await getStats({ user });
-  const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
 
   if (!blog) {
@@ -77,7 +72,6 @@ export async function getServerSideProps({
       user,
       blog: blog.data,
       reputations,
-      tags,
       stats,
       ...(await serverSideTranslations(locale as string, ["common"])),
     },

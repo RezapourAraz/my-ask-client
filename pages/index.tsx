@@ -40,40 +40,44 @@ export default function Home({
     query.filter ? String(query.filter) : "recent"
   );
 
+  const [hydration, setHydration] = useState(false);
+
   useEffect(() => {
     if (locale === "fa") {
       document.dir = "rtl";
     } else if (locale === "en") {
       document.dir = "ltr";
     }
+    setHydration(true);
   }, []);
 
-  return (
-    <>
-      <Head>
-        <title>{t("title")}</title>
-        <meta name="description" content="Travel App" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <MainLayout
-        user={user}
-        sidebar={
-          <MainSidebar
-            tags={questions.relatedTags}
-            reputations={reputations.data}
-            stats={stats.data}
+  if (hydration)
+    return (
+      <>
+        <Head>
+          <title>{t("title")}</title>
+          <meta name="description" content="Travel App" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <MainLayout
+          user={user}
+          sidebar={
+            <MainSidebar
+              tags={questions.relatedTags}
+              reputations={reputations.data}
+              stats={stats.data}
+            />
+          }
+          mainBanner={<MainBanner />}
+        >
+          <MainTab
+            data={questions}
+            setSelectedTab={setSelectedTab}
+            selectedTab={selectedTab as string}
           />
-        }
-        mainBanner={<MainBanner />}
-      >
-        <MainTab
-          data={questions}
-          setSelectedTab={setSelectedTab}
-          selectedTab={selectedTab as string}
-        />
-      </MainLayout>
-    </>
-  );
+        </MainLayout>
+      </>
+    );
 }
 
 export async function getServerSideProps({
