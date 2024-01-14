@@ -26,8 +26,6 @@ import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 
 // Cookie
-import { useCookies } from "react-cookie";
-import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
 import { setCookie } from "cookies-next";

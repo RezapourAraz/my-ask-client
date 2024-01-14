@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Mui
 import { Box } from "@mui/material";
@@ -15,32 +15,43 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { getTags } from "@/redux/tags/tags.services";
 import { getBlogs } from "@/redux/blogs/blogss.services";
+import { useTranslation } from "react-i18next";
 
 const Blogs = ({ user, reputations, tags, stats, blogs }: any) => {
-  return (
-    <>
-      <Head>
-        <title>Blogs</title>
-        <meta name="description" content="Blogs" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <MainLayout
-        user={user}
-        sidebar={
-          <MainSidebar
-            reputations={reputations.data}
-            tags={tags.data}
-            stats={stats.data}
-          />
-        }
-        mainBanner={<QuestionBanner title="Blogs" />}
-      >
-        {blogs.data.map((blog: any) => (
-          <BlogCard blog={blog} />
-        ))}
-      </MainLayout>
-    </>
-  );
+  // hooks
+  const { t } = useTranslation();
+  // states
+  const [hydration, setHydration] = useState(false);
+
+  useEffect(() => {
+    setHydration(true);
+  }, []);
+
+  if (hydration)
+    return (
+      <>
+        <Head>
+          <title>{t("blogs")}</title>
+          <meta name="description" content={t("blogs")} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <MainLayout
+          user={user}
+          sidebar={
+            <MainSidebar
+              reputations={reputations.data}
+              tags={tags.data}
+              stats={stats.data}
+            />
+          }
+          mainBanner={<QuestionBanner title="Blogs" />}
+        >
+          {blogs.data.map((blog: any) => (
+            <BlogCard blog={blog} />
+          ))}
+        </MainLayout>
+      </>
+    );
 };
 
 export default Blogs;

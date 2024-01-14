@@ -21,14 +21,9 @@ const routes = [
     route: "/ask-question",
   },
   {
-    id: 3,
-    name: "questions",
-    route: "/questions",
-  },
-  {
     id: 4,
-    name: "user",
-    route: "/user",
+    name: "users",
+    route: "/users",
   },
   {
     id: 6,

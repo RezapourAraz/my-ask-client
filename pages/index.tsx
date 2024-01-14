@@ -46,7 +46,7 @@ export default function Home({
     } else if (locale === "en") {
       document.dir = "ltr";
     }
-  });
+  }, []);
 
   return (
     <>

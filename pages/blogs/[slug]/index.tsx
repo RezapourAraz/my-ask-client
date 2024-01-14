@@ -19,7 +19,7 @@ const BlogDetail = ({ user, blog, reputations, tags, stats }: any) => {
     <>
       <Head>
         <title>{blog.title}</title>
-        <meta name="description" content="Travel App" />
+        <meta name="description" content={blog.title} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout
