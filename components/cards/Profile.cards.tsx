@@ -75,7 +75,7 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
   };
 
   // formik
-  const { values, handleSubmit, handleChange } = useProfileForm(
+  const { values, handleSubmit, handleChange, isSubmitting } = useProfileForm(
     submitHandler,
     user
   );
@@ -379,12 +379,10 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
         >
           <LoadingButton
             variant="contained"
-            type="submit"
             fullWidth
-            loading={loading}
-            sx={{
-              color: "common.white",
-            }}
+            type="submit"
+            sx={{ boxShadow: 0, color: "common.white" }}
+            loading={isSubmitting}
           >
             {t("submit")}
           </LoadingButton>
