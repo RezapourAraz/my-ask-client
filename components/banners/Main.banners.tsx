@@ -12,11 +12,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import { getCookie } from "cookies-next";
 
 const MainBanner = () => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
+
+  const userData = getCookie("user");
+
+  const user = userData ? JSON.stringify(userData) : null;
 
   return (
     <Grid sx={{ bgcolor: "primary.main", height: { xs: 550, md: 400 } }}>
@@ -61,22 +66,24 @@ const MainBanner = () => {
                 >
                   {t("about_us")}
                 </Button>
-                <Button
-                  variant="contained"
-                  sx={{
-                    bgcolor: "secondary.main",
-                    boxShadow: 0,
-                    color: "white",
-                    width: 120,
-                    ":hover": {
-                      bgcolor: "grey.800",
+                {!user && (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      bgcolor: "secondary.main",
                       boxShadow: 0,
-                    },
-                  }}
-                  onClick={() => router.push("/auth/login")}
-                >
-                  {t("join_now")}
-                </Button>
+                      color: "white",
+                      width: 120,
+                      ":hover": {
+                        bgcolor: "grey.800",
+                        boxShadow: 0,
+                      },
+                    }}
+                    onClick={() => router.push("/auth/login")}
+                  >
+                    {t("join_now")}
+                  </Button>
+                )}
               </Box>
             </Box>
           </Grid>

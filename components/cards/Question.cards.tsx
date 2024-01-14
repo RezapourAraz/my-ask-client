@@ -21,6 +21,8 @@ import { useTranslation } from "next-i18next";
 import VoteCard from "./Vote.cards";
 import { getCookie, getCookies } from "cookies-next";
 import { useRouter } from "next/router";
+import { reportService } from "@/redux/vote/vote.services";
+import { toast } from "react-toastify";
 
 // tags data
 const tags = [
@@ -57,6 +59,26 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
 
   // states
   const [openReport, setOpenReport] = useState(false);
+  const [content, setContent] = useState("");
+
+  // handler
+  const handleReport = async () => {
+    const body = {
+      userId: user.id,
+      relId: question.id,
+      relType: "question",
+      content,
+    };
+
+    const data = await reportService({ user, body });
+
+    console.log(data);
+
+    if (data?.code === 201) {
+      setOpenReport(false);
+      toast.success(t("thanks_report"));
+    }
+  };
 
   return (
     <Grid
@@ -129,6 +151,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
                 px: 1,
                 alignItems: "center",
                 width: "fit-content",
+                borderRadius: 1,
               }}
             >
               {/* <MdOutlineQuestionMark style={{ color: "white" }} /> */}
@@ -180,13 +203,17 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
               <Input
                 fullWidth
                 sx={{ bgcolor: "grey.300", px: 1, color: "grey.800" }}
+                value={content}
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <Button
                 variant="contained"
                 sx={{ color: "common.white", boxShadow: 0 }}
-                onClick={() => setOpenReport(false)}
+                onClick={handleReport}
               >
                 {t("report")}
               </Button>
