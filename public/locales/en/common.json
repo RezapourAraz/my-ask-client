@@ -118,5 +118,10 @@
   "publish_question": "Publish your question",
   "thanks_report": "Thank you for reporting",
   "related_questions": "Related Questions",
-  "user_stats": "User Stats"
+  "user_stats": "User Stats",
+  "publish": "Publish",
+  "comment": "Comment",
+  "leave_answer": "Leave An Answer",
+  "post_answer": "Post Your Answer",
+  "success_comment": "comment post successfully"
 }

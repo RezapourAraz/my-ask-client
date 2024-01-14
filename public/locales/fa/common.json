@@ -118,5 +118,10 @@
   "publish_question": "انتشار سؤال",
   "thanks_report": "متشکریم از گزارشتان",
   "related_questions": "سوالات مرتبط",
-  "user_stats": "آمار کاربر"
+  "user_stats": "آمار کاربر",
+  "publish": "انتشار",
+  "comment": "نظر",
+  "leave_answer": "جواب دهید",
+  "post_answer": "انتشار جواب",
+  "success_comment": "انتشار پست موفقیت آمیز بود"
 }

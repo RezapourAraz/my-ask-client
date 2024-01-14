@@ -6,11 +6,13 @@ import TextEditorInput from "../inputs/TextEditor.inputs";
 import { useRouter } from "next/router";
 import { addQuestionAnswer } from "@/redux/answers/answers.services";
 import { getCookie, getCookies } from "cookies-next";
+import { useTranslation } from "react-i18next";
 
 const LeaveAnswerCard = () => {
   // hooks
   const { query } = useRouter();
   const userCookie: any = getCookie("user");
+  const { t } = useTranslation();
 
   const user = userCookie && JSON.parse(userCookie);
 
@@ -45,7 +47,7 @@ const LeaveAnswerCard = () => {
     >
       <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
         <Typography variant="h3" color="primary.main">
-          Leave An Answer
+          {t("leave_answer")}
         </Typography>
       </Box>
       <Grid container mt={2}>
@@ -62,7 +64,7 @@ const LeaveAnswerCard = () => {
             sx={{ color: "common.white" }}
             onClick={handleAnswer}
           >
-            Post Your Answer
+            {t("post_answer")}
           </Button>
         </Grid>
       </Grid>

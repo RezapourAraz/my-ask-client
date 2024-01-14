@@ -23,10 +23,9 @@ import { getCookie } from "cookies-next";
 import { reportService } from "@/redux/vote/vote.services";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { commentServices } from "@/redux/comments/comments.services";
 
 const AnswerCard = ({ answer }: any) => {
-  console.log(answer);
-
   // hooks
   const userData = getCookie("user");
   const user = userData ? JSON.parse(userData) : null;
@@ -35,6 +34,7 @@ const AnswerCard = ({ answer }: any) => {
   const userPoints = pointMaker(answer.reputation ? answer.reputation : 0);
   const [openReport, setOpenReport] = useState(false);
   const [content, setContent] = useState("");
+  const [comment, setComment] = useState("");
 
   // handler
   const handleReport = async () => {
@@ -47,11 +47,24 @@ const AnswerCard = ({ answer }: any) => {
 
     const data = await reportService({ user, body });
 
-    console.log(data);
-
     if (data?.code === 201) {
       setOpenReport(false);
       toast.success(t("thanks_report"));
+    }
+  };
+
+  const handlePublishComment = async () => {
+    const body = {
+      relId: answer.id,
+      relType: "answer",
+      userId: user.id,
+      content: comment,
+    };
+
+    const data = await commentServices({ user, body });
+
+    if (data?.code === 201) {
+      toast.success(t("success_comment"));
     }
   };
 
@@ -124,14 +137,7 @@ const AnswerCard = ({ answer }: any) => {
             startIcon={<IoFlag style={{ margin: "0 0 0 5px" }} />}
             onClick={() => setOpenReport(true)}
           >
-            Report
-          </Button>
-          <Button
-            size="small"
-            variant="text"
-            startIcon={<TbArrowBackUp style={{ margin: "0 0 0 5px" }} />}
-          >
-            Replay
+            {t("report")}
           </Button>
         </Grid>
         <Grid item md={12} my={3}>
@@ -187,19 +193,54 @@ const AnswerCard = ({ answer }: any) => {
           </Typography>
         </Grid>
         <Grid item md={12} sx={{ mb: 2 }}>
-          <Box sx={{ borderTop: 2, borderColor: "grey.300", p: 1 }}>
-            <Typography variant="h5" color="grey.900">
-              {t("comments")}
-            </Typography>
+          <Box sx={{ p: 1, display: "flex", alignItems: "center" }}>
+            <Input
+              fullWidth
+              placeholder={t("comment")}
+              sx={{
+                px: 1,
+                color: "grey.900",
+                bgcolor: "grey.300",
+                border: 1,
+                borderColor: "primary.main",
+                borderTopRightRadius: 4,
+                borderBottomRightRadius: 4,
+              }}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <Button
+              variant="outlined"
+              sx={{
+                boxShadow: 0,
+                borderTopLeftRadius: 4,
+                borderBottomLeftRadius: 4,
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0,
+              }}
+              onClick={handlePublishComment}
+            >
+              {t("publish")}
+            </Button>
           </Box>
-          {answer?.comments?.map((comment: any) => (
-            <Box sx={{ p: 1, bgcolor: "grey.300", my: 0.1 }}>
-              <Typography variant="h6" color="grey.900">
-                {comment.content}
+        </Grid>
+
+        {answer?.comments.length ? (
+          <Grid item md={12} sx={{ mb: 2 }}>
+            <Box sx={{ borderTop: 2, borderColor: "grey.300", p: 1 }}>
+              <Typography variant="h5" color="grey.900">
+                {t("comments")}
               </Typography>
             </Box>
-          ))}
-        </Grid>
+            {answer?.comments?.map((comment: any) => (
+              <Box sx={{ p: 1, bgcolor: "grey.300", my: 0.1 }}>
+                <Typography variant="h6" color="grey.900">
+                  {comment.content}
+                </Typography>
+              </Box>
+            ))}
+          </Grid>
+        ) : undefined}
       </Grid>
     </Grid>
   );
