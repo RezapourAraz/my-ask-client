@@ -189,6 +189,7 @@ const TopHeader = ({ user }: any) => {
                         borderRadius: 1,
                         maxHeight: 200,
                         overflowY: "auto",
+                        zIndex: 1000,
                       }}
                     >
                       {loading ? (
@@ -201,23 +202,31 @@ const TopHeader = ({ user }: any) => {
                           <BeatLoader size={15} color="#FE7361" />
                         </Box>
                       ) : result && result.length > 0 ? (
-                        result?.map((item: any) => (
-                          <Box
-                            sx={{
-                              px: 1,
-                              py: 0.5,
-                              cursor: "pointer",
-                              ":hover": { bgcolor: "primary.light" },
-                            }}
-                          >
-                            <Typography
-                              variant="subtitle2"
-                              color="primary.main"
+                        result?.map((item: any) => {
+                          const link =
+                            `/questions/${item.id} ${item.title}`.replace(
+                              / /g,
+                              "-"
+                            );
+                          return (
+                            <Box
+                              sx={{
+                                px: 1,
+                                py: 0.5,
+                                cursor: "pointer",
+                                ":hover": { bgcolor: "primary.light" },
+                              }}
+                              onClick={() => router.push(link)}
                             >
-                              {item?.title}
-                            </Typography>
-                          </Box>
-                        ))
+                              <Typography
+                                variant="subtitle2"
+                                color="primary.main"
+                              >
+                                {item?.title}
+                              </Typography>
+                            </Box>
+                          );
+                        })
                       ) : (
                         t("search_not_found")
                       )}
