@@ -25,6 +25,8 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 const AnswerCard = ({ answer }: any) => {
+  console.log(answer);
+
   // hooks
   const userData = getCookie("user");
   const user = userData ? JSON.parse(userData) : null;
@@ -63,17 +65,24 @@ const AnswerCard = ({ answer }: any) => {
         borderColor: "grey.300",
       }}
     >
-      <Grid item md={1} container sx={{ justifyContent: "center" }}>
-        <Avatar
-          src={answer.profile}
-          sx={{ bgcolor: "primary.main", color: "common.white" }}
-        />
-        <VoteCard
-          user={user}
-          relId={answer.id}
-          relName="answer"
-          rating={answer.vote}
-        />
+      <Grid
+        item
+        md={1}
+        container
+        sx={{ justifyContent: "center", alignItems: "start" }}
+      >
+        <Grid container sx={{ justifyContent: "center", gap: 2 }}>
+          <Avatar
+            src={answer.profile}
+            sx={{ bgcolor: "primary.main", color: "common.white" }}
+          />
+          <VoteCard
+            user={user}
+            relId={answer.id}
+            relName="answer"
+            rating={answer.vote}
+          />
+        </Grid>
       </Grid>
       <Grid container item md={11}>
         <Grid item md={9}>
@@ -176,6 +185,20 @@ const AnswerCard = ({ answer }: any) => {
             <FaCheck />
             Best Answer
           </Typography>
+        </Grid>
+        <Grid item md={12} sx={{ mb: 2 }}>
+          <Box sx={{ borderTop: 2, borderColor: "grey.300", p: 1 }}>
+            <Typography variant="h5" color="grey.900">
+              {t("comments")}
+            </Typography>
+          </Box>
+          {answer?.comments?.map((comment: any) => (
+            <Box sx={{ p: 1, bgcolor: "grey.300", my: 0.1 }}>
+              <Typography variant="h6" color="grey.900">
+                {comment.content}
+              </Typography>
+            </Box>
+          ))}
         </Grid>
       </Grid>
     </Grid>
