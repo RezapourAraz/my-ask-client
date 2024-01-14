@@ -92,11 +92,7 @@ const BadgesAndPoints = ({ user, reputations, stats, tags }: any) => {
       <MainLayout
         user={user}
         sidebar={
-          <MainSidebar
-            reputations={reputations.data}
-            stats={stats.data}
-            tags={tags.data}
-          />
+          <MainSidebar reputations={reputations.data} stats={stats.data} />
         }
       >
         <Grid sx={{ px: 2 }}>

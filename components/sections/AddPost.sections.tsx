@@ -44,6 +44,7 @@ const AddPostSection = ({ user }: { user: any }) => {
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -144,16 +145,17 @@ const AddPostSection = ({ user }: { user: any }) => {
               onChange={(value: string) => setFieldValue("content", value)}
             />
           </Grid>
-          <Grid md={12} my={3}>
+          <Grid
+            md={12}
+            my={3}
+            sx={{ ".Mui-disabled": { bgcolor: "grey.800" } }}
+          >
             <LoadingButton
-              fullWidth
-              loading={loading}
               variant="contained"
+              fullWidth
               type="submit"
-              sx={{
-                color: "common.white",
-                ".MuiLoadingButton-loadingIndicator": { color: "primary.main" },
-              }}
+              sx={{ boxShadow: 0, color: "common.white" }}
+              loading={loading}
             >
               {t("publish_blog")}
             </LoadingButton>

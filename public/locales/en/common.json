@@ -113,5 +113,7 @@
   "first_name": "First Name",
   "last_name": "Last Name",
   "birth": "Birthday",
-  "submit": "Submit"
+  "submit": "Submit",
+  "question_title": "Question Title",
+  "publish_question": "Publish your question"
 }

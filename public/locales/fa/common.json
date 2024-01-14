@@ -113,5 +113,7 @@
   "first_name": "نام",
   "last_name": "نام خانوادگی",
   "birth": "تولد",
-  "submit": "اعمال"
+  "submit": "اعمال",
+  "question_title": "عنوان سؤال",
+  "publish_question": "انتشار سؤال"
 }

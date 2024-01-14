@@ -13,11 +13,13 @@ import { useAskQuestionForm } from "@/lib/formik.hooks";
 import { askQuestion } from "@/redux/questions/question.services";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const AskQuestionSection = ({ tags }: any) => {
   // hooks
   const userCookie: any = getCookie("user");
   const router = useRouter();
+  const { t } = useTranslation();
 
   const user = userCookie && JSON.parse(userCookie);
 
@@ -56,7 +58,7 @@ const AskQuestionSection = ({ tags }: any) => {
       <Grid sx={{ my: 6, p: 2, bgcolor: "common.white" }}>
         <Box sx={{ pb: 2, borderBottom: 2, borderColor: "grey.300" }}>
           <Typography variant="h3" color="primary.main">
-            Ask Question
+            {t("ask_question")}
           </Typography>
         </Box>
         <Grid
@@ -70,7 +72,7 @@ const AskQuestionSection = ({ tags }: any) => {
         >
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
-              Question Title
+              {t("question_title")}
               <Typography
                 color="primary.main"
                 variant="subtitle2"
@@ -96,7 +98,7 @@ const AskQuestionSection = ({ tags }: any) => {
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
             <Typography variant="subtitle2">
-              Content
+              {t("content")}
               <Typography
                 color="primary.main"
                 variant="subtitle2"
@@ -117,7 +119,7 @@ const AskQuestionSection = ({ tags }: any) => {
             </Typography>
           </Grid>
           <Grid my={1} item md={2} container alignItems="center">
-            <Typography variant="subtitle2">Tags</Typography>
+            <Typography variant="subtitle2">{t("tags")}</Typography>
           </Grid>
           <Grid my={1} item md={10}>
             <MultiSelectInput
@@ -130,7 +132,11 @@ const AskQuestionSection = ({ tags }: any) => {
               Please choose suitable Keywords Ex : Javascript , Node js
             </Typography>
           </Grid>
-          <Grid md={12} my={3}>
+          <Grid
+            md={12}
+            my={3}
+            sx={{ ".Mui-disabled": { bgcolor: "grey.800" } }}
+          >
             <LoadingButton
               type="submit"
               fullWidth
@@ -143,17 +149,8 @@ const AskQuestionSection = ({ tags }: any) => {
                 },
               }}
             >
-              Publish Your Question
+              {"publish_question"}
             </LoadingButton>
-
-            {/* <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ color: "common.white" }}
-            >
-              Publish Your Question
-            </Button> */}
           </Grid>
         </Grid>
       </Grid>

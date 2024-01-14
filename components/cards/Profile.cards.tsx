@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 // Mui
 import {
@@ -18,6 +18,7 @@ import { useProfileForm } from "@/lib/formik.hooks";
 import { userProfileUpdate } from "@/redux/users/users.services";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 // type
 export type IUser = {
@@ -55,8 +56,12 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
 
   const userFromCookie = userData ? JSON.stringify(userData) : null;
 
+  // state
+  const [loading, setLoading] = useState(false);
+
   // handler
   const submitHandler = async (values: any) => {
+    setLoading(true);
     const data = await userProfileUpdate({
       user: userFromCookie,
       body: values,
@@ -65,6 +70,7 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
 
     if (data.code === 200) {
       toast.success("update profile successfully");
+      setLoading(false);
     }
   };
 
@@ -363,15 +369,25 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
             sx={{ color: "common.black", bgcolor: "grey.300", px: 1 }}
           />
         </Grid>
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <Button
+        <Grid
+          item
+          xs={12}
+          sx={{
+            mt: 2,
+            ".Mui-disabled": { bgcolor: "grey.800" },
+          }}
+        >
+          <LoadingButton
             variant="contained"
             type="submit"
             fullWidth
-            sx={{ color: "common.white" }}
+            loading={loading}
+            sx={{
+              color: "common.white",
+            }}
           >
             {t("submit")}
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </Grid>

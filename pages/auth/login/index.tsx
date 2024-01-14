@@ -31,6 +31,7 @@ import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
 import { setCookie } from "cookies-next";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const Login = () => {
   // hooks
@@ -40,19 +41,23 @@ const Login = () => {
 
   // states
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // handlers
   const handleOnSubmit = async () => {
     try {
+      setLoading(true);
       const data = await login(values).unwrap();
       if (data.code === 200) {
         // dispatch(setUser(data?.data));
 
+        setLoading(false);
         setCookie("user", data.data);
         router.push("/");
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -159,15 +164,16 @@ const Login = () => {
             <Checkbox />
             <Typography variant="h6">{t("remember_me")}</Typography>
           </Grid>
-          <Grid>
-            <Button
+          <Grid sx={{ ".Mui-disabled": { bgcolor: "grey.800" } }}>
+            <LoadingButton
               variant="contained"
               fullWidth
               type="submit"
               sx={{ boxShadow: 0, color: "common.white" }}
+              loading={loading}
             >
               {t("login")}
-            </Button>
+            </LoadingButton>
           </Grid>
         </Grid>
       </Grid>

@@ -30,7 +30,7 @@ const AddPost = ({ user, tags, reputations, stats }: any) => {
         user={user}
         sidebar={
           <MainSidebar
-            tags={tags.data}
+            // tags={tags.data}
             reputations={reputations.data}
             stats={stats.data}
           />
