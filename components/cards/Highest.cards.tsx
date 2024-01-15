@@ -24,7 +24,7 @@ const HighestCard = ({ reputation }: any) => {
         sx={{ alignContent: "center", mt: { xs: 1, md: 0 } }}
       >
         <Avatar
-          src={reputation.profile}
+          src={`https://arazdev.storage.iran.liara.space/api/v1/users/${reputation.profile}`}
           alt={reputation.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />

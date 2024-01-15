@@ -99,7 +99,7 @@ const QuestionCard: FC<IQuestionCard> = ({ question }) => {
         sx={{ alignItems: "center", justifyContent: "center" }}
       >
         <Avatar
-          src={question.profile}
+          src={`https://arazdev.storage.iran.liara.space/api/v1/users/${question.profile}`}
           alt={question.username}
           sx={{ bgcolor: "primary.main", color: "common.white" }}
         />
