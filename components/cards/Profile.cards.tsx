@@ -19,6 +19,9 @@ import { userProfileUpdate } from "@/redux/users/users.services";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import LoadingButton from "@mui/lab/LoadingButton";
+import CustomFileInput from "../inputs/CustomFile.inputs";
+
+import { FaUserLarge } from "react-icons/fa6";
 
 // type
 export type IUser = {
@@ -54,23 +57,29 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
   const { t } = useTranslation();
   const userData = getCookie("user");
 
-  const userFromCookie = userData ? JSON.stringify(userData) : null;
+  const userFromCookie = userData ? JSON.parse(userData) : null;
+
+  console.log(userFromCookie);
 
   // state
-  const [loading, setLoading] = useState(false);
+  const [attachment, setAttachment] = useState<any>();
 
   // handler
   const submitHandler = async (values: any) => {
-    setLoading(true);
+    const formData = new FormData();
+
+    for (const key in values) {
+      if (key !== "file") formData.append(key, values[key]);
+      if (attachment) formData.append("file", attachment);
+    }
     const data = await userProfileUpdate({
       user: userFromCookie,
-      body: values,
+      body: formData,
       userId: user.id,
     });
 
     if (data.code === 200) {
       toast.success("update profile successfully");
-      setLoading(false);
     }
   };
 
@@ -99,7 +108,17 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
           p: 2,
         }}
       >
-        <Avatar sx={{ width: 70, height: 70 }} />
+        <CustomFileInput
+          attachment={attachment}
+          setAttachment={setAttachment}
+          name="file"
+          icon={<FaUserLarge style={{ fontSize: 32, color: "grey" }} />}
+          hasImage={
+            user.profile
+              ? `https://arazdev.storage.iran.liara.space/api/v1/users/${user.profile}`
+              : false
+          }
+        />
       </Grid>
       <Grid
         container

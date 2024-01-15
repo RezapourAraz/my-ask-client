@@ -76,8 +76,9 @@ export const userProfileUpdate = async ({
       user
         ? {
             headers: {
-              Authorization: `Bearer ${user?.accessToken}`,
+              authorization: `Bearer ${user?.accessToken}`,
               RefreshToken: user?.refreshToken,
+              "Content-Type": "multipart/form-data",
             },
           }
         : undefined
