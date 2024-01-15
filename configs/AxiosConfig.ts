@@ -1,7 +1,7 @@
 import axios from "axios";
 import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
 
-const BASE_URL = "http://localhost:5005/api/v1";
+const BASE_URL = "https://api.soalitoo.ir/api/v1";
 
 // Create a new axios instance
 export const axiosInstance = axios.create({

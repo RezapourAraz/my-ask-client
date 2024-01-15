@@ -75,7 +75,9 @@ const BlogCard = ({ blog }: any) => {
             },
           }}
         >
-          <FaUserAlt />
+          <Box>
+            <FaUserAlt />
+          </Box>
           <Typography variant="h5" color="secondary.main">
             {blog.username}
           </Typography>
@@ -99,8 +101,10 @@ const BlogCard = ({ blog }: any) => {
             },
           }}
         >
-          <FaCalendar />
-          <Typography variant="h6" color="secondary.main">
+          <Box>
+            <FaCalendar />
+          </Box>
+          <Typography variant="caption" color="secondary.main">
             {new Date(blog?.created_at).toLocaleDateString("en-US")}
           </Typography>
         </Box>
@@ -114,8 +118,10 @@ const BlogCard = ({ blog }: any) => {
             },
           }}
         >
-          <FaComments />
-          <Typography variant="h5" color="secondary.main">
+          <Box>
+            <FaComments />
+          </Box>
+          <Typography variant="caption" color="secondary.main">
             2 comments
           </Typography>
         </Box>
@@ -129,8 +135,10 @@ const BlogCard = ({ blog }: any) => {
             },
           }}
         >
-          <FaEye />
-          <Typography variant="h5" color="secondary.main">
+          <Box>
+            <FaEye />
+          </Box>
+          <Typography variant="caption" color="secondary.main">
             {blog?.views} views
           </Typography>
         </Box>

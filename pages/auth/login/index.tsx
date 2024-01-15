@@ -145,10 +145,10 @@ const Login = () => {
             container
             sx={{ alignItems: "center", justifyContent: "space-between" }}
           >
-            <Typography variant="h6">
+            <Typography variant="caption" color="common.white">
               {t("don't_have_an_account")}{" "}
               <Typography
-                variant="h6"
+                variant="caption"
                 component="span"
                 sx={{ color: "primary.main", cursor: "pointer" }}
                 onClick={() => router.push("/auth/register")}
@@ -156,11 +156,15 @@ const Login = () => {
                 {t("register")}
               </Typography>
             </Typography>
-            <Typography variant="h6">{t("forgot_password")}</Typography>
+            <Typography variant="caption" color="common.white" my={1}>
+              {t("forgot_password")}
+            </Typography>
           </Grid>
           <Grid container my={1} sx={{ alignItems: "center" }}>
             <Checkbox />
-            <Typography variant="h6">{t("remember_me")}</Typography>
+            <Typography variant="caption" color="common.white">
+              {t("remember_me")}
+            </Typography>
           </Grid>
           <Grid sx={{ ".Mui-disabled": { bgcolor: "grey.800" } }}>
             <LoadingButton

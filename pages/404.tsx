@@ -8,7 +8,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const Page = ({ user }: any) => {
+const Page = () => {
   return (
     <>
       <Head>
@@ -16,7 +16,7 @@ const Page = ({ user }: any) => {
         <meta name="description" content="Travel App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayout user={user} mainBanner={<QuestionBanner title="Error 404" />}>
+      <MainLayout mainBanner={<QuestionBanner title="Error 404" />}>
         <Box my={6}>
           <Box sx={{}} textAlign="center">
             <Typography sx={{ fontSize: 180, color: "grey.300" }}>
@@ -25,7 +25,11 @@ const Page = ({ user }: any) => {
             <Typography sx={{ fontSize: 50 }}>Oops! Page Not Found</Typography>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
-            <Button variant="contained" sx={{ width: 200 }}>
+            <Button
+              variant="contained"
+              sx={{ width: 200 }}
+              onClick={() => window.history.back()}
+            >
               Home Page
             </Button>
           </Box>
@@ -37,21 +41,21 @@ const Page = ({ user }: any) => {
 
 export default Page;
 
-export async function getServerSideProps({
-  query,
-  req,
-  res,
-  locale,
-  ...ctx
-}: any) {
-  const user: any = hasCookie("user", { req, res })
-    ? JSON.parse(getCookie("user", { req, res }) as string)
-    : null;
+// export async function getServerSideProps({
+//   query,
+//   req,
+//   res,
+//   locale,
+//   ...ctx
+// }: any) {
+//   const user: any = hasCookie("user", { req, res })
+//     ? JSON.parse(getCookie("user", { req, res }) as string)
+//     : null;
 
-  return {
-    props: {
-      user,
-      ...(await serverSideTranslations(locale as string, ["common"])),
-    },
-  };
-}
+//   return {
+//     props: {
+//       user,
+//       ...(await serverSideTranslations(locale as string, ["common"])),
+//     },
+//   };
+// }

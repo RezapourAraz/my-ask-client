@@ -14,7 +14,7 @@ type IMainLayoutProps = {
   children: ReactNode;
   sidebar?: ReactNode;
   mainBanner?: ReactNode;
-  user: any;
+  user?: any;
 };
 
 const MainLayout: FC<IMainLayoutProps> = ({

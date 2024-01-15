@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { getCookie, hasCookie } from "cookies-next";
+import { GetServerSideProps } from "next";
 
 // components
 import MainLayout from "@/components/layout/Main.layout";
@@ -40,18 +41,18 @@ export default function Home({
     query.filter ? String(query.filter) : "recent"
   );
 
-  const [hydration, setHydration] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     if (locale === "fa") {
       document.dir = "rtl";
     } else if (locale === "en") {
       document.dir = "ltr";
     }
-    setHydration(true);
   }, []);
 
-  if (hydration)
+  if (isClient)
     return (
       <>
         <Head>
@@ -80,20 +81,25 @@ export default function Home({
     );
 }
 
-export async function getServerSideProps({
+export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
   res,
   locale,
   ...ctx
-}: any) {
+}) => {
   const { limit = 10, page = 1, filter = "recent" } = query;
 
   const user: any = hasCookie("user", { req, res })
     ? JSON.parse(getCookie("user", { req, res }) as string)
     : null;
 
-  const questions = await getQuestions({ limit, page, filter, user });
+  const questions = await getQuestions({ limit, page, filter, user } as {
+    limit: number;
+    page: number;
+    filter: string;
+    user: any;
+  });
   const tags = await getTags({ user });
   const reputations = await getHighestUserPoint({ user });
   const stats = await getStats({ user });
@@ -114,4 +120,4 @@ export async function getServerSideProps({
       ...(await serverSideTranslations(locale as string, ["common"])),
     },
   };
-}
+};
