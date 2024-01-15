@@ -50,7 +50,7 @@ const Login = () => {
         // dispatch(setUser(data?.data));
 
         setLoading(false);
-        setCookie("user", data.data);
+        setCookie("user", data.data, { maxAge: 3600 * 24 });
         router.push("/");
       }
     } catch (err) {
