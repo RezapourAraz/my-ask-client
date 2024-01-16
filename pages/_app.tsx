@@ -16,10 +16,19 @@ import { useRouter } from "next/router";
 import { Bounce, ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { locale } = useRouter();
   const theme = useTheme(locale);
+
+  useEffect(() => {
+    if (locale === "fa") {
+      document.dir = "rtl";
+    } else if (locale === "en") {
+      document.dir = "ltr";
+    }
+  }, []);
 
   return (
     <CookiesProvider>

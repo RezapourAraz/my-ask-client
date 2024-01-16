@@ -33,7 +33,7 @@ export default function Home({
   user: any;
 }) {
   // hooks
-  const { locale, query } = useRouter();
+  const { query } = useRouter();
   const { t } = useTranslation();
 
   // states
@@ -44,12 +44,7 @@ export default function Home({
 
   useEffect(() => {
     setIsClient(true);
-    if (locale === "fa") {
-      document.dir = "rtl";
-    } else if (locale === "en") {
-      document.dir = "ltr";
-    }
-  }, [isClient]);
+  }, []);
 
   if (isClient)
     return (
