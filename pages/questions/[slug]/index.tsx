@@ -72,7 +72,9 @@ const Question = ({
             )}
 
             {user ? <LeaveAnswerCard /> : <InfoForLoginCard />}
-            <RelatedQuestionsSection related={question.relatedQuestions} />
+            {question.relatedQuestions.length && (
+              <RelatedQuestionsSection related={question.relatedQuestions} />
+            )}
           </Grid>
         </MainLayout>
       </>

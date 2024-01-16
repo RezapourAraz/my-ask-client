@@ -88,7 +88,8 @@ const AnswerCard = ({ answer }: any) => {
       >
         <Grid container sx={{ justifyContent: "center", gap: 2 }}>
           <Avatar
-            src={answer.profile}
+            src={`https://arazdev.storage.iran.liara.space/api/v1/users/${answer.profile}`}
+            alt={answer.username}
             sx={{ bgcolor: "primary.main", color: "common.white" }}
           />
           <VoteCard
@@ -198,38 +199,40 @@ const AnswerCard = ({ answer }: any) => {
             Best Answer
           </Typography>
         </Grid>
-        <Grid item md={12} sx={{ mb: 2 }}>
-          <Box sx={{ p: 1, display: "flex", alignItems: "center" }}>
-            <Input
-              fullWidth
-              placeholder={t("comment")}
-              sx={{
-                px: 1,
-                color: "grey.900",
-                bgcolor: "grey.300",
-                border: 1,
-                borderColor: "primary.main",
-                borderTopRightRadius: 4,
-                borderBottomRightRadius: 4,
-              }}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <Button
-              variant="outlined"
-              sx={{
-                boxShadow: 0,
-                borderTopLeftRadius: 4,
-                borderBottomLeftRadius: 4,
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-              }}
-              onClick={handlePublishComment}
-            >
-              {t("publish")}
-            </Button>
-          </Box>
-        </Grid>
+        {user && (
+          <Grid item md={12} sx={{ mb: 2 }}>
+            <Box sx={{ p: 1, display: "flex", alignItems: "center" }}>
+              <Input
+                fullWidth
+                placeholder={t("comment")}
+                sx={{
+                  px: 1,
+                  color: "grey.900",
+                  bgcolor: "grey.300",
+                  border: 1,
+                  borderColor: "primary.main",
+                  borderTopRightRadius: 4,
+                  borderBottomRightRadius: 4,
+                }}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <Button
+                variant="outlined"
+                sx={{
+                  boxShadow: 0,
+                  borderTopLeftRadius: 4,
+                  borderBottomLeftRadius: 4,
+                  borderTopRightRadius: 0,
+                  borderBottomRightRadius: 0,
+                }}
+                onClick={handlePublishComment}
+              >
+                {t("publish")}
+              </Button>
+            </Box>
+          </Grid>
+        )}
 
         {answer?.comments.length ? (
           <Grid item md={12} sx={{ mb: 2 }}>
@@ -250,7 +253,7 @@ const AnswerCard = ({ answer }: any) => {
                 }}
               >
                 <Avatar
-                  src={comment.profile}
+                  src={`https://arazdev.storage.iran.liara.space/api/v1/users/${comment.profile}`}
                   alt={comment.username}
                   sx={{ width: 20, height: 20 }}
                 />

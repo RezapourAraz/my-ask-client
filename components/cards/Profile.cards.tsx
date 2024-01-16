@@ -8,6 +8,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  IconButton,
   Input,
   Radio,
   RadioGroup,
@@ -16,12 +17,15 @@ import {
 import { useTranslation } from "next-i18next";
 import { useProfileForm } from "@/lib/formik.hooks";
 import { userProfileUpdate } from "@/redux/users/users.services";
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CustomFileInput from "../inputs/CustomFile.inputs";
 
+// icons
 import { FaUserLarge } from "react-icons/fa6";
+import { RxExit } from "react-icons/rx";
+import { useRouter } from "next/router";
 
 // type
 export type IUser = {
@@ -56,10 +60,9 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
   // hooks
   const { t } = useTranslation();
   const userData = getCookie("user");
+  const { locale, push } = useRouter();
 
   const userFromCookie = userData ? JSON.parse(userData) : null;
-
-  console.log(userFromCookie);
 
   // state
   const [attachment, setAttachment] = useState<any>();
@@ -83,6 +86,11 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
     }
   };
 
+  const handleLogout = () => {
+    deleteCookie("user");
+    push("/");
+  };
+
   // formik
   const { values, handleSubmit, handleChange, isSubmitting } = useProfileForm(
     submitHandler,
@@ -102,30 +110,47 @@ const ProfileCard: FC<IProfileCardProps> = ({ user }) => {
       <Grid
         container
         item
+        bgcolor="common.white"
+        borderRadius={1}
         xs={12}
         sx={{
           my: 2,
           p: 2,
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <CustomFileInput
-          attachment={attachment}
-          setAttachment={setAttachment}
-          name="file"
-          icon={<FaUserLarge style={{ fontSize: 32, color: "grey" }} />}
-          hasImage={
-            user.profile
-              ? `https://arazdev.storage.iran.liara.space/api/v1/users/${user.profile}`
-              : false
-          }
-        />
+        <Box>
+          <CustomFileInput
+            attachment={attachment}
+            setAttachment={setAttachment}
+            name="file"
+            icon={<FaUserLarge style={{ fontSize: 32, color: "grey" }} />}
+            hasImage={
+              user.profile
+                ? `https://arazdev.storage.iran.liara.space/api/v1/users/${user.profile}`
+                : false
+            }
+          />
+        </Box>
+
+        <Box>
+          <IconButton onClick={handleLogout}>
+            <RxExit
+              style={{
+                color: "black",
+                transform: locale === "fa" ? "rotate(180deg)" : "initial",
+              }}
+            />
+          </IconButton>
+        </Box>
       </Grid>
       <Grid
         container
         item
         xs={12}
         md={5.9}
-        sx={{ bgcolor: "common.white", p: 2 }}
+        sx={{ bgcolor: "common.white", p: 2, borderRadius: 1 }}
         alignItems="center"
       >
         <Grid

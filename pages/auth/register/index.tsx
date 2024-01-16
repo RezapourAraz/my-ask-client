@@ -26,6 +26,7 @@ import { useTranslation } from "next-i18next";
 import { useRegisterFrom } from "@/lib/formik.hooks";
 import { IRegisterBody, registerUser } from "@/redux/auth/auth.services";
 import { toast } from "react-toastify";
+import { setCookie } from "cookies-next";
 
 const Register = () => {
   // hooks
@@ -41,7 +42,8 @@ const Register = () => {
 
     if (data.code === 201) {
       toast.success("you registered successfully");
-      router.push("/auth/login");
+      setCookie("user", data.data, { maxAge: 3600 * 24 });
+      router.push("/");
     } else {
       toast.error("something went wrong!");
     }
@@ -49,8 +51,6 @@ const Register = () => {
 
   const { errors, values, handleChange, handleSubmit } =
     useRegisterFrom(submitHandler);
-
-  console.log(errors);
 
   return (
     <>

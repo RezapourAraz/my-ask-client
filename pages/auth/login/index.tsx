@@ -30,6 +30,7 @@ import { useTranslation } from "next-i18next";
 import { GetStaticProps } from "next";
 import { setCookie } from "cookies-next";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // hooks
@@ -50,6 +51,7 @@ const Login = () => {
         // dispatch(setUser(data?.data));
 
         setLoading(false);
+        toast.success("you logged in successfully");
         setCookie("user", data.data, { maxAge: 3600 * 24 });
         router.push("/");
       }

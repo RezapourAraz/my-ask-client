@@ -34,7 +34,7 @@ const QuestionBanner: FC<IQuestionBannerProps> = ({ title }) => {
                     : `/${route}`
                 }
               >
-                {route === "" ? "Home" : route}
+                {route === "" ? "Home" : decodeURIComponent(route)}
               </Link>
             ))}
           </Breadcrumbs>
