@@ -116,7 +116,7 @@ const AnswerCard = ({ answer }: any) => {
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            {/* <Box sx={{ display: "flex", alignItems: "center" }}>
               <IconButton size="small">
                 <AiFillLike style={{ color: "black", fontSize: 14 }} />
               </IconButton>
@@ -124,7 +124,7 @@ const AnswerCard = ({ answer }: any) => {
                 <AiFillDislike style={{ color: "black", fontSize: 14 }} />
               </IconButton>
               <Typography variant="caption">{answer.rating}</Typography>
-            </Box>
+            </Box> */}
             <Box>
               <Typography variant="caption">
                 {document.dir === "rtl"
