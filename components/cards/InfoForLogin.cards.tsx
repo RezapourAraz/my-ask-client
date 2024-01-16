@@ -5,8 +5,11 @@ import { Box, Typography } from "@mui/material";
 
 // icons
 import { CgDanger } from "react-icons/cg";
+import { useTranslation } from "react-i18next";
 
 const InfoForLoginCard = () => {
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -22,9 +25,7 @@ const InfoForLoginCard = () => {
       <Box sx={{ p: 1, bgcolor: "red", borderRadius: 1, display: "flex" }}>
         <CgDanger style={{ color: "white", fontSize: 20 }} />
       </Box>
-      <Typography variant="h5">
-        You must login your account for ask question
-      </Typography>
+      <Typography variant="h5">{t("info_for_login")}</Typography>
     </Box>
   );
 };

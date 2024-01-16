@@ -123,5 +123,6 @@
   "comment": "Comment",
   "leave_answer": "Leave An Answer",
   "post_answer": "Post Your Answer",
-  "success_comment": "comment post successfully"
+  "success_comment": "comment post successfully",
+  "info_for_login": "You must login your account for ask question"
 }
