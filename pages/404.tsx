@@ -1,14 +1,14 @@
-import MainBanner from "@/components/banners/Main.banners";
-import QuestionBanner from "@/components/banners/Question.banners";
-import MainLayout from "@/components/layout/Main.layout";
-import MainSidebar from "@/components/sidebars/Main.sidebars";
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { getCookie, hasCookie } from "cookies-next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React from "react";
 
-const Page = () => {
+// Mui
+import { Box, Button, Typography } from "@mui/material";
+
+// Components
+import MainLayout from "@/components/layout/Main.layout";
+import QuestionBanner from "@/components/banners/Question.banners";
+
+const Page404 = () => {
   return (
     <>
       <Head>
@@ -39,7 +39,7 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Page404;
 
 // export async function getServerSideProps({
 //   query,

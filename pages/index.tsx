@@ -40,7 +40,6 @@ export default function Home({
   const [selectedTab, setSelectedTab] = useState<string>(
     query.filter ? String(query.filter) : "recent"
   );
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -50,14 +49,14 @@ export default function Home({
     } else if (locale === "en") {
       document.dir = "ltr";
     }
-  }, []);
+  }, [isClient]);
 
   if (isClient)
     return (
       <>
         <Head>
           <title>{t("title")}</title>
-          <meta name="description" content="Travel App" />
+          <meta name="description" content={t("title")} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <MainLayout

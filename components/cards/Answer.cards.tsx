@@ -25,6 +25,8 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { commentServices } from "@/redux/comments/comments.services";
 
+import moment from "jalali-moment";
+
 const AnswerCard = ({ answer }: any) => {
   // hooks
   const userData = getCookie("user");
@@ -125,7 +127,11 @@ const AnswerCard = ({ answer }: any) => {
             </Box>
             <Box>
               <Typography variant="caption">
-                {new Date(answer.updated_at).toLocaleString("en-US")}
+                {document.dir === "rtl"
+                  ? moment(answer.updated_at)
+                      .locale("fa")
+                      .format("YYYY/M/D HH:mm")
+                  : new Date(answer.updated_at).toLocaleString("en-US")}
               </Typography>
             </Box>
           </Box>
