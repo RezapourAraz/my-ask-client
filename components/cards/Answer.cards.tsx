@@ -130,7 +130,7 @@ const AnswerCard = ({ answer }: any) => {
                 {document.dir === "rtl"
                   ? moment(answer.updated_at)
                       .locale("fa")
-                      .format("YYYY/M/D HH:mm")
+                      .format("YYYY/MM/DD HH:mm")
                   : new Date(answer.updated_at).toLocaleString("en-US")}
               </Typography>
             </Box>
@@ -239,7 +239,25 @@ const AnswerCard = ({ answer }: any) => {
               </Typography>
             </Box>
             {answer?.comments?.map((comment: any) => (
-              <Box sx={{ p: 1, bgcolor: "grey.300", my: 0.1 }}>
+              <Box
+                sx={{
+                  p: 1,
+                  bgcolor: "grey.300",
+                  my: 0.1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Avatar
+                  src={comment.profile}
+                  alt={comment.username}
+                  sx={{ width: 20, height: 20 }}
+                />
+
+                <Typography variant="caption" color="grey.900">
+                  {comment.username} :
+                </Typography>
                 <Typography variant="h6" color="grey.900">
                   {comment.content}
                 </Typography>
