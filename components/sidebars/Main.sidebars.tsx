@@ -1,12 +1,16 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 // Mui
 import { Box, Button, Grid } from "@mui/material";
-import StatsCard from "../cards/Stats.cards";
+
+// components
 import HighestPointsSection from "../sections/HighestPoints.sections";
 import TagsSection from "../sections/Tags.sections";
+import StatsCard from "../cards/Stats.cards";
+
+// i18next
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 
 const MainSidebar = ({ tags, reputations, stats }: any) => {
   // hooks
@@ -27,7 +31,7 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
       </Box>
       <StatsCard stats={stats} />
       <HighestPointsSection reputations={reputations} />
-      {tags && <TagsSection tags={tags} />}
+      {tags.length > 0 && <TagsSection tags={tags} />}
     </Grid>
   );
 };

@@ -29,11 +29,6 @@ const quickLinks = [
     route: "/ask-question",
   },
   {
-    id: 3,
-    name: "questions",
-    route: "/questions",
-  },
-  {
     id: 4,
     name: "profile",
     route: "/profile",
