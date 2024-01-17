@@ -30,21 +30,30 @@ const HighestCard = ({ reputation }: any) => {
         />
       </Grid>
       <Grid item md={9} xs={12}>
-        <Box my={2}>
-          <Typography color="primary.main" variant="h3">
-            {reputation.username}
-          </Typography>
-          <Box
-            sx={{
-              bgcolor: userPoints?.color,
-              display: "inline-flex",
-              p: 0.5,
-              borderRadius: 1,
-            }}
-          >
-            <Typography variant="h6">{t(`${userPoints?.name}`)}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box my={2}>
+            <Typography color="primary.main" variant="h5">
+              {reputation.username}
+            </Typography>
+            <Box
+              sx={{
+                bgcolor: userPoints?.color,
+                display: "inline-flex",
+                p: 0.5,
+                borderRadius: 1,
+              }}
+            >
+              <Typography variant="h6">{t(`${userPoints?.name}`)}</Typography>
+            </Box>
           </Box>
-          <Typography color="secondary.main" variant="h5">
+          <Typography color="secondary.main" variant="h6">
             {reputation.reputation ? reputation.reputation : 0} {t("points")}
           </Typography>
         </Box>

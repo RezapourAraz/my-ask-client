@@ -84,8 +84,8 @@ const MainTab: FC<IMainTabProps> = ({ selectedTab, setSelectedTab, data }) => {
             onClick={() => handleChangeTab(tab.value)}
           >
             <Typography
-              variant="h4"
-              sx={{ fontSize: { xs: 14, md: 18 } }}
+              variant="h5"
+              sx={{ fontSize: { xs: 10, md: 14 } }}
               color={
                 tab.value === selectedTab ? "common.white" : "secondary.main"
               }
