@@ -83,9 +83,8 @@ const MainHeader = () => {
                   sx={{
                     p: 1,
                     px: 2,
-                    bgcolor: router.pathname.includes(route.route)
-                      ? "primary.main"
-                      : "initial",
+                    bgcolor:
+                      router.route === route.route ? "primary.main" : "initial",
                     borderRadius: 1,
                   }}
                   key={route.id}
