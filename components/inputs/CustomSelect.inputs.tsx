@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Mui Components
 import {
@@ -6,12 +6,14 @@ import {
   Checkbox,
   ClickAwayListener,
   FormControlLabel,
+  Input,
   styled,
   Typography,
 } from "@mui/material";
 
 // Mui icons
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { t } from "i18next";
 
 //Data
 
@@ -29,6 +31,8 @@ const CustomSelectInput = ({
 }: any) => {
   //  States
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   // handlers
   const handleOpen = () => {
@@ -63,6 +67,18 @@ const CustomSelectInput = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (search !== "") {
+      let searchedTags = inputItems.filter((item: any) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredData(searchedTags);
+    } else {
+      setFilteredData(inputItems);
+    }
+  }, [search]);
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
@@ -138,6 +154,21 @@ const CustomSelectInput = ({
               flexWrap="nowrap"
               alignItems="center"
               justifyContent="space-between"
+            >
+              <Input
+                fullWidth
+                placeholder={t("search_here")}
+                sx={{ color: "common.black" }}
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+              />
+            </Box>
+            <Box
+              p={1.5}
+              display="flex"
+              flexWrap="nowrap"
+              alignItems="center"
+              justifyContent="space-between"
               bgcolor={!checkedState.length ? "primary.light" : "common.white"}
             >
               <FormControlLabel
@@ -170,7 +201,7 @@ const CustomSelectInput = ({
               />
             </Box>
             {single
-              ? inputItems?.map((item: any, idx: any) => (
+              ? filteredData?.map((item: any, idx: any) => (
                   <Box
                     key={idx}
                     p={1.5}
@@ -214,7 +245,7 @@ const CustomSelectInput = ({
                     />
                   </Box>
                 ))
-              : inputItems?.map((item: any, idx: number) => (
+              : filteredData?.map((item: any, idx: number) => (
                   <Box
                     key={idx}
                     p={1.5}

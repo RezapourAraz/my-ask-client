@@ -29,13 +29,13 @@ export const useAskQuestionForm = (submitHandler: any) => {
     title: "",
     content: "",
     user_id: null,
-    tags: [],
+    tags: "",
   };
 
   let schema = yup.object().shape({
     title: yup.string().required("title is required"),
     content: yup.string().required("body is required"),
-    tags: yup.array().required("tags is required"),
+    tags: yup.string().required("tags is required"),
   });
 
   return useFormik({
