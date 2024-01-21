@@ -36,8 +36,8 @@ const AddQuestion = ({
   return (
     <>
       <Head>
-        <title>Ask Question</title>
-        <meta name="description" content="Ask Question" />
+        <title>{t("ask_question")}</title>
+        <meta name="description" content={t("ask_question")} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <MainLayout

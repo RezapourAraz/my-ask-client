@@ -31,7 +31,7 @@ const MainSidebar = ({ tags, reputations, stats }: any) => {
       </Box>
       <StatsCard stats={stats} />
       <HighestPointsSection reputations={reputations} />
-      {tags.length > 0 && <TagsSection tags={tags} />}
+      {tags?.length > 0 && <TagsSection tags={tags} />}
     </Grid>
   );
 };

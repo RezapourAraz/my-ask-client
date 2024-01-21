@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import { getQuestions } from "@/redux/questions/question.services";
 import { getTags } from "@/redux/tags/tags.services";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
+import InfoForLoginCard from "@/components/cards/InfoForLogin.cards";
 
 const AddPost = ({ user, tags, reputations, stats }: any) => {
   // hooks
@@ -36,7 +37,7 @@ const AddPost = ({ user, tags, reputations, stats }: any) => {
           />
         }
       >
-        <AddPostSection user={user} />
+        {user ? <AddPostSection user={user} /> : <InfoForLoginCard />}
       </MainLayout>
     </>
   );

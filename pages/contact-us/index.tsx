@@ -1,8 +1,18 @@
 import React from "react";
 import Head from "next/head";
+import { getCookie, hasCookie } from "cookies-next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 // Mui
-import { Box, Button, Grid, Input, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Input,
+  Typography,
+} from "@mui/material";
 
 // Components
 import QuestionBanner from "@/components/banners/Question.banners";
@@ -13,9 +23,9 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaShareSquare } from "react-icons/fa";
-import { getCookie, hasCookie } from "cookies-next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
 
 const ContactUs = ({ user }: any) => {
   const { t } = useTranslation();
@@ -170,9 +180,17 @@ const ContactUs = ({ user }: any) => {
                 <Typography variant="h6" sx={{ color: "common.black" }}>
                   {t("social_links")}:
                 </Typography>
-                <Typography variant="h6" sx={{ color: "common.black" }}>
-                  instagram
-                </Typography>
+                <Box>
+                  <IconButton>
+                    <FaInstagram style={{ color: "black", fontSize: 18 }} />
+                  </IconButton>
+                  <IconButton>
+                    <FaLinkedinIn style={{ color: "black", fontSize: 18 }} />
+                  </IconButton>
+                  <IconButton>
+                    <FaFacebookF style={{ color: "black", fontSize: 18 }} />
+                  </IconButton>
+                </Box>
               </Grid>
             </Grid>
           </Grid>

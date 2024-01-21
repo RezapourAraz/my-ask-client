@@ -84,7 +84,13 @@ const AskQuestionSection = ({ tags }: any) => {
           </Grid>
           <Grid my={1} item md={10}>
             <Input
-              sx={{ bgcolor: "grey.300", color: "grey.900", px: 1 }}
+              sx={{
+                bgcolor: "grey.300",
+                color: "grey.900",
+                px: 1,
+                borderRadius: 1,
+                py: 0.5,
+              }}
               fullWidth
               name="title"
               onChange={handleChange}
@@ -149,7 +155,7 @@ const AskQuestionSection = ({ tags }: any) => {
                 },
               }}
             >
-              {"publish_question"}
+              {t("publish_question")}
             </LoadingButton>
           </Grid>
         </Grid>
