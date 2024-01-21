@@ -131,3 +131,27 @@ export const useProfileForm = (submitHandler: any, user: IUser) => {
     validateOnChange: false,
   });
 };
+
+export const useResetPasswordForm = (submitHandler: any) => {
+  const initialValues = {
+    password: "",
+    confirmPassword: "",
+  };
+
+  const validateSchema = yup.object().shape({
+    password: yup
+      .string()
+      .min(8, "password must be min 8 character")
+      .required("password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")])
+      .required("Password confirmation is dose not match"),
+  });
+
+  return useFormik({
+    initialValues,
+    onSubmit: submitHandler,
+    validationSchema: validateSchema,
+  });
+};

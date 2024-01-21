@@ -17,7 +17,7 @@ import {
 
 // redux
 import { setUser } from "@/redux/auth/auth.reducer";
-import { useLoginForm } from "@/lib/formik.hooks";
+import { useLoginForm, useResetPasswordForm } from "@/lib/formik.hooks";
 import { useLoginMutation } from "@/redux/auth/auth.slice";
 // Icons
 import { FaUser } from "react-icons/fa";
@@ -31,40 +31,43 @@ import { GetStaticProps } from "next";
 import { setCookie } from "cookies-next";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { toast } from "react-toastify";
+import { resetPassword } from "@/redux/auth/auth.services";
 
 const Login = () => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
-  const [login, { isSuccess, error }] = useLoginMutation();
 
   // states
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // handlers
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = async (values: any) => {
     try {
       setLoading(true);
-      const data = await login(values).unwrap();
+      const data = await resetPassword({
+        userId: router.query.userId,
+        token: router.query.token,
+        password: values.password,
+      });
       if (data.code === 200) {
         // dispatch(setUser(data?.data));
 
         setLoading(false);
-        toast.success("you logged in successfully");
-        setCookie("user", data.data, { maxAge: 3600 * 24 });
-        router.push("/");
+        toast.success("your password changed successfully");
+        router.push("/auth/login");
       }
     } catch (err) {
       console.log(err);
-      toast.error("failed to login");
+      toast.error("an error according");
       setLoading(false);
     }
   };
 
   // formik
   const { handleChange, handleSubmit, errors, values } =
-    useLoginForm(handleOnSubmit);
+    useResetPasswordForm(handleOnSubmit);
 
   return (
     <>
@@ -98,26 +101,9 @@ const Login = () => {
           }}
         >
           <Box sx={{ textAlign: "center" }}>
-            <Typography variant="h2">{t("login_title")}</Typography>
+            <Typography variant="h2">{t("change_password")}</Typography>
           </Box>
-          <Grid my={2} sx={{ textAlign: "center" }}>
-            <Typography variant="h5">{t("welcome")}</Typography>
-          </Grid>
-          <Grid my={3}>
-            <Input
-              name="email"
-              sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
-              fullWidth
-              placeholder={t("email_username")}
-              startAdornment={
-                <InputAdornment position="start">
-                  <FaUser />
-                </InputAdornment>
-              }
-              value={values.email}
-              onChange={handleChange}
-            />
-          </Grid>
+
           <Grid mt={3}>
             <Input
               name="password"
@@ -143,41 +129,33 @@ const Login = () => {
               onChange={handleChange}
             />
           </Grid>
-          <Grid
-            my={2}
-            container
-            sx={{ alignItems: "center", justifyContent: "space-between" }}
-          >
-            <Typography variant="caption" color="common.white">
-              {t("don't_have_an_account")}{" "}
-              <Typography
-                variant="caption"
-                component="span"
-                sx={{ color: "primary.main", cursor: "pointer" }}
-                onClick={() => router.push("/auth/register")}
-              >
-                {t("register")}
-              </Typography>
-            </Typography>
-            <Typography variant="caption" color="common.white" my={1}>
-              {t("forgot_password")}
-              <Typography
-                variant="caption"
-                component="span"
-                sx={{ color: "primary.main", cursor: "pointer" }}
-                onClick={() => router.push("/auth/forget")}
-              >
-                {t("forget")}
-              </Typography>
-            </Typography>
+          <Grid mt={3}>
+            <Input
+              name="confirm_password"
+              sx={{ bgcolor: "grey.800", borderRadius: 1, px: 1, py: 0.5 }}
+              fullWidth
+              placeholder={t("confirm_password")}
+              type={showPassword ? "text" : "password"}
+              startAdornment={
+                <InputAdornment position="start">
+                  <RiLockPasswordFill />
+                </InputAdornment>
+              }
+              endAdornment={
+                <InputAdornment
+                  position="start"
+                  onClick={() => setShowPassword(!showPassword)}
+                  sx={{ cursor: "pointer" }}
+                >
+                  {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                </InputAdornment>
+              }
+              value={values.password}
+              onChange={handleChange}
+            />
           </Grid>
-          <Grid container my={1} sx={{ alignItems: "center" }}>
-            <Checkbox />
-            <Typography variant="caption" color="common.white">
-              {t("remember_me")}
-            </Typography>
-          </Grid>
-          <Grid sx={{ ".Mui-disabled": { bgcolor: "grey.800" } }}>
+
+          <Grid item sx={{ ".Mui-disabled": { bgcolor: "grey.800" }, mt: 3 }}>
             <LoadingButton
               variant="contained"
               fullWidth
@@ -185,7 +163,7 @@ const Login = () => {
               sx={{ boxShadow: 0, color: "common.white" }}
               loading={loading}
             >
-              {t("login")}
+              {t("confirm")}
             </LoadingButton>
           </Grid>
         </Grid>
@@ -195,6 +173,13 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getStaticPaths(ctx: any) {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: "blocking", //indicates the type of fallback
+  };
+}
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {

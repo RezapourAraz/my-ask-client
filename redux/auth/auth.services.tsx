@@ -16,3 +16,28 @@ export const registerUser = async (body: IRegisterBody) => {
     console.log(err);
   }
 };
+
+export const forgetPasswordLink = async (email: string) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/reset-password", {
+      email,
+    });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const resetPassword = async ({ userId, token, password }: any) => {
+  try {
+    const { data } = await axiosInstance.post(
+      `/auth/reset-password/${userId}/${token}`,
+      {
+        password,
+      }
+    );
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
