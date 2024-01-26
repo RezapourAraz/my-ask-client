@@ -128,5 +128,6 @@
   "forget": "Forget password",
   "sent": "Sent successfully",
   "change_password": "Change Password",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "continue_reading": "Continue reading"
 }

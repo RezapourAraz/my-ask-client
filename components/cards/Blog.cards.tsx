@@ -12,10 +12,12 @@ import { FaCalendar } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { pointMaker } from "@/helper/pointMaker";
+import { useTranslation } from "react-i18next";
 
 const BlogCard = ({ blog }: any) => {
   // hooks
   const router = useRouter();
+  const { t } = useTranslation();
 
   const link = `/blogs/${blog.id} ${blog.title}`.replace(/ /g, "-");
 
@@ -156,6 +158,10 @@ const BlogCard = ({ blog }: any) => {
             height: blogId ? "fit-content" : 50,
             textOverflow: blogId ? "initial" : "ellipsis",
             overflow: blogId ? "initial" : "hidden",
+            display: "-webkit-box",
+            lineClamp: blogId ? 0 : 2,
+            WebkitLineClamp: blogId ? 0 : 2,
+            WebkitBoxOrient: "vertical",
           }}
         />
       </Box>
@@ -166,7 +172,7 @@ const BlogCard = ({ blog }: any) => {
             sx={{ width: 200, color: "common.white", boxShadow: 0 }}
             onClick={() => router.push(link)}
           >
-            Continue reading
+            {t("continue_reading")}
           </Button>
         </Box>
       )}
