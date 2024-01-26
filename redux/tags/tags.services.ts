@@ -1,9 +1,9 @@
 import { axiosInstance } from "@/configs/AxiosConfig";
 
-export const getTags = async ({ user }: any) => {
+export const getTags = async ({ user, limit = 200, page = 1 }: any) => {
   try {
     const { data } = await axiosInstance.get(
-      "/tags",
+      `/tags?limit=${limit}&page=${page}`,
       user
         ? {
             headers: {

@@ -25,6 +25,8 @@ const BlogCard = ({ blog }: any) => {
   // state
   const userPoints = pointMaker(blog.reputation ? blog.reputation : 0);
 
+  console.log(router.query.blogId);
+
   return (
     <Box
       sx={{
@@ -105,7 +107,7 @@ const BlogCard = ({ blog }: any) => {
             <FaCalendar />
           </Box>
           <Typography variant="caption" color="secondary.main">
-            {new Date(blog?.created_at).toLocaleDateString("en-US")}
+            {new Date(blog?.created_at).toLocaleDateString("fa-IR")}
           </Typography>
         </Box>
         <Box
@@ -143,14 +145,18 @@ const BlogCard = ({ blog }: any) => {
           </Typography>
         </Box>
       </Grid>
-      <Box sx={{ my: 3 }}>
+      <Box
+        sx={{
+          my: 3,
+        }}
+      >
         <Typography
-          sx={{
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            height: router.query.blogId ? "fit-content" : 50,
-          }}
           dangerouslySetInnerHTML={{ __html: blog?.content }}
+          sx={{
+            height: blogId ? "fit-content" : 50,
+            textOverflow: blogId ? "initial" : "ellipsis",
+            overflow: blogId ? "initial" : "hidden",
+          }}
         />
       </Box>
       {!blogId && (
