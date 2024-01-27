@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Mui
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, NoSsr, Typography } from "@mui/material";
 
 // Icons
 import { BiSolidImage } from "react-icons/bi";
@@ -106,9 +106,9 @@ const BlogCard = ({ blog, commentCount }: any) => {
           <Box>
             <FaCalendar />
           </Box>
-          <Typography variant="caption" color="secondary.main">
+          {/* <Typography variant="caption" color="secondary.main">
             {new Date(blog?.created_at).toLocaleDateString("fa-IR")}
-          </Typography>
+          </Typography> */}
         </Box>
         {blogId && (
           <Box

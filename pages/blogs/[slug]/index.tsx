@@ -8,15 +8,21 @@ import MainSidebar from "@/components/sidebars/Main.sidebars";
 import { getBlogById, updateBlogViews } from "@/redux/blogs/blogss.services";
 import { getTags } from "@/redux/tags/tags.services";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
-import { Grid } from "@mui/material";
+import { Avatar, Box, Button, Grid, Input, Typography } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { commentServices } from "@/redux/comments/comments.services";
+import { toast } from "react-toastify";
 
 const BlogDetail = ({ user, blog, reputations, stats }: any) => {
+  // hooks
+  const { t } = useTranslation();
   // state
   const [hydrated, setHydrated] = useState(false);
+  const [comment, setComment] = useState("");
   const updateViews = async () => {
     await updateBlogViews({ user, id: blog.data.id });
   };
@@ -25,6 +31,23 @@ const BlogDetail = ({ user, blog, reputations, stats }: any) => {
     setHydrated(true);
     updateViews();
   }, []);
+
+  const handlePublishComment = async () => {
+    const body = {
+      relId: blog.data.id,
+      relType: "blog",
+      userId: user.id,
+      content: comment,
+    };
+
+    const data = await commentServices({ user, body });
+
+    if (data?.code === 201) {
+      toast.success(t("success_comment"));
+    }
+  };
+
+  console.log(blog);
 
   return (
     hydrated && (
@@ -45,7 +68,75 @@ const BlogDetail = ({ user, blog, reputations, stats }: any) => {
             <BlogCard blog={blog.data} commentCount={blog.commentCount} />
             {/* <RelatedQuestionsSection /> */}
             {/* <AnswersSection /> */}
-            <LeaveAnswerCard />
+            {/* <LeaveAnswerCard /> */}
+            {user && (
+              <Grid item md={12} sx={{ mb: 2 }}>
+                <Box sx={{ p: 1, display: "flex", alignItems: "center" }}>
+                  <Input
+                    fullWidth
+                    placeholder={t("comment")}
+                    sx={{
+                      px: 1,
+                      color: "grey.900",
+                      bgcolor: "grey.300",
+                      border: 1,
+                      borderColor: "primary.main",
+                      borderTopRightRadius: 4,
+                      borderBottomRightRadius: 4,
+                    }}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      boxShadow: 0,
+                      borderTopLeftRadius: 4,
+                      borderBottomLeftRadius: 4,
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                    }}
+                    onClick={handlePublishComment}
+                  >
+                    {t("publish")}
+                  </Button>
+                </Box>
+              </Grid>
+            )}
+            {blog?.data.comments.length ? (
+              <Grid item md={12} sx={{ mb: 2 }}>
+                <Box sx={{ borderTop: 2, borderColor: "grey.300", p: 1 }}>
+                  <Typography variant="h5" color="grey.900">
+                    {t("comments")}
+                  </Typography>
+                </Box>
+                {blog?.data.comments?.map((comment: any) => (
+                  <Box
+                    sx={{
+                      p: 1,
+                      bgcolor: "grey.300",
+                      my: 0.1,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <Avatar
+                      src={`https://arazdev.storage.iran.liara.space/api/v1/users/${comment.profile}`}
+                      alt={comment.username}
+                      sx={{ width: 20, height: 20 }}
+                    />
+
+                    <Typography variant="caption" color="grey.900">
+                      {comment.username} :
+                    </Typography>
+                    <Typography variant="h6" color="grey.900">
+                      {comment.content}
+                    </Typography>
+                  </Box>
+                ))}
+              </Grid>
+            ) : undefined}
           </Grid>
         </MainLayout>
       </>
