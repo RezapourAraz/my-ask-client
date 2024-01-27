@@ -30,7 +30,7 @@ const BlogDetail = ({ user, blog, reputations, stats }: any) => {
         mainBanner={<QuestionBanner title="Blogs" />}
       >
         <Grid my={6}>
-          <BlogCard blog={blog} />
+          <BlogCard blog={blog.data} commentCount={blog.commentCount} />
           {/* <RelatedQuestionsSection /> */}
           {/* <AnswersSection /> */}
           <LeaveAnswerCard />
@@ -70,7 +70,7 @@ export async function getServerSideProps({
   return {
     props: {
       user,
-      blog: blog.data,
+      blog,
       reputations,
       stats,
       ...(await serverSideTranslations(locale as string, ["common"])),

@@ -14,7 +14,7 @@ import { FaEye } from "react-icons/fa6";
 import { pointMaker } from "@/helper/pointMaker";
 import { useTranslation } from "react-i18next";
 
-const BlogCard = ({ blog }: any) => {
+const BlogCard = ({ blog, commentCount }: any) => {
   // hooks
   const router = useRouter();
   const { t } = useTranslation();
@@ -26,8 +26,6 @@ const BlogCard = ({ blog }: any) => {
 
   // state
   const userPoints = pointMaker(blog.reputation ? blog.reputation : 0);
-
-  console.log(router.query.blogId);
 
   return (
     <Box
@@ -51,7 +49,7 @@ const BlogCard = ({ blog }: any) => {
           <Box sx={{ bgcolor: "primary.main", display: "inline-flex", p: 1 }}>
             <BiSolidImage />
           </Box>
-          <Link href="/blogs/1" style={{ textDecoration: "none" }}>
+          <Link href={link} style={{ textDecoration: "none" }}>
             <Typography
               variant="h3"
               sx={{
@@ -112,23 +110,26 @@ const BlogCard = ({ blog }: any) => {
             {new Date(blog?.created_at).toLocaleDateString("fa-IR")}
           </Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            ":hover": {
-              color: "primary.main",
-            },
-          }}
-        >
-          <Box>
-            <FaComments />
+        {blogId && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              ":hover": {
+                color: "primary.main",
+              },
+            }}
+          >
+            <Box>
+              <FaComments />
+            </Box>
+            <Typography variant="caption" color="secondary.main">
+              {commentCount ? commentCount : 0} comments
+            </Typography>
           </Box>
-          <Typography variant="caption" color="secondary.main">
-            2 comments
-          </Typography>
-        </Box>
+        )}
+
         <Box
           sx={{
             display: "flex",
