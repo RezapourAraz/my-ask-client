@@ -5,38 +5,51 @@ import MainLayout from "@/components/layout/Main.layout";
 import AnswersSection from "@/components/sections/Answers.sections";
 import RelatedQuestionsSection from "@/components/sections/RelatedQuestions.sections";
 import MainSidebar from "@/components/sidebars/Main.sidebars";
-import { getBlogById } from "@/redux/blogs/blogss.services";
+import { getBlogById, updateBlogViews } from "@/redux/blogs/blogss.services";
 import { getTags } from "@/redux/tags/tags.services";
 import { getHighestUserPoint, getStats } from "@/redux/users/users.services";
 import { Grid } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const BlogDetail = ({ user, blog, reputations, stats }: any) => {
+  // state
+  const [hydrated, setHydrated] = useState(false);
+  const updateViews = async () => {
+    await updateBlogViews({ user, id: blog.data.id });
+  };
+
+  useEffect(() => {
+    setHydrated(true);
+    updateViews();
+  }, []);
+
   return (
-    <>
-      <Head>
-        <title>{blog.title}</title>
-        <meta name="description" content={blog.title} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <MainLayout
-        user={user}
-        sidebar={
-          <MainSidebar reputations={reputations.data} stats={stats.data} />
-        }
-        mainBanner={<QuestionBanner title="Blogs" />}
-      >
-        <Grid my={6}>
-          <BlogCard blog={blog.data} commentCount={blog.commentCount} />
-          {/* <RelatedQuestionsSection /> */}
-          {/* <AnswersSection /> */}
-          <LeaveAnswerCard />
-        </Grid>
-      </MainLayout>
-    </>
+    hydrated && (
+      <>
+        <Head>
+          <title>{blog.title}</title>
+          <meta name="description" content={blog.title} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <MainLayout
+          user={user}
+          sidebar={
+            <MainSidebar reputations={reputations.data} stats={stats.data} />
+          }
+          mainBanner={<QuestionBanner title="Blogs" />}
+        >
+          <Grid my={6}>
+            <BlogCard blog={blog.data} commentCount={blog.commentCount} />
+            {/* <RelatedQuestionsSection /> */}
+            {/* <AnswersSection /> */}
+            <LeaveAnswerCard />
+          </Grid>
+        </MainLayout>
+      </>
+    )
   );
 };
 

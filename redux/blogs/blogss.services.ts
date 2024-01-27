@@ -61,3 +61,23 @@ export const getBlogById = async ({ id, user }: any) => {
     console.log(err);
   }
 };
+
+export const updateBlogViews = async ({ user, id }: any) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/blogs/view/${id}`,
+      user
+        ? {
+            headers: {
+              Authorization: `Bearer ${user?.accessToken}`,
+              RefreshToken: user?.refreshToken,
+            },
+          }
+        : undefined
+    );
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
