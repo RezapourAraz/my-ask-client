@@ -25,7 +25,7 @@ const HighestPointsSection = ({ reputations }: any) => {
         </Typography>
       </Box>
       {reputations.map((reputation: any) => (
-        <HighestCard reputation={reputation} />
+        <HighestCard key={reputation.id} reputation={reputation} />
       ))}
     </Grid>
   );

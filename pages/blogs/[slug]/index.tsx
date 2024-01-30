@@ -47,8 +47,6 @@ const BlogDetail = ({ user, blog, reputations, stats }: any) => {
     }
   };
 
-  console.log(blog);
-
   return (
     hydrated && (
       <>
